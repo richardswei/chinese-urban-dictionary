@@ -1,3 +1,17 @@
 <h2>Hello, World!</h2>
 
 <div>This is the start of a beautiful thing made by Richard Wei and Marcus Schorow</div>
+
+<div>In fact, it's already reading from the database!!!</div>
+
+<ul>
+  <% Entry.all.each do |entry| %>
+    <li>
+      <%= entry.chinese_word %>
+      <ul>
+        <li><%= entry.definition %></li>
+        <li><%= entry.body %></li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
