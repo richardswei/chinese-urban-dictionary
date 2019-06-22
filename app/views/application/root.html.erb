@@ -7,10 +7,10 @@
 <ul>
   <% Entry.all.each do |entry| %>
     <li>
-      <%= entry.chinese_word %>
+      Chinese Word: <%= entry.chinese_word %>
       <ul>
-        <li><%= entry.definition %></li>
-        <li><%= entry.body %></li>
+        <li>Definition: <%= entry.definition %></li>
+        <li>Body: <%= entry.body %></li>
       </ul>
     </li>
   <% end %>
