@@ -10,8 +10,11 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: mysql2
+  database: chinese_urban_dictionary
+  username: root
+  password:
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,5 +24,8 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: heroku_d957cac8898ea60
+  username: <%= Rails.application.credentials.database[:user] %>
+  password: <%=Rails.application.credentials.database[:password] %>
+  host: us-cdbr-iron-east-02.cleardb.net

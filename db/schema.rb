@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_06_13_234346) do
 
-  create_table "entries", force: :cascade do |t|
+  create_table "entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "chinese_word"
     t.string "pinyin"
     t.text "definition"
