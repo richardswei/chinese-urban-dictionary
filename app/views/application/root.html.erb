@@ -1,17 +1,15 @@
-<h2>Hello, World!</h2>
+<h2>Chang's Slang</h2>
 
-<div>This is the start of a beautiful thing made by Richard Wei and Marcus Schorow</div>
-
-<div>In fact, it's already reading from the database!!!</div>
-
+<br>
+<div>SEARCH BAR GOES HERE</div>
+<br>
+<div></div>
+<span>TRENDING</span>
 <ul>
-  <% Entry.all.each do |entry| %>
+  <% Entry.all.order(view_count: :desc).limit(5).each do |entry| %>
     <li>
-      Chinese Word: <%= entry.chinese_word %>
-      <ul>
-        <li>Definition: <%= entry.definition %></li>
-        <li>Body: <%= entry.body %></li>
-      </ul>
+    	<%= link_to "#{entry.phrase}", entry_path(entry.id) %>
     </li>
   <% end %>
 </ul>
+<%= link_to "Add a new word!", new_entry_path %>

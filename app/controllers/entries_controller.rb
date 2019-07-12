@@ -11,4 +11,10 @@ class EntriesController < ApplicationController
     @entry = Entry.where(id: params[:id]).first
     # NB: @entry might be nil if we were passed an invalid id.
   end
+
+  def new
+  end
+
+  def edit
+  end
 end
