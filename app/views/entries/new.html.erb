@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Add New Entry</title>
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="new_entry_form.css">
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<h1>CHANG'S SLANG</h1>
+	<%= form_for(@entry) do |f| %>
+	  <ul>
+	  <% @entry.errors.full_messages.each do |error| %>
+	    <li><%= error %></li>
+	  <% end %>
+	  </ul>
+	  <p>
+	    <%= f.label :phrase %><br />
+	    <%= f.text_field :phrase %>
+	  </p>
+	  <p>
+	    <%= f.label :pinyin %><br />
+	    <%= f.text_field :pinyin %>
+	  </p>
+	  <p>
+	    <%= f.submit %>
+	  </p>
+	<% end %>
+</body>
+</html>

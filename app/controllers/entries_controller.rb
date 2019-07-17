@@ -13,8 +13,19 @@ class EntriesController < ApplicationController
   end
 
   def new
+    @entry = Entry.new
   end
 
   def edit
+  end
+
+  def create
+    # fail
+    @entry = Entry.new(
+        phrase: params[:entry][:phrase],
+        pinyin: params[:entry][:pinyin]
+      )
+    @entry.save
+    redirect_to entry_path(@entry)
   end
 end

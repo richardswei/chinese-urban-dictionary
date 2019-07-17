@@ -1,0 +1,20 @@
+/*new entry page css*/
+
+/*COLORS*/
+/* #FAED26 - yellow */
+/* #46344E - indigo */
+/* #5A5560 - blue gray */
+/* #9D8D8F - paper */
+/* #9B786F - latte */
+
+
+p {
+	background-color: #46344E;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+label {
+ color: white;
+}
+
+
