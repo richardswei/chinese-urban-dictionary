@@ -1,17 +1,46 @@
-<h2>Hello, World!</h2>
+<head>
+	
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
 
-<div>This is the start of a beautiful thing made by Richard Wei and Marcus Schorow</div>
+	<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/root.css">
+	<style type="text/css">
+		.headerTitle {
+			margin: 0px;
+			padding:0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="panel">
+		
+		<h1 class="headerTitle">CHANG'S</h1>
+		<h1 class="headerTitle">SLANG</h1>
+		<h2>The Chinese Urban Dictionary</h2>
 
-<div>In fact, it's already reading from the database!!!</div>
-
-<ul>
-  <% Entry.all.each do |entry| %>
-    <li>
-      Chinese Word: <%= entry.chinese_word %>
-      <ul>
-        <li>Definition: <%= entry.definition %></li>
-        <li>Body: <%= entry.body %></li>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+		<br>
+		<div class="textPanel">
+			<div class="searchBarSection">
+				<span class="searchTitle">Search</span>
+				<input type="text" class="searchBar"></input>	
+			</div>
+			<br>
+			<% t=Time.now %>
+			<div class="trending">
+				<div>Top 5 Trending - <%= t.strftime("%b %d, %Y") %> </div>
+				<div>
+					<ol>
+						<% Entry.all.order(view_count: :desc).limit(5).each do |entry| %>
+					    <li>
+					    	<%= link_to "#{entry.phrase}", entry_path(entry.id) %>
+					    </li>
+					  <% end %>
+					</ol>
+				</div>
+				<div class="newWordLink">
+					<%= link_to "Add a new word!", new_entry_path %>
+				</div>
+			</div>
+		</div>
+			
+	</div>	
+</body>

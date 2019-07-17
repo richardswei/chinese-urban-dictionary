@@ -1,13 +1,12 @@
-<h4>Specific Entry</h4>
+<h4>Chang's Slang</h4>
 
 <div>This is a view for a specific entry.</div>
 
 <div>We can show some details about the entry here.</div><br>
 <% if @entry.present? %>
     <!-- This will be rendered if we found an entry -->
-  <div>Chinese Word: <%= @entry.chinese_word %></div>
-  <div>Definition: <%= @entry.definition %></div>
-  <div>Body: <%= @entry.body %></div>
+  <div>Chinese Word: <%= @entry.phrase %></div>
+  <div>Pinyin: <%= @entry.pinyin %></div>
 
 <% else %>
   <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
