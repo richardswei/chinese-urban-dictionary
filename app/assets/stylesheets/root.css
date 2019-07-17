@@ -1,0 +1,48 @@
+/*landing page css*/
+
+/*COLORS*/
+/* #FAED26 - yellow */
+/* #46344E - indigo */
+/* #5A5560 - blue gray */
+/* #9D8D8F - paper */
+/* #9B786F - latte */
+
+	body {
+		margin: 0px;
+		background-color: #5A5560;
+	}
+	h1,h2,h3,h4,h5,h6 {
+	    font-family: 'Oswald', sans-serif;
+	    background-color: #5A5560; 
+	    color: #FAED26;
+	    padding: 10px;
+	}
+	div {
+		padding: 6px;
+		border-radius: 4px; 
+		background-color: #46344E;
+		color: white;
+		font-family: 'Noto Sans TC', sans-serif;
+	}
+	.searchBarSection {
+		padding-right: 5px 15px 5px 0px;
+		width: 75%;
+		margin: auto;
+		background-color: #46344E;
+		color: white;
+	}
+	.searchTitle {
+		padding:10px;
+	}
+	.trending {
+		margin: 30px;
+	}
+	input {
+		padding: 10px;
+		width: 75%;
+		font-size: 15px;
+		margin: auto;
+	}
+	li a {
+		color: white;
+	}

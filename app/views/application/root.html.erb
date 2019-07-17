@@ -1,15 +1,41 @@
-<h2>Chang's Slang</h2>
+<head>
+	
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
 
-<br>
-<div>SEARCH BAR GOES HERE</div>
-<br>
-<div></div>
-<span>TRENDING</span>
-<ul>
-  <% Entry.all.order(view_count: :desc).limit(5).each do |entry| %>
-    <li>
-    	<%= link_to "#{entry.phrase}", entry_path(entry.id) %>
-    </li>
-  <% end %>
-</ul>
-<%= link_to "Add a new word!", new_entry_path %>
+	<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/root.css">
+	<style type="text/css">
+		.headerTitle {
+			margin: 0px;
+			padding:0px;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="headerTitle">CHANG'S</h1>
+	<h1 class="headerTitle">SLANG</h1>
+	<h3>The Chinese Urban Dictionary</h3>
+
+	<br>
+	<div class="searchBarSection">
+		<span class="searchTitle">Search</span>
+		<input type="text" class="searchBar"></input>	
+	</div>
+	<br>
+	<% t=Time.now %>
+	<div class="trending">
+		<div>Top 5 Trending - <%= t.strftime("%b %d, %Y") %> </div>
+		<div>
+			<ol>
+				<% Entry.all.order(view_count: :desc).limit(5).each do |entry| %>
+			    <li>
+			    	<%= link_to "#{entry.phrase}", entry_path(entry.id) %>
+			    </li>
+			  <% end %>
+			</ol>
+		</div>
+	</div>
+	<div>
+		<%= link_to "Add a new word!", new_entry_path %>
+	</div>
+		
+</body>
