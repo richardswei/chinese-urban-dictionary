@@ -12,13 +12,16 @@
 		background-color: black		
 	}
 	.bulkPanel{
-		margin-top: 50px;
+		margin-top: 100px;
 	}
 	.panel {
 		margin: 0px;
 		background: url(taipei_101_bckgd.jpg);
 		background-repeat: no-repeat;
 		background-size: cover;
+		/*background-color: black;*/
+		height: 100vh;
+		background-position: center;
 	}
 	h1,h2,h3,h4,h5,h6 {
 	    font-family: 'Oswald', sans-serif;
@@ -37,14 +40,16 @@
 		padding: 5px 15px 5px 0px;
 		width: 75%;
 		margin: auto;
-		background-color: #46344E;
 		color: white;
+		background-color: #46344E;
+
 	}
 	.searchTitle {
 		padding:10px;
 	}
 	.trending {
 		margin: 30px;
+		background-color: #46344E;
 	}
 	input {
 		padding: 10px;
@@ -52,6 +57,6 @@
 		font-size: 15px;
 		margin: auto;
 	}
-	li a {
-		color: white;
+	li, li a{
+		color: #FAED26;
 	}
