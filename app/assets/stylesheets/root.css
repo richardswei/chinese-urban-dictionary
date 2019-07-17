@@ -11,29 +11,30 @@
 		margin: 0px;
 		background-color: black		
 	}
-	.bulkPanel{
+	.textPanel{
 		margin-top: 100px;
 	}
 	.panel {
 		margin: 0px;
+		padding: 30px 0px 0px 30px;
 		background: url(taipei_101_bckgd.jpg);
 		background-repeat: no-repeat;
 		background-size: cover;
-		/*background-color: black;*/
 		height: 100vh;
 		background-position: center;
 	}
 	h1,h2,h3,h4,h5,h6 {
 	    font-family: 'Oswald', sans-serif;
-	    /*background-color: #5A5560; */
 	    color: #FAED26;
 	    padding: 10px;
+	}
+	h1 {
+		font-size: 50px;
 	}
 	div {
 		padding: 6px;
 		border-radius: 4px; 
-/*		background-color: #46344E;
-*/		color: white;
+		color: white;
 		font-family: 'Noto Sans TC', sans-serif;
 	}
 	.searchBarSection {
@@ -48,8 +49,12 @@
 		padding:10px;
 	}
 	.trending {
-		margin: 30px;
+		margin: auto;
 		background-color: #46344E;
+		width: 75%;
+	}
+	.trending div{
+		color: white;
 	}
 	input {
 		padding: 10px;
@@ -57,6 +62,6 @@
 		font-size: 15px;
 		margin: auto;
 	}
-	li, li a{
-		color: #FAED26;
+	.newWordLink a, li, li a{
+		color: white;
 	}
