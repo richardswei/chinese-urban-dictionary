@@ -6,24 +6,40 @@
 	<script type="text/javascript"></script>
 </head>
 <body>
-	<h1>CHANG'S SLANG</h1>
-	<%= form_for(@entry) do |f| %>
-	  <ul>
-	  <% @entry.errors.full_messages.each do |error| %>
-	    <li><%= error %></li>
-	  <% end %>
-	  </ul>
-	  <p>
-	    <%= f.label :phrase %><br />
-	    <%= f.text_field :phrase %>
-	  </p>
-	  <p>
-	    <%= f.label :pinyin %><br />
-	    <%= f.text_field :pinyin %>
-	  </p>
-	  <p>
-	    <%= f.submit %>
-	  </p>
-	<% end %>
+	<div class="mainPanel">
+		<h1>CHANG'S SLANG</h1>
+		<h2>New Entry</h2>
+		<%= form_for(@entry) do |f| %>
+			<ul>
+			<% @entry.errors.full_messages.each do |error| %>
+			<li><%= error %></li>
+			<% end %>
+			</ul>
+			<div class="inputFields">
+				<p>
+					<span>
+						<%= f.label :phrase %>
+					</span>
+					<span>
+						<%= f.text_field :phrase %>
+					</span>
+				</p>
+				<p>
+					<span>
+						<%= f.label :pinyin %>
+					</span>
+					<span>
+						<%= f.text_field :pinyin %>
+					</span>
+				</p>
+				<p>
+					<span class="submitButton">
+						<%= f.submit %>					
+					</span>	
+				</p>
+		  	
+			</div>
+		<% end %>
+	</div>
 </body>
 </html>

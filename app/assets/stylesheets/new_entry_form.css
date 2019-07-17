@@ -7,14 +7,27 @@
 /* #9D8D8F - paper */
 /* #9B786F - latte */
 
-
+.mainPanel {
+	margin: 0px;
+	padding: 30px 0px 0px 30px;
+}
 p {
 	background-color: #46344E;
 	font-family: 'Noto Sans', sans-serif;
+	padding: 15px;
+	border-radius: 5px;
 }
 
 label {
  color: white;
 }
 
+.inputFields {
+	width: 75%;
+	margin: auto;
+}
 
+.submitButton {
+	width: auto;
+	margin: auto;
+}
