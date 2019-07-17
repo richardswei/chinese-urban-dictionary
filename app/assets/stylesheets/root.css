@@ -7,25 +7,34 @@
 /* #9D8D8F - paper */
 /* #9B786F - latte */
 
-	body {
+	body{
 		margin: 0px;
-		background-color: #5A5560;
+		background-color: black		
+	}
+	.bulkPanel{
+		margin-top: 50px;
+	}
+	.panel {
+		margin: 0px;
+		background: url(taipei_101_bckgd.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
 	h1,h2,h3,h4,h5,h6 {
 	    font-family: 'Oswald', sans-serif;
-	    background-color: #5A5560; 
+	    /*background-color: #5A5560; */
 	    color: #FAED26;
 	    padding: 10px;
 	}
 	div {
 		padding: 6px;
 		border-radius: 4px; 
-		background-color: #46344E;
-		color: white;
+/*		background-color: #46344E;
+*/		color: white;
 		font-family: 'Noto Sans TC', sans-serif;
 	}
 	.searchBarSection {
-		padding-right: 5px 15px 5px 0px;
+		padding: 5px 15px 5px 0px;
 		width: 75%;
 		margin: auto;
 		background-color: #46344E;
