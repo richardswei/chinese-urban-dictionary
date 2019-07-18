@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entry: one
+  definition: MyText
+  usage: MyText
+  usage_translation: MyText
+
+two:
+  entry: two
+  definition: MyText
+  usage: MyText
+  usage_translation: MyText
