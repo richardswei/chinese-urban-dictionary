@@ -7,7 +7,8 @@
     <!-- This will be rendered if we found an entry -->
   <div>Chinese Word: <%= @entry.phrase %></div>
   <div>Pinyin: <%= @entry.pinyin %></div>
-
+  <h2>Definitions</h2>
+  <%= render partial: 'entries/definition', collection: @entry.definitions %>
 <% else %>
   <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
   <h1 class="animated shakeit" style="color: red;padding-left:50px;">
