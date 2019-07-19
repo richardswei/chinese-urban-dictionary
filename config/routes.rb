@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/", to: "application#root"
   get "corgi", to: "application#corgi"
 
-  resources :entries, only: [:index, :show, :edit, :new, :create]
+  resources :entries, only: [:index, :show, :edit, :new, :create, :update]
   # ^This is shorthand for doing:
   # get "entries/", to: "entries#index"
   # get "entries/:id", to: "entries#show"

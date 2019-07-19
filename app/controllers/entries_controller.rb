@@ -20,6 +20,15 @@ class EntriesController < ApplicationController
     @entry = Entry.where(id: params[:id]).first
   end
 
+  def update
+    @entry = Entry.where(id: params[:id]).first
+    @entry.update(
+      params.require(:entry).permit(:phrase, :pinyin)
+    )
+
+    redirect_to entry_path(@entry)
+  end
+
   def create
     @entry = Entry.new(
         phrase: params[:entry][:phrase],
