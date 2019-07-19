@@ -17,10 +17,10 @@ class EntriesController < ApplicationController
   end
 
   def edit
+    @entry = Entry.where(id: params[:id]).first
   end
 
   def create
-    # fail
     @entry = Entry.new(
         phrase: params[:entry][:phrase],
         pinyin: params[:entry][:pinyin]
