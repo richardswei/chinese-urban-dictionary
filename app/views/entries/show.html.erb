@@ -14,6 +14,7 @@
 		  <div>Pinyin: <%= @entry.pinyin %></div>
 		  <h3>Definitions</h3>
 		  <%= render partial: 'entries/definition', collection: @entry.definitions%>
+		  <%= render partial: 'definitions/definitions_form'%>
 		  <%= link_to "Edit this word!", edit_entry_path %>
 		<% else %>
 		  <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
