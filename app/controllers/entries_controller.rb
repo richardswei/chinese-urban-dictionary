@@ -17,11 +17,11 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    @entry = Entry.find(id: params[:id])
+    @entry = Entry.find(params[:id])
   end
 
   def update
-    @entry = Entry.find(id: params[:id])
+    @entry = Entry.find(params[:id])
     @entry.update(
       params.require(:entry).permit(:phrase, :pinyin)
     )
