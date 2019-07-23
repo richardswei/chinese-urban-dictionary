@@ -1,0 +1,35 @@
+<h3>Add a New Definition</h3>
+<%= form_with(model:@definition, url: [@entry, @definition]) do |f| %>
+	<div>
+		<p>
+			<span>
+				<%= f.label :definition %>
+			</span>
+			<span>
+				<%= f.text_field :definition %>
+			</span>
+		</p>
+		<p>
+			<span>
+				<%= f.label :usage %>
+			</span>
+			<span>
+				<%= f.text_field :usage %>
+			</span>
+		</p>
+		<p>
+			<span>
+				<%= f.label :usage_translation %>
+			</span>
+			<span>
+				<%= f.text_field :usage_translation %>
+			</span>
+		</p>
+		<p>
+			<span class="submitButton">
+				<%= f.submit %>					
+			</span>	
+		</p>
+  	
+	</div>
+<% end %>

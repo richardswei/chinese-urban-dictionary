@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get "corgi", to: "application#corgi"
 
   resources :entries, only: [:index, :show, :edit, :new, :create, :update]
+  resources :entries do
+  	resources :definitions
+  end
   # ^This is shorthand for doing:
   # get "entries/", to: "entries#index"
   # get "entries/:id", to: "entries#show"

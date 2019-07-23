@@ -10,6 +10,8 @@ class EntriesController < ApplicationController
   def show
     @entry = Entry.where(id: params[:id]).first
     # NB: @entry might be nil if we were passed an invalid id.
+    @definition = Definition.new
+    @definition.entry_id = @entry.id
   end
 
   def new

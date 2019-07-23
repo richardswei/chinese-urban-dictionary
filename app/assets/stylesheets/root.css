@@ -23,14 +23,6 @@
 		height: 100vh;
 		background-position: center;
 	}
-	h1,h2,h3,h4,h5,h6 {
-	    font-family: 'Oswald', sans-serif;
-	    color: #FAED26;
-	    padding: 10px;
-	}
-	h1 {
-		font-size: 50px;
-	}
 	div {
 		padding: 6px;
 		border-radius: 4px; 

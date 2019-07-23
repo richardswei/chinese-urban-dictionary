@@ -1,16 +1,26 @@
-<h4>Chang's Slang</h4>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+</head>
+<body>
+	<h1>CHANG'S SLANG</h1>
+	<div style="background-color: #46344E">
+		
+		<div>This is a view for a specific entry.</div>
 
-<div>This is a view for a specific entry.</div>
-
-<div>We can show some details about the entry here.</div><br>
-<% if @entry.present? %>
-    <!-- This will be rendered if we found an entry -->
-  <div>Chinese Word: <%= @entry.phrase %></div>
-  <div>Pinyin: <%= @entry.pinyin %></div>
-  <%= link_to "Edit this word!", edit_entry_path %>
-<% else %>
-  <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
-  <h1 class="animated shakeit" style="color: red;padding-left:50px;">
-    THERE'S NO ENTRY WITH THAT ID
-  </h1>
-<% end %>
+		<div>We can show some details about the entry here.</div><br>
+		<% if @entry.present? %>
+		    <!-- This will be rendered if we found an entry -->
+		  <h2><%= @entry.phrase %></h2>
+		  <div>Pinyin: <%= @entry.pinyin %></div>
+		  <h3>Definitions</h3>
+		  <%= render partial: 'entries/definition', collection: @entry.definitions%>
+		  <%= render partial: 'definitions/definitions_form'%>
+		  <%= link_to "Edit this word!", edit_entry_path %>
+		<% else %>
+		  <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
+		  <h1 class="animated shakeit" style="color: red;padding-left:50px;">
+		    THERE'S NO ENTRY WITH THAT ID
+		  </h1>
+		<% end %>
+	</div>
+</body>
