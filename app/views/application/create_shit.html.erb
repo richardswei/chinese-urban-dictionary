@@ -1,0 +1,28 @@
+<head>
+
+  <link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<label style="color: white" for="phrase">Phrase:</label>
+<input type="text" id="phrase">
+<br>
+
+<label style="color: white" for="pinyin">Pinyin:</label>
+<input type="text" id="pinyin">
+<br>
+
+<button type="button" onclick="submit()">Submit!</button>
+
+
+<script>
+    function submit() {
+        var phrase = $("#phrase").val();
+        var pinyin = $("#pinyin").val();
+
+        $.post("/entries", {phrase: phrase, pinyin: pinyin}, function (response) {
+            console.log(response.data);
+        });
+    };
+</script>
+</body>

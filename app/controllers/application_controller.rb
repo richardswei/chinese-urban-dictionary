@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
     # Array#sample returns an element of that array at random.
     @image_url = images.sample
   end
+
+  def create_shit
+    # TODO: this is temporary to explain how this can work
+  end
 end

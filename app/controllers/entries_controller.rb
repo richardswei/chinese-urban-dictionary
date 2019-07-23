@@ -17,4 +17,9 @@ class EntriesController < ApplicationController
 
   def edit
   end
+
+  def create
+    e = Entry.create(pinyin: params[:pinyin], phrase: params[:phrase])
+    render json: {success: true, data: e}
+  end
 end
