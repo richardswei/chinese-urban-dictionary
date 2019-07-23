@@ -13,8 +13,28 @@ class EntriesController < ApplicationController
   end
 
   def new
+    @entry = Entry.new
   end
 
   def edit
+    @entry = Entry.find(id: params[:id])
+  end
+
+  def update
+    @entry = Entry.find(id: params[:id])
+    @entry.update(
+      params.require(:entry).permit(:phrase, :pinyin)
+    )
+
+    redirect_to entry_path(@entry)
+  end
+
+  def create
+    @entry = Entry.new(
+        phrase: params[:entry][:phrase],
+        pinyin: params[:entry][:pinyin]
+      )
+    @entry.save
+    redirect_to entry_path(@entry)
   end
 end

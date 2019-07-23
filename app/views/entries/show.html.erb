@@ -9,6 +9,7 @@
   <div>Pinyin: <%= @entry.pinyin %></div>
   <h2>Definitions</h2>
   <%= render partial: 'entries/definition', collection: @entry.definitions %>
+  <%= link_to "Edit this word!", edit_entry_path %>
 <% else %>
   <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
   <h1 class="animated shakeit" style="color: red;padding-left:50px;">
