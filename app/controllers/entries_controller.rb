@@ -33,8 +33,8 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(
-        phrase: params[:entry][:phrase],
-        pinyin: params[:entry][:pinyin]
+        phrase: params[:phrase],
+        pinyin: params[:pinyin]
       )
     @entry.save
     redirect_to entry_path(@entry)

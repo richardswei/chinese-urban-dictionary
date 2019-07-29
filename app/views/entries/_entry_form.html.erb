@@ -1,31 +1,30 @@
-<%= form_with model:@entry do |f| %>
-	<ul>
-	<% @entry.errors.full_messages.each do |error| %>
-	<li><%= error %></li>
-	<% end %>
-	</ul>
-	<div class="inputFields">
-		<p>
-			<span>
-				<%= f.label :phrase %>
-			</span>
-			<span>
-				<%= f.text_field :phrase %>
-			</span>
-		</p>
-		<p>
-			<span>
-				<%= f.label :pinyin %>
-			</span>
-			<span>
-				<%= f.text_field :pinyin %>
-			</span>
-		</p>
-		<p>
-			<span class="submitButton">
-				<%= f.submit %>					
-			</span>	
-		</p>
-  	
-	</div>
-<% end %>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+	<style type="text/css">
+		label { color: white; }
+
+	</style>
+	<title>New Phrase</title>
+</head>
+<body>
+	<label for="phrase">Phrase: </label>
+	<br>
+	<input type="text" id="phrase">
+	<br>
+	<label for="pinyin">Pinyin: </label>
+	<br>
+	<input type="text" id="pinyin">
+	<br>
+	<button type="button" onclick="submitEntry()">Submit</button>
+
+	<script type="text/javascript">
+		function submitEntry() {
+			var phraseText = $("#phrase").val();
+			var pinyinText = $("#pinyin").val();
+			$.post("/entries", {
+				phrase: phraseText,
+				pinyin: pinyinText
+			});
+		}
+	</script>
+</body>
