@@ -1,28 +1,115 @@
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
 	<style type="text/css">
+		.divPartial {
+			padding: 10px;
+			margin: 10px;
+			background-color: #3b2b46;
+		}
+		 /* The Modal (background) */
+		.modal {
+		  display: none; /* Hidden by default */
+		  position: fixed; /* Stay in place */
+		  z-index: 1; /* Sit on top */
+		  left: 0;
+		  top: 0;
+		  width: 100%; /* Full width */
+		  height: 100%; /* Full height */
+		  overflow: auto; /* Enable scroll if needed */
+		  background-color: rgb(0,0,0); /* black color */
+		  background-color: rgba(0,0,0,0.5); /* black color */
+		}
+
+		/* Modal Content/Box */
+		.modal-content {
+		  background-color: #fefefe;
+		  margin: 15% auto; /* 15% from the top and centered */
+		  padding: 20px;
+		  border: 1px solid #888;
+		  width: 80%; /* Could be more or less, depending on screen size */
+		}
+
+		/* The Close Button */
+		.close {
+		  color: #aaa;
+		  float: right;
+		  font-size: 28px;
+		  font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+		  color: black;
+		  text-decoration: none;
+		  cursor: pointer;
+		} 
+		.centerInnerPanel {
+
+			padding-left: 10%;
+			padding-bottom: 5%;
+			padding-top: 5%;
+			background-color: #3b2b46; /* purple color */
+		}
+		.centerOuterPanel {
+			margin-top: 5%;
+			margin-left: 5%;
+			margin-right: 5%;
+		}
 	</style>
 </head>
 <body>
 	<h1>CHANG'S SLANG</h1>
-	<div style="background-color: #46344E">
-		
-		<div>This is a view for a specific entry.</div>
+	<div id="myModal" class="modal">
+		<div class='centerOuterPanel'>
+			<span class="close">&times;</span>
+			<div class='centerInnerPanel'>
+				<div class="model-content">
+					<%= render partial: 'definitions/definitions_form'%>
 
-		<div>We can show some details about the entry here.</div><br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="entryPanel">
 		<% if @entry.present? %>
 		    <!-- This will be rendered if we found an entry -->
 		  <h2><%= @entry.phrase %></h2>
 		  <div>Pinyin: <%= @entry.pinyin %></div>
+		  <%= link_to "Edit this word!", edit_entry_path %>
 		  <h3>Definitions</h3>
 		  <%= render partial: 'entries/definition', collection: @entry.definitions%>
-		  <%= render partial: 'definitions/definitions_form'%>
-		  <%= link_to "Edit this word!", edit_entry_path %>
 		<% else %>
-		  <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
+			<h1>HAHA, LOSER!!!</h1>
 		  <h1 class="animated shakeit" style="color: red;padding-left:50px;">
 		    THERE'S NO ENTRY WITH THAT ID
 		  </h1>
 		<% end %>
 	</div>
+	<button id="myBtn">Add a Def</button>
+	<script type="text/javascript">
+		// Get the modal
+		var modal = document.getElementById("myModal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+		    modal.style.display = "none";
+		  }
+		} 	</script>
 </body>

@@ -8,14 +8,13 @@
 /* #9B786F - latte */
 
 .mainPanel {
-	margin: 0px;
-	padding: 30px 0px 0px 30px;
+	margin: 30px;
 }
-p {
+
+.newEntryPanel {
+	margin: 0px;
+	padding: 20px;
 	background-color: #46344E;
-	font-family: 'Noto Sans', sans-serif;
-	padding: 15px;
-	border-radius: 5px;
 }
 
 label {
