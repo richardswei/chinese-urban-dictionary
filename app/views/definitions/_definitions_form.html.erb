@@ -14,6 +14,13 @@
 		var usageText = $("#usage").val();
 		var usageTranslationText = $("#usageTranslation").val();
 		console.log(window.location.pathname+'/definitions');
+		if (definitionText.trim()=='') {
+			return alert('Definition cannot be empty!')
+		} else if (usageText.trim()=='') {
+			return alert('Usage cannot be empty!')
+		} else if (usageTranslationText.trim()=='') {
+			return alert('Usage Translation cannot be empty!')
+		}
 		$.post(window.location.pathname+'/definitions', {
 			definition: definitionText,
 			usage: usageText,
