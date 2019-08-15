@@ -21,9 +21,8 @@ label {
  color: white;
 }
 
-.inputFields {
-	width: 75%;
-	margin: auto;
+.inputField {
+	padding: 10px;
 }
 
 .submitButton {
