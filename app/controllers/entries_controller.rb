@@ -10,8 +10,6 @@ class EntriesController < ApplicationController
   def show
     @entry = Entry.where(id: params[:id]).first
     # NB: @entry might be nil if we were passed an invalid id.
-    @definition = Definition.new
-    @definition.entry_id = @entry.id
   end
 
   def new
@@ -33,8 +31,8 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(
-        phrase: params[:entry][:phrase],
-        pinyin: params[:entry][:pinyin]
+        phrase: params[:phrase],
+        pinyin: params[:pinyin]
       )
     @entry.save
     redirect_to entry_path(@entry)

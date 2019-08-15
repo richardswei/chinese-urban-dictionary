@@ -13,11 +13,40 @@
  *= require_tree .
  *= require_self
  */
+
+ 	body{
+		margin: 0px;
+		background-color: black;		
+	}
 	h1,h2,h3,h4,h5,h6 {
-	    font-family: 'Oswald', sans-serif;
-	    color: #FAED26;
-	    padding: 10px;
+		font-family: 'Oswald', sans-serif;
+		color: #FAED26;
+		padding: 0px;
+		margin: 0px;
 	}
 	h1 {
 		font-size: 50px;
+	}
+	h2 {
+		font-size: 40px;
+	}
+	label {
+		font-family: 'Noto Sans TC', sans-serif;		
+	}
+	a.button {
+		background: transparent url('bg_button_a.gif') no-repeat scroll top right;
+		color: black;
+		/*display: block;*/
+		clear: left;
+		font: normal 14px Noto Sans, sans-serif;
+		margin: 10px 10px 0px 0px;
+		padding: 5px 15px 5px 15px;
+		background-color: #FAED26;
+		border-radius: 5px;
+		text-decoration: none;
+		display: inline-block;
+	}
+	a.button:hover {
+		cursor: pointer;
+		text-decoration: underline;		
 	}

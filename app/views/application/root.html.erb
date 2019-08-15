@@ -1,22 +1,12 @@
 <head>
-	
-	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" type="text/css" href="app/assets/stylesheets/root.css">
-	<style type="text/css">
-		.headerTitle {
-			margin: 0px;
-			padding:0px;
-		}
-	</style>
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
 </head>
 <body>
 	<div class="panel">
 		
-		<h1 class="headerTitle">CHANG'S</h1>
-		<h1 class="headerTitle">SLANG</h1>
-		<h2>The Chinese Urban Dictionary</h2>
-
+		<h1 class="headerTitle">CHANG'S SLANG</h1>
+		<h3>The Chinese Urban Dictionary</h3>
 		<br>
 		<div class="textPanel">
 			<div class="searchBarSection">
@@ -26,8 +16,8 @@
 			<br>
 			<% t=Time.now %>
 			<div class="trending">
-				<div>Top 5 Trending - <%= t.strftime("%b %d, %Y") %> </div>
-				<div>
+				<h3 class="wordSection">Top 5 Trending - <%= t.strftime("%b %d, %Y") %> </h3>
+				<div class="trendingList">
 					<ol>
 						<% Entry.all.order(view_count: :desc).limit(5).each do |entry| %>
 					    <li>
@@ -35,9 +25,9 @@
 					    </li>
 					  <% end %>
 					</ol>
-				</div>
-				<div class="newWordLink">
-					<%= link_to "Add a new word!", new_entry_path %>
+					<div class="newWordLink">
+						<%= link_to "Add a new word!", new_entry_path, :class => 'button' %>
+					</div>
 				</div>
 			</div>
 		</div>

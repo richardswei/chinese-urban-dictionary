@@ -1,31 +1,34 @@
-<%= form_with model:@entry do |f| %>
-	<ul>
-	<% @entry.errors.full_messages.each do |error| %>
-	<li><%= error %></li>
-	<% end %>
-	</ul>
-	<div class="inputFields">
-		<p>
-			<span>
-				<%= f.label :phrase %>
-			</span>
-			<span>
-				<%= f.text_field :phrase %>
-			</span>
-		</p>
-		<p>
-			<span>
-				<%= f.label :pinyin %>
-			</span>
-			<span>
-				<%= f.text_field :pinyin %>
-			</span>
-		</p>
-		<p>
-			<span class="submitButton">
-				<%= f.submit %>					
-			</span>	
-		</p>
-  	
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+	<style type="text/css">
+	</style>
+	<title>New Phrase</title>
+</head>
+<body>
+	<div class="newEntryPanel">
+		<label for="phrase">Phrase: </label>
+		<br>
+		<input type="text" id="phrase" value="<%=@entry.phrase%>">
+		<br>
+		<label for="pinyin">Pinyin: </label>
+		<br>
+		<input type="text" id="pinyin" value="<%=@entry.pinyin%>">
+		<br>
+		<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
 	</div>
-<% end %>
+	<script type="text/javascript">
+		function submitEntry() {
+			var phraseText = $("#phrase").val();
+			var pinyinText = $("#pinyin").val();
+			if (phraseText.trim()=='') { 
+				return alert('Phrase field cannot be empty!') 
+			} else if (pinyinText.trim()=='') {
+				return alert('Pinyin field cannot be empty!') 				
+			}
+			$.post("/entries", {
+				phrase: phraseText,
+				pinyin: pinyinText
+			});
+		}
+	</script>
+</body>

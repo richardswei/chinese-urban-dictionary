@@ -1,26 +1,65 @@
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+	<style type="text/css">
+	</style>
 </head>
 <body>
-	<h1>CHANG'S SLANG</h1>
-	<div style="background-color: #46344E">
-		
-		<div>This is a view for a specific entry.</div>
-
-		<div>We can show some details about the entry here.</div><br>
+	<h1 class="title">CHANG'S SLANG</h1>
+	<div id="defModal" class="modal">
+		<div class='centerOuterPanel'>
+			<span class="close">&times;</span>
+			<div class='centerInnerPanel'>
+				<div class="model-content">
+					<%= render partial: 'definitions/definitions_form'%>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="entryPanel">
 		<% if @entry.present? %>
-		    <!-- This will be rendered if we found an entry -->
-		  <h2><%= @entry.phrase %></h2>
-		  <div>Pinyin: <%= @entry.pinyin %></div>
-		  <h3>Definitions</h3>
-		  <%= render partial: 'entries/definition', collection: @entry.definitions%>
-		  <%= render partial: 'definitions/definitions_form'%>
-		  <%= link_to "Edit this word!", edit_entry_path %>
+		  <div class="wordSection">
+			  <h2><%= @entry.phrase %>
+			  <span><%= link_to "Edit this word!", edit_entry_path, :class => 'button addEditButton'%></span>
+			  </h2>
+			  <h3>Pinyin: <%=@entry.pinyin%></h3>
+		  </div>
+		  <div class="wordSection">
+			  <h3>Definitions<span>
+				  <a class="button" id="addDefButton">Add a Definition</a>
+				</span></h3>
+				<% if @entry.definitions.present?%>
+			  	<%= render partial: 'entries/definition', collection: @entry.definitions%>
+			  <% else %>
+			  	<p>There are currently no definitions for this phrase!</p>
+			  <% end %>
+		  </div>
 		<% else %>
-		  <h4>EXCEPT YOU FUCKED UP</h4><br><br><br>
+			<h1>HAHA, LOSER!!!</h1>
 		  <h1 class="animated shakeit" style="color: red;padding-left:50px;">
 		    THERE'S NO ENTRY WITH THAT ID
 		  </h1>
-		<% end %>
+		<%end%>
 	</div>
+	<script type="text/javascript">
+		// Get the modal
+		var defModal = document.getElementById("defModal");
+		// Get the button that opens the modal
+		var enterButton = document.getElementById("addDefButton");
+		// Get the <span> element that closes the modal
+		var exitButton = document.getElementsByClassName("close")[0];
+		//  open the modal
+		enterButton.onclick = function() {
+		  defModal.style.display = "block";
+		}
+		// close the modal
+		exitButton.onclick = function() {
+		  defModal.style.display = "none";
+		}
+		// When the close it
+		window.onclick = function(event) {
+		  if (event.target == defModal) {
+		    defModal.style.display = "none";
+		  }
+		} 	
+	</script>
 </body>

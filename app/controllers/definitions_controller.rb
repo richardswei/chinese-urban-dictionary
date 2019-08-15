@@ -1,8 +1,9 @@
 class DefinitionsController < ApplicationController
 	def create 
 		@definition = Definition.new(
-			params.require(:definition).
-				permit(:definition, :usage, :usage_translation)
+			definition: params[:definition],
+			usage: params[:usage],
+			usage_translation: params[:usage_translation]
 		)
 		@definition.entry_id = params[:entry_id]
 		@definition.save
