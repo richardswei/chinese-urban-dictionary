@@ -1,0 +1,60 @@
+/*landing page css*/
+
+/*COLORS*/
+/* #FAED26 - yellow */
+/* #46344E - indigo */
+/* #5A5560 - blue gray */
+/* #9D8D8F - paper */
+/* #9B786F - latte */
+
+	.panel {
+		margin: 0px;
+		padding: 30px 0px 0px 30px;
+		background: url(taipei_101_bckgd.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+		background-position: center;
+	}
+	.textPanel {
+		position: relative;
+		top: 25%;
+
+	}
+	div {
+		border-radius: 4px; 
+		color: white;
+		font-family: 'Noto Sans TC', sans-serif;
+	}
+	.searchBarSection {
+		padding: 5px 15px 5px 0px;
+		width: 75%;
+		max-width: 500px;
+		margin: auto;
+		color: white;
+		background-color: #3b2b46;
+
+	}
+	.searchTitle {
+		padding:10px;
+	}
+	.trending {
+		max-width: 500px;
+		width: 75%;
+		margin: auto;
+		color: white;
+		background-color: #3b2b46;
+	}
+	.trending	a, li, li a{
+		color: white;
+	}
+	input {
+		padding: 10px;
+		width: 75%;
+		font-size: 15px;
+		margin: auto;
+	}
+	.newWordLink {
+		padding: 0px 0px 10px 10px;
+	}
+
