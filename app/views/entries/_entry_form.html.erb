@@ -8,7 +8,7 @@
 	<div class="newEntryPanel">
 		<label for="phrase">Phrase: </label>
 		<br>
-		<input type="text" id="phrase" value="<%=@entry.phrase%>">
+		<input type="text" id="phrase" onkeyup="getChinese(this.value)" value="<%=@entry.phrase%>">
 		<br>
 		<label for="pinyin">Pinyin: </label>
 		<br>
@@ -16,7 +16,25 @@
 		<br>
 		<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
 	</div>
+	<div id='results'></div>
 	<script type="text/javascript">
+		window.addEventListener ("load", function () {
+				var input = document.getElementsByTagName ("input");
+
+				input[0].addEventListener ("keydown", function () {
+				    alert ("Caret position: " + this.selectionStart);
+
+				    // You can also set the caret: this.selectionStart = 2;
+				});
+			});
+
+		function getChinese(pinyin) {
+			$.get("https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num=10&text="+pinyin, 
+				function(data) {
+					document.getElementById('results').innerHTML = String(data[1][0][1]);
+				});
+		}
+
 		function submitEntry() {
 			var phraseText = $("#phrase").val();
 			var pinyinText = $("#pinyin").val();
