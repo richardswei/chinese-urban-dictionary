@@ -33,6 +33,10 @@
 	label {
 		font-family: 'Noto Sans TC', sans-serif;		
 	}
+	h2 a, h1 a {
+	    text-decoration: none;
+	    color: inherit;
+	}
 	a.button {
 		background: transparent url('bg_button_a.gif') no-repeat scroll top right;
 		color: black;

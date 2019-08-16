@@ -8,30 +8,71 @@
 	<div class="newEntryPanel">
 		<label for="phrase">Phrase: </label>
 		<br>
-		<input type="text" id="phrase" onkeyup="getChinese(this.value)" value="<%=@entry.phrase%>">
+		<div class="inputFields">
+			<input type="text" id="phrase" value="<%=@entry.phrase%>">
+		</div>
 		<br>
 		<label for="pinyin">Pinyin: </label>
 		<br>
-		<input type="text" id="pinyin" value="<%=@entry.pinyin%>">
+		<div class="inputFields">
+			<input type="text" id="pinyin" value="<%=@entry.pinyin%>">
+		</div>
 		<br>
 		<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
 	</div>
-	<div id='results'></div>
 	<script type="text/javascript">
-		window.addEventListener ("load", function () {
-				var input = document.getElementsByTagName ("input");
+		// window.addEventListener("load", function() {
+		// 	var input document.getElementsByTagName("input");
+		// 	input[0].addEventListener("keydown", function() {
+		// 		alert("Caret position: " + this.selectionStart);
+		// 	});
+		// }); 
+		var setBoxCoordinates = function(){
+		  var caret = getCaretCoordinates(this, this.selectionEnd);
+		  console.log('(top, left, height) = (%s, %s, %s)', caret.top, caret.left, caret.height);
+		  var parentNode = this.parentNode;
+		  console.log(parentNode);
+		  if (parentNode.querySelector('div')) {
+		  	parentNode.querySelector('div').remove();
+		  }
+		  var results = document.createElement("div");
+		  results.id = 'results';
+		  parentNode.appendChild(results);
+		  var inputVertPosition = this.getBoundingClientRect().top + caret.height + + caret.top + 5;
+		  var inputHorizPosition = this.getBoundingClientRect().left + caret.left + 5;
+		  $("div#results")
+		  	.css({
+		  		"background-color":"gray",
+		  		"z-index": 99,
+		  		"color":"black",
+		  		"position":"absolute",
+		  		"top":inputVertPosition+"px",
+		  		"left":inputHorizPosition+"px",
+		  		"padding":"10px",
+		  	});
+		  	getChinese(this.value);
 
-				input[0].addEventListener ("keydown", function () {
-				    alert ("Caret position: " + this.selectionStart);
-
-				    // You can also set the caret: this.selectionStart = 2;
-				});
-			});
+		}
+		
+		var inputCollection = document.getElementsByTagName("input");
+		
+		inputCollection[0].onkeypress = function(evt) {
+		   evt = evt || window.event;
+		   var charCode = evt.which || evt.keyCode;
+		   var charStr = String.fromCharCode(charCode);
+		   if (/[a-z0-9]/i.test(charStr)) {
+		   }
+		};
+		inputCollection[0].addEventListener('keyup', setBoxCoordinates);
 
 		function getChinese(pinyin) {
-			$.get("https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num=10&text="+pinyin, 
+			$.get("https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num=5&text="+pinyin.toLowerCase(), 
 				function(data) {
-					document.getElementById('results').innerHTML = String(data[1][0][1]);
+					document.getElementById('results').innerHTML = data[1][0][1].map(
+							function(x, i){
+								return i+1+") "+x+"  ";
+							}
+						).join(' ');
 				});
 		}
 
