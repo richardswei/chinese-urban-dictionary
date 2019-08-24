@@ -64,7 +64,7 @@
 			// GET imeBubble
 			getChinese(this.value);
 		}
-
+		var inputCollection = document.getElementsByTagName("input");
 		inputCollection[0].addEventListener('keydown', initializeIME);
 		inputCollection[0].addEventListener('keyup', renderIME);
 
@@ -73,7 +73,7 @@
 				function(data) {
 					document.getElementById('results').innerHTML = data[1][0][1].map(
 							function(x, i){
-								return i+1+") "+x+"  ";
+								return '<div>'+(i+1)+") "+x+"</div>";
 							}
 						).join(' ');
 				});
@@ -82,7 +82,7 @@
 </body>
 
 
-<!-- 		var inputCollection = document.getElementsByTagName("input");
+<!--
 		inputCollection[0].onkeypress = function(evt) {
 		   evt = evt || window.event;
 		   var charCode = evt.which || evt.keyCode;
