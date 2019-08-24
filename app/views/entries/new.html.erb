@@ -11,5 +11,22 @@
 		<h2>New Entry</h2>
 		<%= render partial: 'entry_form' %>
 	</div>
+	<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
+
+	<script type="text/javascript">
+		function submitEntry() {
+			var phraseText = $("#phrase").val();
+			var pinyinText = $("#pinyin").val();
+			if (phraseText.trim()=='') { 
+				return alert('Phrase field cannot be empty!') 
+			} else if (pinyinText.trim()=='') {
+				return alert('Pinyin field cannot be empty!') 				
+			}
+			$.post("/entries", {
+				phrase: phraseText,
+				pinyin: pinyinText
+			});
+		}
+	</script>
 </body>
 </html>

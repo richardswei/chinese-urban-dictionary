@@ -1,3 +1,46 @@
-<h1><a href="/">CHANG'S SLANG</a></h1>
-<h2>Edit Entry</h2>
-<%= render partial: 'entry_form' %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function submitEditEntry() {
+			console.log('click triggered')
+			var phraseText = $("#phrase").val();
+			var pinyinText = $("#pinyin").val();
+			if (phraseText.trim()=='') {
+				return alert('Phrase field cannot be empty!');
+			} else if (pinyinText.trim()=='') {
+				return alert('Pinyin field cannot be empty!');
+			}
+			var entryId = <%= params[:id] %>;
+			$.ajax({
+				type: "PATCH",
+				url: "/entries/"+entryId+".json",
+				data: {
+					phrase: phraseText,
+					pinyin: pinyinText
+				},
+				// dataType: "json",
+				success: function(msg) {
+					alert("Data Saved: "+msg);
+				},
+			}).done(function () {
+			    console.log('SUCCESS');
+			}).fail(function (msg) {
+			    console.log('FAIL');
+			}).always(function (msg) {
+			    console.log('ALWAYS');
+			});
+		}
+	</script>
+
+</head>
+<body>
+	<div class="mainPanel">
+		<h1><a href="/">CHANG'S SLANG</a></h1>
+		<h2>Edit Entry</h2>
+		<%= render partial: 'entry_form' %>
+		<a class="button" id="submitDefButton" onclick="submitEditEntry()">Submit</a>
+	</div>
+</body>
+</html>

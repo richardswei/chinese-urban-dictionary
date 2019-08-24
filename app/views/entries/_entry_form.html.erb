@@ -2,45 +2,47 @@
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
 	<style type="text/css">
 	</style>
-	<title>New Phrase</title>
 </head>
 <body>
 	<div class="newEntryPanel">
 		<label for="phrase">Phrase: </label>
 		<br>
-		<div class="inputFields">
+		<div class="inputField" id="phraseField">
 			<input type="text" id="phrase" value="<%=@entry.phrase%>">
 		</div>
 		<br>
 		<label for="pinyin">Pinyin: </label>
 		<br>
-		<div class="inputFields">
+		<div class="inputField" id="pinyinField">
 			<input type="text" id="pinyin" value="<%=@entry.pinyin%>">
 		</div>
 		<br>
-		<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
 	</div>
 	<script type="text/javascript">
-		// window.addEventListener("load", function() {
-		// 	var input document.getElementsByTagName("input");
-		// 	input[0].addEventListener("keydown", function() {
-		// 		alert("Caret position: " + this.selectionStart);
-		// 	});
-		// }); 
-		var setBoxCoordinates = function(){
+		var initializeIME = function(event){
+			// TRIGGER the IME ONLY IF the character is a-z
+			if (event.which<65 || event.which>90) {return;}
+			// TRACK the position of the results box
 		  var caret = getCaretCoordinates(this, this.selectionEnd);
-		  console.log('(top, left, height) = (%s, %s, %s)', caret.top, caret.left, caret.height);
-		  var parentNode = this.parentNode;
-		  console.log(parentNode);
-		  if (parentNode.querySelector('div')) {
-		  	parentNode.querySelector('div').remove();
+		  var cursorPos= $("#phrase").prop('selectionStart');
+		  var phraseNode = $('#phraseField');
+		  if (phraseNode.find('div')) {
+		  	phraseNode.find('div').remove();
+		  	// phraseNode.find('input').remove();
+
 		  }
-		  var results = document.createElement("div");
-		  results.id = 'results';
-		  parentNode.appendChild(results);
+		  phraseNode.append(
+	      $('<div>', { id: 'imeBubble'})
+		  );
+		  $('#imeBubble').append(
+	      $('<input>', { id: 'phraseEntry', type: 'text'})
+		  );
+		  $('#imeBubble').append(
+	      $('<div>', { id: 'results'})
+		  );
 		  var inputVertPosition = this.getBoundingClientRect().top + caret.height + + caret.top + 5;
 		  var inputHorizPosition = this.getBoundingClientRect().left + caret.left + 5;
-		  $("div#results")
+		  $("div#imeBubble")
 		  	.css({
 		  		"background-color":"gray",
 		  		"z-index": 99,
@@ -50,20 +52,21 @@
 		  		"left":inputHorizPosition+"px",
 		  		"padding":"10px",
 		  	});
-		  	getChinese(this.value);
-
+			$('input#phraseEntry').on('blur', removeIME);
+		  $('input#phraseEntry').focus();
+		  $('input#phraseEntry').on('keyup', renderIME);
 		}
-		
-		var inputCollection = document.getElementsByTagName("input");
-		
-		inputCollection[0].onkeypress = function(evt) {
-		   evt = evt || window.event;
-		   var charCode = evt.which || evt.keyCode;
-		   var charStr = String.fromCharCode(charCode);
-		   if (/[a-z0-9]/i.test(charStr)) {
-		   }
-		};
-		inputCollection[0].addEventListener('keyup', setBoxCoordinates);
+		var removeIME = function(){
+			document.getElementById("imeBubble").remove();
+		}
+
+		var renderIME = function(){
+			// GET imeBubble
+			getChinese(this.value);
+		}
+
+		inputCollection[0].addEventListener('keydown', initializeIME);
+		inputCollection[0].addEventListener('keyup', renderIME);
 
 		function getChinese(pinyin) {
 			$.get("https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num=5&text="+pinyin.toLowerCase(), 
@@ -75,19 +78,16 @@
 						).join(' ');
 				});
 		}
-
-		function submitEntry() {
-			var phraseText = $("#phrase").val();
-			var pinyinText = $("#pinyin").val();
-			if (phraseText.trim()=='') { 
-				return alert('Phrase field cannot be empty!') 
-			} else if (pinyinText.trim()=='') {
-				return alert('Pinyin field cannot be empty!') 				
-			}
-			$.post("/entries", {
-				phrase: phraseText,
-				pinyin: pinyinText
-			});
-		}
 	</script>
 </body>
+
+
+<!-- 		var inputCollection = document.getElementsByTagName("input");
+		inputCollection[0].onkeypress = function(evt) {
+		   evt = evt || window.event;
+		   var charCode = evt.which || evt.keyCode;
+		   var charStr = String.fromCharCode(charCode);
+		   if (/[a-z0-9]/i.test(charStr)) {
+		   }
+		};
+ -->
