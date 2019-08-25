@@ -19,12 +19,10 @@
 		<br>
 	</div>
 	<script type="text/javascript">
-		var cursorFieldPos = 0;
 		var selectionFieldPos = [0,0]
 		var initializeIME = function(event){
 			// TRIGGER the IME ONLY IF the character is a-z
 			if (event.which<65 || event.which>90) {return;}
-			cursorFieldPos = this.selectionStart;
 			selectionFieldPos = [this.selectionStart,this.selectionEnd];
 			// TRACK the position of the results box
 		  var caret = getCaretCoordinates(this, this.selectionEnd);
@@ -60,7 +58,7 @@
 				document.getElementById("imeBubble").remove();
 			}
 		}
-
+		// need global variable to keep the old list in case we hit one of the submit options
 		var resultsList;
 		var renderIME = function(e){
 			// GET imeBubble
@@ -97,10 +95,8 @@
 			$('#imeBubble').remove();
 			inputField.focus();
 		};
-		function insertInPosition(){}
 
-		var inputCollection = document.getElementsByTagName("input");
-		inputCollection[0].addEventListener('keydown', initializeIME);
+		$('input#phraseField').on('keydown', initializeIME);
 
 		function getChinese(pinyin) {
 			return $.ajax({
@@ -110,14 +106,3 @@
 
 	</script>
 </body>
-
-
-<!--
-		inputCollection[0].onkeypress = function(evt) {
-		   evt = evt || window.event;
-		   var charCode = evt.which || evt.keyCode;
-		   var charStr = String.fromCharCode(charCode);
-		   if (/[a-z0-9]/i.test(charStr)) {
-		   }
-		};
- -->
