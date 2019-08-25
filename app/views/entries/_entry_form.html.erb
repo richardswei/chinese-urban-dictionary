@@ -19,19 +19,15 @@
 		<br>
 	</div>
 	<script type="text/javascript">
+		var cursorFieldPos = 0;
 		var initializeIME = function(event){
 			// TRIGGER the IME ONLY IF the character is a-z
 			if (event.which<65 || event.which>90) {return;}
+			cursorFieldPos = this.selectionStart;
 			// TRACK the position of the results box
 		  var caret = getCaretCoordinates(this, this.selectionEnd);
 		  var cursorPos= $("#phrase").prop('selectionStart');
-		  var phraseNode = $('#phraseField');
-		  if (phraseNode.find('div')) {
-		  	phraseNode.find('div').remove();
-		  	// phraseNode.find('input').remove();
-
-		  }
-		  phraseNode.append(
+		  $('#phraseField').append(
 	      $('<div>', { id: 'imeBubble'})
 		  );
 		  $('#imeBubble').append(
@@ -57,27 +53,56 @@
 		  $('input#phraseEntry').on('keyup', renderIME);
 		}
 		var removeIME = function(){
-			document.getElementById("imeBubble").remove();
+			if (!$('.resultsList').is(":focus")){
+				document.getElementById("imeBubble").remove();
+			}
 		}
 
-		var renderIME = function(){
+		var renderIME = function(e){
 			// GET imeBubble
-			getChinese(this.value);
+			var resultsList = [];
+			var inputEntryText = this.value;
+			var promise = getChinese(inputEntryText);
+			promise.then(data => {
+				resultsList = data[1][0][1];
+				document.getElementById('results').innerHTML = resultsList.map(
+					function(x, i){
+						return '<div>'+(i+1)+") "+x+"</div>";
+					}
+				).join(' ');
+				if (e.which==13) {
+					var insertableText = resultsList[0];
+					var firstSlice = $('input#phrase').val().slice(0,cursorFieldPos);
+					var secondSlice = $('input#phrase').val().slice(cursorFieldPos);
+					$('input#phrase').val(firstSlice+insertableText+secondSlice);
+					console.log(firstSlice+insertableText+secondSlice);
+					$('#imeBubble').remove();
+				}
+			}).catch(error => console.log('Error:', error));
 		}
+
+		var insertPhrase = function(event) {
+			if (event.which==13) {
+								
+						// window.addEventListener("load", function() {
+		// 	var input document.getElementsByTagName("input");
+		// 	input[0].addEventListener("keydown", function() {
+		// 		alert("Caret position: " + this.selectionStart);
+		// 	});
+		// }); 
+			}
+		};
+		function insertInPosition(){}
+
 		var inputCollection = document.getElementsByTagName("input");
 		inputCollection[0].addEventListener('keydown', initializeIME);
-		inputCollection[0].addEventListener('keyup', renderIME);
 
 		function getChinese(pinyin) {
-			$.get("https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num=5&text="+pinyin.toLowerCase(), 
-				function(data) {
-					document.getElementById('results').innerHTML = data[1][0][1].map(
-							function(x, i){
-								return '<div>'+(i+1)+") "+x+"</div>";
-							}
-						).join(' ');
-				});
+			return $.ajax({
+				url: "https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num=5&text="+pinyin.toLowerCase(),
+			});
 		}
+
 	</script>
 </body>
 
