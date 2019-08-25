@@ -7,27 +7,29 @@
 	<div class="newEntryPanel">
 		<label for="phrase">Phrase: </label>
 		<br>
-		<div class="inputField" id="phraseField">
-			<input type="text" id="phrase" value="<%=@entry.phrase%>">
+		<div id="phrase">
+			<input type="text" id="phraseField" value="<%=@entry.phrase%>">
 		</div>
 		<br>
 		<label for="pinyin">Pinyin: </label>
 		<br>
-		<div class="inputField" id="pinyinField">
-			<input type="text" id="pinyin" value="<%=@entry.pinyin%>">
+		<div id="pinyin">
+			<input type="text" id="pinyinField" value="<%=@entry.pinyin%>">
 		</div>
 		<br>
 	</div>
 	<script type="text/javascript">
 		var cursorFieldPos = 0;
+		var selectionFieldPos = [0,0]
 		var initializeIME = function(event){
 			// TRIGGER the IME ONLY IF the character is a-z
 			if (event.which<65 || event.which>90) {return;}
 			cursorFieldPos = this.selectionStart;
+			selectionFieldPos = [this.selectionStart,this.selectionEnd];
 			// TRACK the position of the results box
 		  var caret = getCaretCoordinates(this, this.selectionEnd);
 		  var cursorPos= $("#phrase").prop('selectionStart');
-		  $('#phraseField').append(
+		  $('#phrase').append(
 	      $('<div>', { id: 'imeBubble'})
 		  );
 		  $('#imeBubble').append(
@@ -40,13 +42,14 @@
 		  var inputHorizPosition = this.getBoundingClientRect().left + caret.left + 5;
 		  $("div#imeBubble")
 		  	.css({
-		  		"background-color":"gray",
+		  		"background-color":"#DCDCDC",
 		  		"z-index": 99,
 		  		"color":"black",
 		  		"position":"absolute",
 		  		"top":inputVertPosition+"px",
 		  		"left":inputHorizPosition+"px",
 		  		"padding":"10px",
+		  		"border": "1px solid gray"
 		  	});
 			$('input#phraseEntry').on('blur', removeIME);
 		  $('input#phraseEntry').focus();
@@ -58,10 +61,23 @@
 			}
 		}
 
+		var resultsList;
 		var renderIME = function(e){
 			// GET imeBubble
-			var resultsList = [];
 			var inputEntryText = this.value;
+			if (inputEntryText == '') {
+				document.getElementById('results').innerHTML='';
+				return;
+			}
+			var textToUse = '';
+			var code = e.which;
+			if (code==13) {
+				textToUse = resultsList[0];
+				insertPhrase(textToUse);
+			} else if (code<=54 & code>=49){
+				textToUse = resultsList[code-49];
+				insertPhrase(textToUse);
+			}
 			var promise = getChinese(inputEntryText);
 			promise.then(data => {
 				resultsList = data[1][0][1];
@@ -70,27 +86,16 @@
 						return '<div>'+(i+1)+") "+x+"</div>";
 					}
 				).join(' ');
-				if (e.which==13) {
-					var insertableText = resultsList[0];
-					var firstSlice = $('input#phrase').val().slice(0,cursorFieldPos);
-					var secondSlice = $('input#phrase').val().slice(cursorFieldPos);
-					$('input#phrase').val(firstSlice+insertableText+secondSlice);
-					console.log(firstSlice+insertableText+secondSlice);
-					$('#imeBubble').remove();
-				}
 			}).catch(error => console.log('Error:', error));
 		}
 
-		var insertPhrase = function(event) {
-			if (event.which==13) {
-								
-						// window.addEventListener("load", function() {
-		// 	var input document.getElementsByTagName("input");
-		// 	input[0].addEventListener("keydown", function() {
-		// 		alert("Caret position: " + this.selectionStart);
-		// 	});
-		// }); 
-			}
+		function insertPhrase(insertableText) {
+			var inputField = $('input#phraseField');
+			var firstSlice = inputField.val().slice(0,selectionFieldPos[0]);
+			var secondSlice = inputField.val().slice(selectionFieldPos[1]);
+			inputField.val(firstSlice+insertableText+secondSlice);
+			$('#imeBubble').remove();
+			inputField.focus();
 		};
 		function insertInPosition(){}
 
