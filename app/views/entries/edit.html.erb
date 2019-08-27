@@ -5,8 +5,8 @@
 	<script type="text/javascript">
 		function submitEditEntry() {
 			console.log('click triggered')
-			var phraseText = $("#phrase").val();
-			var pinyinText = $("#pinyin").val();
+			var phraseText = $("#phraseField").val();
+			var pinyinText = $("#pinyinField").val();
 			if (phraseText.trim()=='') {
 				return alert('Phrase field cannot be empty!');
 			} else if (pinyinText.trim()=='') {
@@ -15,7 +15,7 @@
 			var entryId = <%= params[:id] %>;
 			$.ajax({
 				type: "PATCH",
-				url: "/entries/"+entryId+".json",
+				url: "/entries/"+entryId,
 				data: {
 					phrase: phraseText,
 					pinyin: pinyinText
