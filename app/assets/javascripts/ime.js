@@ -1,7 +1,27 @@
 function bindIME(inputId, numResultsToShow) {
-	var selectionFieldPos = [0,0];
 	// set the caret's selection start and end for later insertion
-	var initializeIME = function(event) {
+	//Create the label element
+	if (!$('#keyboardOn').length) {
+		var $label = $("<label>").text('Use IME:').css({"float": "inline-end"});
+		//Create the input element
+		var $input = $('<input type="checkbox">').attr({id: 'keyboardOn', name: 'from'});
+		$(inputId).after($label);
+		$input.appendTo($label);
+	}
+	$input.change(addListeners);
+	function addListeners() {
+		console.log(this.checked);
+		if (this.checked) {
+			$(inputId).on('keydown', initializeIME);
+			// TODO a more robust way to take care of tab/shift-tab out of the entryinput
+			$(inputId).on('focus', removeIME);
+		} else {
+			$(inputId).off();
+		}
+	}
+
+	var selectionFieldPos = [0,0];
+	function initializeIME(event) {
 		// TRIGGER the IME ONLY IF the character is a-z and IF CRTL is not pressed
 		if (event.ctrlKey || event.which<65 || event.which>90) {
 			return;
@@ -15,7 +35,7 @@ function bindIME(inputId, numResultsToShow) {
       $('<input>', { id: 'imeEntry', type: 'text'})
 	  );
 	  $('#imeBubble').append(
-      $('<div>', { id: 'results', class:'results'})
+      $('<div>', { id: 'imeResults'})
 	  );
 	  // TODO clickable options
 	  //	$('#imeBubble').append(
@@ -37,66 +57,68 @@ function bindIME(inputId, numResultsToShow) {
 			"padding":"10px",
 			"border": "1px solid gray"
 		});
+		// remove IME when clicking anywhere not on the bubble
 		$('html').on('mousedown', removeIME);
 		$('#imeBubble').on('mousedown', function(event){
 			event.stopPropagation();
 		});
+		// FOCUS into the ime entry box and render the IME with the first character on keyup
 	  $('input#imeEntry').focus();
 	  $('input#imeEntry').on('keyup', renderIME);
 	}
-	$(inputId).on('keydown', initializeIME);
+	// INITIALIZE the IME once keydown
 
-	var removeIME = function() {
-		if (!$('.resultsList').is(":focus")){
-			document.getElementById("imeBubble").remove();
-		}
+	function removeIME() {
+		$('#imeBubble').remove();
 	}
 
-	var resultsList = []; 
-	// need global variable to keep the old list
-	var renderIME = function(event) {
+	function renderIME(event) {
 		// GET imeBubble
 		var inputEntryText = this.value;
 		if (inputEntryText == '') { 
 			// takes care of case where user deletes to blank input
-			$('.results').hide();
+			$('#imeResults').hide();
 			return;
 		}
-		var code = event.which;
-		if (code==13) {
+		var charCode = event.which;
+		var currPageNum = $('#imeBubble').data('page');
+		var currResults = $('#imeBubble').data('results');
+		if (charCode==13) {
 			// if character is return key
-			insertPhrase($('#imeBubble').data('results')[0]);
-		} else if (code>=49 && code<=49+5){ 
+			insertPhrase(currResults[0]);
+		} else if (charCode>=49 && charCode<=49+numResultsToShow){ 
 			// if character is num of selection in results list
-			insertPhrase($('#imeBubble').data('results')[code-49]);
-		} else if (code==40) { // arrow down
+			insertPhrase(currResults[charCode-49]);
+		} else if (charCode==40) { // arrow down
+			// do nothing if we go to the end of retrieved results
 			if (!$('#imeBubble').data('nextPageAvailable')) {
 				return;
 			}
-			resultPageNum = $('#imeBubble').data('page');
-			setChineseList(inputEntryText, 5, resultPageNum+1);
-		} else if (code==38) { // arrow up
-			resultPageNum = $('#imeBubble').data('page');
-			if (resultPageNum==0)	{
+			setChineseList(inputEntryText, numResultsToShow, currPageNum+1);
+		} else if (charCode==38) { // arrow up
+			// return if we are already at the first page
+			if (currPageNum==0)	{
 				return;
 			} else {
-				setChineseList(inputEntryText, 5, resultPageNum-1);
+				setChineseList(inputEntryText, numResultsToShow, currPageNum-1);
 			}
 		} else {
 			// get the new list of entries and set the list
-			setChineseList(inputEntryText,5,0);
+			setChineseList(inputEntryText,numResultsToShow,0);
 		}
 	}
 
+	// INSERT the result into the saved cursor position(s) of the inputField
 	function insertPhrase(insertableText) {
 		var inputField = $(inputId);
 		var firstSlice = inputField.val().slice(0,selectionFieldPos[0]);
 		var secondSlice = inputField.val().slice(selectionFieldPos[1]);
 		inputField.val(firstSlice+insertableText+secondSlice);
-		$('#imeBubble').remove();
 		inputField.focus();
+		$('#imeBubble').remove();
 	};
 
+	// GET the pinyin transliteration via ajax call
 	function getChinese(pinyin, numberResults) {
 		return $.ajax({
 			url: "https://www.google.com/inputtools/request?ime=pinyin&ie=utf-8&oe=utf-8&app=translate&num="+
@@ -104,22 +126,24 @@ function bindIME(inputId, numResultsToShow) {
 		});
 	}
 
+	// SET the ajax results in the ime bubble
 	function setChineseList(input, numToShow, pageNum) {
 		var promise = getChinese(input,(pageNum+2)*(numToShow));
 			promise.then(data => {
-				resultsList = data[1][0][1];
+				var resultsList = data[1][0][1].slice((pageNum)*(numToShow), (pageNum+1)*(numToShow));
 				$( "#imeBubble" ).data( {
-					results: resultsList.slice((pageNum)*(numToShow), (pageNum+1)*(numToShow)),
+					// BIND results, page, and nextPageAvailable as data for ime Bubble for a next call
+					results: resultsList,
 					page: pageNum,
-					nextPageAvailable: (resultsList.length/5)>(pageNum+1)
+					nextPageAvailable: (data[1][0][1].length/5)>(pageNum+1)
 				} );
-				$('.results').show();
-				document.getElementById('results').innerHTML = 
-					$( "#imeBubble" ).data("results").map(
+				$('#imeResults').show();
+				document.getElementById('imeResults').innerHTML = 
+					resultsList.map(
 						function(x, i){
-							return '<div>'+(i+1)+") "+x+"</div>";
+							return '<div>'+(i+1)+")"+x+"</div>";
 						}
-					).join(' ')+pageNum;
-			}).catch(error => debug('Error:', error));
+					).join(' ')+"Page: "+(pageNum+1);
+			}).catch(error => ('Error:', error));
 	}
 }
