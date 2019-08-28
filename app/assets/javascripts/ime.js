@@ -1,4 +1,7 @@
 function createToggleIMECheckbox() {
+	if ($('#toggleCheckbox').length>0) {
+		return;
+	}
 	$('body').append($('<div>', {id:"toggleCheckbox"}));
 		$('#toggleCheckbox').append('<label for="toggleIME">Use IME: </label>');
 		$('#toggleCheckbox').append('<input id="toggleIME" type="checkbox" name="IME">');
