@@ -1,22 +1,24 @@
 function bindIME(inputId, numResultsToShow) {
 	// set the caret's selection start and end for later insertion
 	//Create the label element
+	const inputTag = '#'+inputId;
+	var inputContainer = $(inputTag).wrap('<div id='+inputId+'Container>');
 	if (!$('#keyboardOn').length) {
 		var $label = $("<label>").text('Use IME:').css({"float": "inline-end"});
 		//Create the input element
-		var $input = $('<input type="checkbox">').attr({id: 'keyboardOn', name: 'from'});
-		$(inputId).after($label);
-		$input.appendTo($label);
+		var $checkbox = $('<input type="checkbox">').attr({id: 'keyboardOn', name: 'ime'});
+		$(inputTag).after($label);
+		$checkbox.appendTo($label);
 	}
-	$input.change(addListeners);
+	$checkbox.change(addListeners);
 	function addListeners() {
 		console.log(this.checked);
 		if (this.checked) {
-			$(inputId).on('keydown', initializeIME);
+			$(inputTag).on('keydown', initializeIME);
 			// TODO a more robust way to take care of tab/shift-tab out of the entryinput
-			$(inputId).on('focus', removeIME);
+			$(inputTag).on('focus', removeIME);
 		} else {
-			$(inputId).off();
+			$(inputTag).off();
 		}
 	}
 
@@ -28,7 +30,7 @@ function bindIME(inputId, numResultsToShow) {
 		}
 		selectionFieldPos = [this.selectionStart,this.selectionEnd];
 		// TRACK the position of the results box
-	  $('#phrase').append(
+	  $(inputTag+'Container').append(
       $('<div>', { id: 'imeBubble'})
 	  );
 	  $('#imeBubble').append(
@@ -39,12 +41,13 @@ function bindIME(inputId, numResultsToShow) {
 	  );
 	  // TODO clickable options
 	  //	$('#imeBubble').append(
-	  // 	$('<img class="results" id="nextInList" src="http://img.icons8.com/material-outlined/24/000000/down.png">')
+	  // 	$('<img class="results" id;="nextInList" src="http://img.icons8.com/material-outlined/24/000000/down.png">')
 	  // );
 	  // $('img#nextInList').on('mousedown', function(){alert('thistaht');});
 	  var caret = getCaretCoordinates(this, this.selectionEnd);
-	  var inputVertPosition = this
-	  	.getBoundingClientRect().top + caret.height + caret.top + 5;
+	  console.log(caret);
+	  console.log(this);
+	  console.log(this.getBoundingClientRect());
 	  var inputHorizPosition = this
 	  	.getBoundingClientRect().left + caret.left + 5;
 	  $("#imeBubble").css({
@@ -52,7 +55,6 @@ function bindIME(inputId, numResultsToShow) {
 			"z-index": 99,
 			"color":"black",
 			"position":"absolute",
-			"top":inputVertPosition+"px",
 			"left":inputHorizPosition+"px",
 			"padding":"10px",
 			"border": "1px solid gray"
@@ -110,7 +112,7 @@ function bindIME(inputId, numResultsToShow) {
 
 	// INSERT the result into the saved cursor position(s) of the inputField
 	function insertPhrase(insertableText) {
-		var inputField = $(inputId);
+		var inputField = $(inputTag);
 		var firstSlice = inputField.val().slice(0,selectionFieldPos[0]);
 		var secondSlice = inputField.val().slice(selectionFieldPos[1]);
 		inputField.val(firstSlice+insertableText+secondSlice);

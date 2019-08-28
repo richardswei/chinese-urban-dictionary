@@ -11,7 +11,7 @@
 		<div class="textPanel">
 			<div class="searchBarSection">
 				<span class="searchTitle">Search</span>
-				<input type="text" class="searchBar"></input>
+				<input id="searchBar" class="inputField" type="text" class="searchBar"></input>
 			</div>
 			<br>
 			<% t=Time.now %>
@@ -32,4 +32,7 @@
 			</div>
 		</div>
 	</div>	
+	<script type="text/javascript">
+		bindIME('searchBar',5);
+	</script>
 </body>

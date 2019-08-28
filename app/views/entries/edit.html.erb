@@ -22,14 +22,11 @@
 				},
 				// dataType: "json",
 				success: function(msg) {
-					alert("Data Saved: "+msg);
 				},
 			}).done(function () {
 			    console.log('SUCCESS');
 			}).fail(function (msg) {
-			    console.log('FAIL');
-			}).always(function (msg) {
-			    console.log('ALWAYS');
+			    console.log('UPDATE FAILED');
 			});
 		}
 	</script>
