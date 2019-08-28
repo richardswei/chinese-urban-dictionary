@@ -1,27 +1,28 @@
+function createToggleIMECheckbox() {
+	$('body').append($('<div>', {id:"toggleCheckbox"}));
+		$('#toggleCheckbox').append('<label for="toggleIME">Use IME: </label>');
+		$('#toggleCheckbox').append('<input id="toggleIME" type="checkbox" name="IME">');
+		$('#toggleCheckbox').css({
+			'position': 'fixed',
+			'bottom': '1%',
+			'right': '1%',
+			'z-index': '1',
+		});
+}
+
+
 function bindIME(inputId, numResultsToShow) {
 	// set the caret's selection start and end for later insertion
 	//Create the label element
-	const inputTag = '#'+inputId;
-	var inputContainer = $(inputTag).wrap('<div id='+inputId+'Container>');
-	if (!$('#keyboardOn').length) {
-		var $label = $("<label>").text('Use IME:').css({"float": "inline-end"});
-		//Create the input element
-		var $checkbox = $('<input type="checkbox">').attr({id: 'keyboardOn', name: 'ime'});
-		$(inputTag).after($label);
-		$checkbox.appendTo($label);
-	}
-	$checkbox.change(addListeners);
-	function addListeners() {
-		console.log(this.checked);
-		if (this.checked) {
-			$(inputTag).on('keydown', initializeIME);
-			// TODO a more robust way to take care of tab/shift-tab out of the entryinput
-			$(inputTag).on('focus', removeIME);
-		} else {
-			$(inputTag).off();
+		$('input#toggleIME').change(addListeners);		
+		function addListeners() {
+			console.log(this.checked);
+			if (this.checked) {
+				$(inputId).on('keydown', initializeIME);
+			} else {
+				$(inputId).off();
+			}
 		}
-	}
-
 	var selectionFieldPos = [0,0];
 	function initializeIME(event) {
 		// TRIGGER the IME ONLY IF the character is a-z and IF CRTL is not pressed
@@ -30,7 +31,7 @@ function bindIME(inputId, numResultsToShow) {
 		}
 		selectionFieldPos = [this.selectionStart,this.selectionEnd];
 		// TRACK the position of the results box
-	  $(inputTag+'Container').append(
+	  $(inputId).after(
       $('<div>', { id: 'imeBubble'})
 	  );
 	  $('#imeBubble').append(
@@ -59,11 +60,8 @@ function bindIME(inputId, numResultsToShow) {
 			"padding":"10px",
 			"border": "1px solid gray"
 		});
-		// remove IME when clicking anywhere not on the bubble
-		$('html').on('mousedown', removeIME);
-		$('#imeBubble').on('mousedown', function(event){
-			event.stopPropagation();
-		});
+		// remove IME when focus out
+		$('input#imeEntry').on('blur', removeIME);
 		// FOCUS into the ime entry box and render the IME with the first character on keyup
 	  $('input#imeEntry').focus();
 	  $('input#imeEntry').on('keyup', renderIME);
@@ -112,7 +110,7 @@ function bindIME(inputId, numResultsToShow) {
 
 	// INSERT the result into the saved cursor position(s) of the inputField
 	function insertPhrase(insertableText) {
-		var inputField = $(inputTag);
+		var inputField = $(inputId);
 		var firstSlice = inputField.val().slice(0,selectionFieldPos[0]);
 		var secondSlice = inputField.val().slice(selectionFieldPos[1]);
 		inputField.val(firstSlice+insertableText+secondSlice);

@@ -29,7 +29,7 @@
 	.searchBarSection {
 		padding: 5px 15px 5px 0px;
 		width: 75%;
-		max-width: 7000px;
+		max-width: 700px;
 		margin: auto;
 		color: white;
 		background-color: #3b2b46;
@@ -39,7 +39,7 @@
 		padding:10px;
 	}
 	.trending {
-		max-width: 500px;
+		max-width: 700px;
 		width: 75%;
 		margin: auto;
 		color: white;
