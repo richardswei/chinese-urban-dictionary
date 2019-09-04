@@ -9,10 +9,14 @@ class Definition < ApplicationRecord
   	end.join(", ")
   end
 
-	def tag_list=(tags_made)
-		tag_names = tags_made.split(",").collect{|s| s.strip.downcase}.uniq
-		new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
-		self.tags = new_or_found_tags
+	def tag_list=(tags_to_set)
+		tag_names = tags_to_set.split(",").collect{
+			|text| text.strip.downcase
+		}.uniq
+		tag_items = tag_names.collect {
+			|name| Tag.find_or_create_by(name: name)
+		}
+		self.tags = tag_items
 	end
 
 end
