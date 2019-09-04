@@ -3,5 +3,12 @@
 		<div>Definition: <%= definition.definition %></div>
 		<div>Usage: <%= definition.usage %></div>
 		<div>Usage Translation: <%= definition.usage_translation %></div>
+		<div>Tags: 
+			<% definition.tags.each do |tag| %>
+					<%= link_to tag.name, tag_path(tag), :class => 'button addEditButton'%>
+			<% end %>
+
+				
+		</div>
 	</div>
 </div>

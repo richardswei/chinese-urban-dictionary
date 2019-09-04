@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :entries do
   	resources :definitions
   end
+  resources :tags
   # ^This is shorthand for doing:
   # get "entries/", to: "entries#index"
   # get "entries/:id", to: "entries#show"

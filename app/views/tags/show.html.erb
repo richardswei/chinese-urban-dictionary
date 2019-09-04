@@ -1,0 +1,13 @@
+<h1>Tagged</h1>
+
+<ul>
+  <% tagged_entries = @tag.definitions.map do |definition|
+  	definition.entry
+  end.uniq
+  for entry in tagged_entries do %>
+  	<li><%= link_to entry.phrase, entry_path(entry) %></li>
+	<% end %>
+</ul>
+
+
+
