@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_20_072331) do
+ActiveRecord::Schema.define(version: 2019_09_04_015033) do
 
   create_table "definitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "definition"
@@ -30,5 +30,22 @@ ActiveRecord::Schema.define(version: 2019_07_20_072331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "taggings", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "tag_id"
+    t.bigint "definition_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["definition_id"], name: "index_taggings_on_definition_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "definitions", "entries"
+  add_foreign_key "taggings", "definitions"
+  add_foreign_key "taggings", "tags"
 end
