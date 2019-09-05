@@ -1,13 +1,18 @@
-<h1>Entries tagged with "<%= @tag.name %>"</h1>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<h1 class="title">CHANG'S SLANG</h1>
+	<h2>Entries tagged with "<%= @tag.name %>"</h2>
 
-<ul>
-  <% tagged_entries = @tag.definitions.map do |definition|
-  	definition.entry
-  end.uniq
-  for entry in tagged_entries do %>
-  	<li><%= link_to entry.phrase, entry_path(entry) %></li>
-	<% end %>
-</ul>
-
-
-
+	<ul>
+	  <% tagged_entries = @tag.definitions.map do |definition|
+	  	definition.entry
+	  end.uniq
+	  for entry in tagged_entries do %>
+	  	<li><%= link_to entry.phrase, entry_path(entry) %></li>
+		<% end %>
+	</ul>
+<body>

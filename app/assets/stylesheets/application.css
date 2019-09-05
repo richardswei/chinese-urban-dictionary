@@ -50,3 +50,10 @@
 		cursor: pointer;
 		text-decoration: underline;		
 	}
+	a.button.tagButton {
+		background-color: lightGray;
+		padding: 2px 8px 2px 8px;
+		margin: 2px;
+		border-radius: 1px;
+		border: 1px solid black;
+	}
