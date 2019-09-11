@@ -6,6 +6,9 @@
 <input class="inputField" type="text" id="usage"><br>
 <label for="usageTranslation">Usage Translation: </label><br>
 <input class="inputField" type="text" id="usageTranslation"><br>
+<label for="tags">Tags: </label><br>
+<input class="inputField" type="text" id="tags"><br>
+
 <a class="button" onclick="submitDefinition()">Submit Definition</a>
 
 <script type="text/javascript">
@@ -13,7 +16,7 @@
 		var definitionText = $("#definition").val();
 		var usageText = $("#usage").val();
 		var usageTranslationText = $("#usageTranslation").val();
-		console.log(window.location.pathname+'/definitions');
+		var tagsText = $("#tags").val();
 		if (definitionText.trim()=='') {
 			return alert('Definition cannot be empty!')
 		} else if (usageText.trim()=='') {
@@ -24,7 +27,8 @@
 		$.post(window.location.pathname+'/definitions', {
 			definition: definitionText,
 			usage: usageText,
-			usage_translation: usageTranslationText
+			usage_translation: usageTranslationText,
+			tag_list: tagsText, 
 		});
 	}
 </script>
