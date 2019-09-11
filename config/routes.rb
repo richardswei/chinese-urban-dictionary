@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  root 'static#index'
+  namespace :v1, defaults: {format: 'json'} do
+    get 'things' => 'things#index'
+  end
+
   devise_for :users
   resources :users do
     resources :definitions
@@ -8,12 +13,12 @@ Rails.application.routes.draw do
   get "/", to: "application#root"
   get "corgi", to: "application#corgi"
 
+  # This is shorthand for doing:
+  # get "entries/", to: "entries#index"
+  # get "entries/:id", to: "entries#show"
   resources :entries, only: [:index, :show, :edit, :new, :create, :update]
   resources :entries do
   	resources :definitions
   end
   resources :tags
-  # ^This is shorthand for doing:
-  # get "entries/", to: "entries#index"
-  # get "entries/:id", to: "entries#show"
 end
