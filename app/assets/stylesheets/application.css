@@ -33,6 +33,14 @@
 	label {
 		font-family: 'Noto Sans TC', sans-serif;		
 	}
+	div.inputSection {
+	  display:grid;
+	  grid-template-columns: min-content auto;
+	  grid-gap:5px;
+	}
+	div.inputSection label {
+		text-align:right;
+	}
 	a.button {
 		background: transparent url('bg_button_a.gif') no-repeat scroll top right;
 		color: black;

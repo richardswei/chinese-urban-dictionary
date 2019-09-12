@@ -27,6 +27,7 @@
 		font-family: 'Noto Sans TC', sans-serif;
 	}
 	.searchBarSection {
+		text-align: center;
 		padding: 5px 15px 5px 0px;
 		width: 75%;
 		max-width: 500px;
