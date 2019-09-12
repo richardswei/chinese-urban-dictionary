@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  root 'static#index'
-  namespace :v1, defaults: {format: 'json'} do
-    get 'things' => 'things#index'
-  end
-
   devise_for :users
   resources :users do
     resources :definitions
