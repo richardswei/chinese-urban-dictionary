@@ -2,13 +2,29 @@
 <div>
 	
 	<label for="definition">Definition: </label><br>
-	<input class="inputField" type="text" id="definition"><br>
+	<!-- <input class="inputField" type="text" id="definition"><br> -->
+
+	<%= react_component("InputMethodEditor", {
+		idName:'definition', textArea:false, numResults:5}) %>
+
 	<label for="usage">Usage: </label><br>
-	<input class="inputField" type="text" id="usage"><br>
+	<!-- <input class="inputField" type="text" id="usage"><br> -->
+
+	<%= react_component("InputMethodEditor", {
+		idName:'usage', textArea:false, numResults:5}) %>
+
 	<label for="usageTranslation">Usage Translation: </label><br>
-	<input class="inputField" type="text" id="usageTranslation"><br>
+	<!-- <input class="inputField" type="text" id="usageTranslation"><br> -->
+
+	<%= react_component("InputMethodEditor", {
+		idName:'usageTranslation', textArea:false, numResults:5}) %>
+
 	<label for="tags">Tags: </label><br>
-	<input class="inputField" type="text" id="tags"><br>
+	<!-- <input class="inputField" type="text" id="tags"><br> -->
+
+	<%= react_component("InputMethodEditor", {
+		idName:'tags', textArea:false, numResults:5}) %>
+
 </div>	
 
 <a class="button" onclick="submitDefinition()">Submit Definition</a>
@@ -19,6 +35,10 @@
 		var usageText = $("#usage").val();
 		var usageTranslationText = $("#usageTranslation").val();
 		var tagsText = $("#tags").val();
+		console.log(definitionText+
+usageText+
+usageTranslationText+
+tagsText);
 		if (definitionText.trim()=='') {
 			return alert('Definition cannot be empty!')
 		} else if (usageText.trim()=='') {
@@ -26,11 +46,20 @@
 		} else if (usageTranslationText.trim()=='') {
 			return alert('Usage Translation cannot be empty!')
 		}
-		$.post(window.location.pathname+'/definitions', {
-			definition: definitionText,
-			usage: usageText,
-			usage_translation: usageTranslationText,
-			tag_list: tagsText, 
+		$.ajax({
+		    url: window.location.pathname+'/definitions',
+		    type: "POST",
+		    data: {
+					definition: definitionText,
+					usage: usageText,
+					usage_translation: usageTranslationText,
+					tag_list: tagsText, 
+				},
+		    success: console.log('success'),
+		    error: function(xhr, status, error) {
+				  var err = JSON.parse(xhr.responseText);
+				  alert(err.Message);
+				}
 		});
 	}
 </script>

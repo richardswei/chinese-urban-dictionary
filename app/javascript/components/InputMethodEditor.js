@@ -94,6 +94,7 @@ class InputMethodEditor extends Component {
 			<div>
 				{this.props.textArea ? 
 					(<textarea 
+						id={this.props.idName}
 						rows="4" cols="50"
 						type="text"
 						value={this.state.inputText} 
@@ -103,6 +104,7 @@ class InputMethodEditor extends Component {
 						ref = {this.MainInputFieldRef}
 					></textarea>)	: 	
 					(<input 
+						id={this.props.idName}
 						type="text"
 						value={this.state.inputText} 
 						onChange={this.handleInputChange}
