@@ -13,7 +13,6 @@ class InputMethodEditor extends Component {
 			results: [],
 			imeHidden: true,
 		};
-		console.log('creating');
 		this.IMEBubbleRef = React.createRef();
 		this.MainInputFieldRef = React.createRef();
 		this.handleIMEKeyUp = this.handleIMEKeyUp.bind(this);
@@ -63,7 +62,6 @@ class InputMethodEditor extends Component {
 			return;
 		}
 		this.showIME();
-		// this.IMEBubbleRef.current.queryInputRef.current.focus();
 	}
 	handleInputSelect(e) {
 		this.setState({caretPositions: [e.target.selectionStart,e.target.selectionEnd]});
