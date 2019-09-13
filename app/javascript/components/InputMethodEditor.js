@@ -13,6 +13,7 @@ class InputMethodEditor extends Component {
 			results: [],
 			imeHidden: true,
 		};
+		console.log('creating');
 		this.IMEBubbleRef = React.createRef();
 		this.MainInputFieldRef = React.createRef();
 		this.handleIMEKeyUp = this.handleIMEKeyUp.bind(this);

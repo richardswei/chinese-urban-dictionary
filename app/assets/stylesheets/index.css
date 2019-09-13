@@ -7,30 +7,12 @@
 /* #9D8D8F - paper */
 /* #9B786F - latte */
 
-	.panel {
-		margin: 0px;
-		padding: 30px 0px 0px 30px;
-		background: url(taipei_101_bckgd.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
-		height: 100vh;
-		background-position: center;
-	}
-	.textPanel {
-		position: relative;
-		top: 25%;
-
-	}
-	div {
-		border-radius: 4px; 
-		color: white;
-		font-family: 'Noto Sans TC', sans-serif;
-	}
+	
 	.searchBarSection {
 		text-align: center;
 		padding: 5px 15px 5px 0px;
 		width: 75%;
-		max-width: 500px;
+		max-width: 700px;
 		margin: auto;
 		color: white;
 		background-color: #3b2b46;
@@ -40,7 +22,7 @@
 		padding:10px;
 	}
 	.trending {
-		max-width: 500px;
+		max-width: 700px;
 		width: 75%;
 		margin: auto;
 		color: white;
@@ -51,7 +33,7 @@
 	}
 	input {
 		padding: 10px;
-		width: 75%;
+		width: 90%;
 		font-size: 15px;
 		margin: auto;
 	}

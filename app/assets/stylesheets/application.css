@@ -24,14 +24,15 @@
 		padding: 0px;
 		margin: 0px;
 	}
-	h1 {
-		font-size: 50px;
-	}
 	h2 {
 		font-size: 40px;
 	}
 	label {
 		font-family: 'Noto Sans TC', sans-serif;		
+	}
+	.title a, .subtitle a {
+	    text-decoration: none;
+	    color: inherit;
 	}
 	div.inputSection {
 	  display:grid;
@@ -56,7 +57,7 @@
 	}
 	a.button:hover {
 		cursor: pointer;
-		text-decoration: underline;		
+		opacity: 0.05;
 	}
 	a.button.tagButton {
 		background-color: lightGray;
@@ -64,4 +65,57 @@
 		margin: 2px;
 		border-radius: 1px;
 		border: 1px solid black;
+	}
+	.background {
+		padding: 0px 30px 30px 30px;
+		margin: 0px;
+		background: url(taipei_101_bckgd.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+		background-position: center;
+	}
+	.mainPanel{
+		padding: 30px;
+	}
+	.panel {
+		margin: 0px;
+		padding: 30px 0px 0px 30px;
+	}
+	.textPanel {
+		position: relative;
+		top: 25%;
+
+	}
+	div {
+		border-radius: 4px; 
+		color: inherit;
+		font-family: 'Noto Sans TC', sans-serif;
+	}
+	div.header {
+	  display:grid;
+	  grid-template-columns: min-content auto;
+	  grid-gap:5px;
+	}
+	div.header .userInfo {
+		text-align: right;
+		color: white
+	}
+	div .title {
+		white-space: nowrap;
+		font-weight: bold;
+		font-size: 50px;
+		font-family: 'Oswald', sans-serif;
+		color: #FAED26;
+		padding: 0px;
+		margin: 0px;
+	}
+	div .subtitle {
+		white-space: nowrap;
+		font-weight: bold;
+		font-size: 20px;
+		font-family: 'Oswald', sans-serif;
+		color: #FAED26;
+		padding: 0px;
+		margin: 0px;
 	}

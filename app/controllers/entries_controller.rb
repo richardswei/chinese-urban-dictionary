@@ -23,7 +23,8 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(
-      params.require(:entry).permit(:phrase, :pinyin)
+      phrase: params[:phrase],
+      pinyin: params[:pinyin]
     )
 
     redirect_to entry_path(@entry)

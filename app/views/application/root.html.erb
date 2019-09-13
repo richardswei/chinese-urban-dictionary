@@ -1,20 +1,16 @@
 <head>
-
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
+	<script type="text/javascript">
+	</script>
 </head>
 <body>
 	<%= javascript_pack_tag 'application'%>
 	<div class="panel">
-		
-		<h1 class="headerTitle">CHANG'S SLANG</h1>
-		<h3>The Chinese Urban Dictionary</h3>
-		<br>
+
 		<div class="textPanel">
 			<div class="searchBarSection">
 				<div class="inputSection">
 					<label class="searchTitle">Search</label>
-					<!-- <input type="text" class="searchBar"></input>	 -->
-						
 					<%= react_component("InputMethodEditor", {textArea:false, numResults:5}) %>
 				</div>
 			</div>
@@ -36,6 +32,7 @@
 				</div>
 			</div>
 		</div>
-			
 	</div>	
+	<script type="text/javascript">
+	</script>
 </body>

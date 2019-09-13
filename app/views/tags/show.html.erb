@@ -4,9 +4,7 @@
 	</style>
 </head>
 <body>
-	<h1 class="title">CHANG'S SLANG</h1>
 	<h2>Entries tagged with "<%= @tag.name %>"</h2>
-
 	<ul>
 	  <% tagged_entries = @tag.definitions.map do |definition|
 	  	definition.entry

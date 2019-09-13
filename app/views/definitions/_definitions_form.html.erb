@@ -35,10 +35,6 @@
 		var usageText = $("#usage").val();
 		var usageTranslationText = $("#usageTranslation").val();
 		var tagsText = $("#tags").val();
-		console.log(definitionText+
-usageText+
-usageTranslationText+
-tagsText);
 		if (definitionText.trim()=='') {
 			return alert('Definition cannot be empty!')
 		} else if (usageText.trim()=='') {
@@ -55,7 +51,7 @@ tagsText);
 					usage_translation: usageTranslationText,
 					tag_list: tagsText, 
 				},
-		    success: console.log('success'),
+		    success: function(){alert('Definition Added!')},
 		    error: function(xhr, status, error) {
 				  var err = JSON.parse(xhr.responseText);
 				  alert(err.Message);

@@ -6,10 +6,26 @@
 	<script type="text/javascript"></script>
 </head>
 <body>
-	<div class="mainPanel">
-		<h1>CHANG'S SLANG</h1>
-		<h2>New Entry</h2>
-		<%= render partial: 'entry_form' %>
-	</div>
+	<h2>New Entry</h2>
+	<%= render partial: 'entry_form' %>
+	<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
+
+	<script type="text/javascript">
+		function submitEntry() {
+			var phraseText = $("#phraseField").val();
+			var pinyinText = $("#pinyinField").val();
+			if (phraseText.trim()=='') { 
+				return alert('Phrase field cannot be empty!') 
+			} else if (pinyinText.trim()=='') {
+				return alert('Pinyin field cannot be empty!') 				
+			}
+			$.post("/entries", {
+				phrase: phraseText,
+				pinyin: pinyinText
+			}, function(){
+				alert('Entry Added!');
+			});
+		}
+	</script>
 </body>
 </html>
