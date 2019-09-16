@@ -57,7 +57,7 @@
 	}
 	a.button:hover {
 		cursor: pointer;
-		opacity: 0.05;
+		opacity: 0.75;
 	}
 	a.button.tagButton {
 		background-color: lightGray;

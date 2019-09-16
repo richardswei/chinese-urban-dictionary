@@ -1,61 +1,58 @@
-<h3>Add a New Definition</h3>
-<div>
-	
-	<label for="definition">Definition: </label><br>
-	<!-- <input class="inputField" type="text" id="definition"><br> -->
-
-	<%= react_component("InputMethodEditor", {
-		idName:'definition', textArea:false, numResults:5}) %>
-
-	<label for="usage">Usage: </label><br>
-	<!-- <input class="inputField" type="text" id="usage"><br> -->
-
-	<%= react_component("InputMethodEditor", {
-		idName:'usage', textArea:false, numResults:5}) %>
-
-	<label for="usageTranslation">Usage Translation: </label><br>
-	<!-- <input class="inputField" type="text" id="usageTranslation"><br> -->
-
-	<%= react_component("InputMethodEditor", {
-		idName:'usageTranslation', textArea:false, numResults:5}) %>
-
-	<label for="tags">Tags: </label><br>
-	<!-- <input class="inputField" type="text" id="tags"><br> -->
-
-	<%= react_component("InputMethodEditor", {
-		idName:'tags', textArea:false, numResults:5}) %>
-
-</div>	
-
-<a class="button" onclick="submitDefinition()">Submit Definition</a>
-
-<script type="text/javascript">
-	function submitDefinition() {
-		var definitionText = $("#definition").val();
-		var usageText = $("#usage").val();
-		var usageTranslationText = $("#usageTranslation").val();
-		var tagsText = $("#tags").val();
-		if (definitionText.trim()=='') {
-			return alert('Definition cannot be empty!')
-		} else if (usageText.trim()=='') {
-			return alert('Usage cannot be empty!')
-		} else if (usageTranslationText.trim()=='') {
-			return alert('Usage Translation cannot be empty!')
+<head>
+	<script type="text/javascript">
+		function submitDefinition(userID) {
+			var definitionText = $("#definition").val();
+			var usageText = $("#usage").val();
+			var usageTranslationText = $("#usageTranslation").val();
+			var tagsText = $("#tags").val();
+			if (definitionText.trim()=='') {
+				return alert('Definition cannot be empty!')
+			} else if (usageText.trim()=='') {
+				return alert('Usage cannot be empty!')
+			} else if (usageTranslationText.trim()=='') {
+				return alert('Usage Translation cannot be empty!')
+			}
+			$.ajax({
+			    url: window.location.pathname+'/definitions',
+			    type: "POST",
+			    data: {
+						definition: definitionText,
+						usage: usageText,
+						usage_translation: usageTranslationText,
+						tag_list: tagsText, 
+					},
+			    success: function(){alert('Definition Added!')},
+			    error: function(xhr, status, error) {
+					  var err = JSON.parse(xhr.responseText);
+					  alert(err.Message);
+					}
+			});
 		}
-		$.ajax({
-		    url: window.location.pathname+'/definitions',
-		    type: "POST",
-		    data: {
-					definition: definitionText,
-					usage: usageText,
-					usage_translation: usageTranslationText,
-					tag_list: tagsText, 
-				},
-		    success: function(){alert('Definition Added!')},
-		    error: function(xhr, status, error) {
-				  var err = JSON.parse(xhr.responseText);
-				  alert(err.Message);
-				}
-		});
-	}
-</script>
+	</script>
+</head>
+<body>
+	<h3>Add a New Definition</h3>
+	<div>
+
+		<label for="definition">Definition: </label><br>
+		<%= react_component("InputMethodEditor", {
+			idName:'definition', textArea:false, numResults:5
+		}) %>
+		<label for="usage">Usage: </label><br>
+		<%= react_component("InputMethodEditor", {
+			idName:'usage', textArea:false, numResults:5
+		}) %>
+		<label for="usageTranslation">Usage Translation: </label><br>
+		<%= react_component("InputMethodEditor", {
+			idName:'usageTranslation', textArea:false, numResults:5
+		}) %>
+		<label for="tags">Tags: </label><br>
+		<%= react_component("InputMethodEditor", {
+			idName:'tags', textArea:false, numResults:5
+		}) %>
+	</div>	
+
+	<a class="button" onclick="submitDefinition()">Submit Definition</a>
+</body>
+
+

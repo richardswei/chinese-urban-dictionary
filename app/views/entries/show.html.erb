@@ -16,27 +16,27 @@
 	</div>
 	<div class="entryPanel">
 		<% if @entry.present? %>
-		  <div class="wordSection">
-			  <h2><%= @entry.phrase %>
-			  <span><%= link_to "Edit this word!", edit_entry_path, :class => 'button addEditButton'%></span>
-			  </h2>
-			  <h3>Pinyin: <%=@entry.pinyin%></h3>
-		  </div>
-		  <div class="wordSection">
-			  <h3>Definitions<span>
-				  <a class="button" id="addDefButton">Add a Definition</a>
+			<div class="wordSection">
+				<h2><%= @entry.phrase %>
+				<span><%= link_to "Edit this word!", edit_entry_path, :class => 'button addEditButton'%></span>
+				</h2>
+				<h3>Pinyin: <%=@entry.pinyin%></h3>
+			</div>
+			<div class="wordSection">
+				<h3>Definitions<span>
+					<a class="button" id="addDefButton">Add a Definition</a>
 				</span></h3>
 				<% if @entry.definitions.present?%>
-			  	<%= render partial: 'entries/definition', collection: @entry.definitions%>
-			  <% else %>
-			  	<p>There are currently no definitions for this phrase!</p>
-			  <% end %>
-		  </div>
+					<%= render partial: 'entries/definition', collection: @entry.definitions%>
+				<% else %>
+					<p>There are currently no definitions for this phrase!</p>
+				<% end %>
+			</div>
 		<% else %>
 			<h1>HAHA, LOSER!!!</h1>
-		  <h1 class="animated shakeit" style="color: red;padding-left:50px;">
-		    THERE'S NO ENTRY WITH THAT ID
-		  </h1>
+			<h1 class="animated shakeit" style="color: red;padding-left:50px;">
+				THERE'S NO ENTRY WITH THAT ID
+			</h1>
 		<%end%>
 	</div>
 	<script type="text/javascript">
@@ -48,17 +48,17 @@
 		var exitButton = document.getElementsByClassName("close")[0];
 		//  open the modal
 		enterButton.onclick = function() {
-		  defModal.style.display = "block";
+			defModal.style.display = "block";
 		}
 		// close the modal
 		exitButton.onclick = function() {
-		  defModal.style.display = "none";
+			defModal.style.display = "none";
 		}
 		// When the close it
 		window.onclick = function(event) {
-		  if (event.target == defModal) {
-		    defModal.style.display = "none";
-		  }
+			if (event.target == defModal) {
+				defModal.style.display = "none";
+			}
 		} 	
 	</script>
 </body>

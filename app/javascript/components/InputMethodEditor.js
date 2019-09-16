@@ -1,6 +1,5 @@
 import React from 'react';
 import {Component} from 'react';
-import ReactDOM from 'react-dom';
 // import './index.css';
 
 class InputMethodEditor extends Component {
@@ -55,7 +54,7 @@ class InputMethodEditor extends Component {
 		this.getCharacters(event.target.value);
 	}
 	handleInputChange(event) {
-	  this.setState({inputText: event.target.value});
+		this.setState({inputText: event.target.value});
 	}
 	handleInputKeyDown(event) {
 		if (event.ctrlKey || event.which<65 || event.which>90){

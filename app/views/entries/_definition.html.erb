@@ -6,7 +6,22 @@
 		<div>Tags: 
 			<% definition.tags.each do |tag| %>
 					<%= link_to tag.name, tag_path(tag), :class => 'button tagButton'%>
-			<% end %>		
+			<% end %>	
 		</div>
+		<a class="button" id="delDefButton" onclick="deleteDefinition(<%= definition.id %>)">Delete this Definition</a>
 	</div>
+	<script>
+		function deleteDefinition(defId) {
+	    console.log(defId);
+			$.ajax({
+		    url: window.location.pathname+'/definitions'+'/'+defId,
+		    type: "DELETE",
+		    success: function(){alert('Definition Deleted!')},
+		    error: function(xhr, status, error) {
+				  var err = JSON.parse(xhr.responseText);
+				  alert(err.Message);
+				}
+			});
+		}
+	</script>
 </div>
