@@ -1,6 +1,6 @@
 <head>
 	<script type="text/javascript">
-		function submitDefinition(userID) {
+		function submitDefinition() {
 			var definitionText = $("#definition").val();
 			var usageText = $("#usage").val();
 			var usageTranslationText = $("#usageTranslation").val();
@@ -33,23 +33,18 @@
 <body>
 	<h3>Add a New Definition</h3>
 	<div>
-
-		<label for="definition">Definition: </label><br>
-		<%= react_component("InputMethodEditor", {
-			idName:'definition', textArea:false, numResults:5
-		}) %>
-		<label for="usage">Usage: </label><br>
-		<%= react_component("InputMethodEditor", {
-			idName:'usage', textArea:false, numResults:5
-		}) %>
-		<label for="usageTranslation">Usage Translation: </label><br>
-		<%= react_component("InputMethodEditor", {
-			idName:'usageTranslation', textArea:false, numResults:5
-		}) %>
-		<label for="tags">Tags: </label><br>
-		<%= react_component("InputMethodEditor", {
-			idName:'tags', textArea:false, numResults:5
-		}) %>
+		<div  class="inputSection">
+			<label for="definition">Definition (English): </label>
+			<input type="text" id="definition">
+			<label for="usage">Usage: </label>
+			<%= react_component("InputMethodEditor", {
+				idName:'usage', textArea:false, numResults:5
+			}) %>
+			<label for="usageTranslation">Usage Translation (English): </label>
+			<input type="text" id="usageTranslation">
+			<label for="tags">Tags (English): </label>
+			<input type="text" id="tags">
+		</div>
 	</div>	
 
 	<a class="button" onclick="submitDefinition()">Submit Definition</a>

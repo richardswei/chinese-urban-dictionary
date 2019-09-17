@@ -26,7 +26,6 @@ class EntriesController < ApplicationController
       phrase: params[:phrase],
       pinyin: params[:pinyin]
     )
-
     redirect_to entry_path(@entry)
   end
 

@@ -8,8 +8,11 @@
 					<%= link_to tag.name, tag_path(tag), :class => 'button tagButton'%>
 			<% end %>	
 		</div>
-		<% if definition.user==current_user %>
+		<% if definition.user==current_user && current_user %>
+		<span>
 			<a class="button" id="delDefButton" onclick="deleteDefinition(<%= definition.id %>)">Delete this Definition</a>
+			<%= link_to "Edit this definition!", edit_entry_definition_path(@entry, definition), :class => 'button addEditButton'%>
+		</span>
 		<% end %>	
 	</div>
 	<script>

@@ -1,0 +1,18 @@
+<body>
+	<h3>Edit Definition</h3>
+	<div style="background-color: white">
+		<div class="inputSection">
+			<label for="definition">Definition: </label>
+			<input type="text" id="definition">
+			<label for="usage">Usage: </label>
+			<%= react_component("InputMethodEditor", {
+				idName:'usage', textArea:false, numResults:5
+			}) %>
+			<label for="usageTranslation">Usage Translation: </label>
+			<input type="text" id="usageTranslation">
+			<label for="tags">Tags: </label>
+			<input type="text" id="tags">
+		</div>
+	</div>	
+	<a class="button" onclick="editDefinition( <%= params[:id] %>)">Submit Definition</a>
+</body>
