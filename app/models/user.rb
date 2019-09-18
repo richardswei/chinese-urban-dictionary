@@ -14,17 +14,10 @@ class User < ApplicationRecord
          # Only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
-	def self.find_first_by_auth_conditions(warden_conditions)
+	def self.find_for_database_authentication warden_conditions
 	  conditions = warden_conditions.dup
-	  if login = conditions.delete(:login)
-	    where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-	  else
-	    if conditions[:username].nil?
-	      where(conditions).first
-	    else
-	      where(username: conditions[:username]).first
-	    end
-	  end
+	  login = conditions.delete(:login)
+	  where(conditions).where(["lower(username) = :value OR lower(email) = :value", {value: login.strip.downcase}]).first
 	end
 
 	protected
