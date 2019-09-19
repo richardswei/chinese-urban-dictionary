@@ -1,34 +1,23 @@
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans+TC&display=swap" rel="stylesheet">
-	<style type="text/css">
-	</style>
-	<title>New Phrase</title>
 </head>
 <body>
 	<div class="newEntryPanel">
-		<label for="phrase">Phrase: </label>
 		<br>
-		<input type="text" id="phrase" value="<%=@entry.phrase%>">
+		<div id="phrase" class="inputSection">
+			<label for="phrase">Phrase: </label>
+			<%= react_component("InputMethodEditor", {
+				idName:'phraseField', 
+				textArea:false,
+				numResults:5,
+				defaultInput: @entry.phrase
+			}) %>
+		</div>
 		<br>
-		<label for="pinyin">Pinyin: </label>
 		<br>
-		<input type="text" id="pinyin" value="<%=@entry.pinyin%>">
+		<div id="pinyin" class="inputSection">
+			<label for="pinyin">Pinyin: </label>
+			<input type="text" id="pinyinField" value="<%=@entry.pinyin%>">
+		</div>
 		<br>
-		<a class="button" id="submitDefButton" onclick="submitEntry()">Submit</a>
 	</div>
-	<script type="text/javascript">
-		function submitEntry() {
-			var phraseText = $("#phrase").val();
-			var pinyinText = $("#pinyin").val();
-			if (phraseText.trim()=='') { 
-				return alert('Phrase field cannot be empty!') 
-			} else if (pinyinText.trim()=='') {
-				return alert('Pinyin field cannot be empty!') 				
-			}
-			$.post("/entries", {
-				phrase: phraseText,
-				pinyin: pinyinText
-			});
-		}
-	</script>
 </body>

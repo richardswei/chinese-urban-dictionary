@@ -1,0 +1,53 @@
+<body>
+	<h3>Edit Definition</h3>
+	<script type="text/javascript">
+		function editDefinition(definitionId) {
+			var definitionText = $("#definition").val();
+			var usageText = $("#usage").val();
+			var usageTranslationText = $("#usageTranslation").val();
+			var tagsText = $("#tags").val();
+			if (definitionText.trim()=='') {
+				return alert('Definition cannot be empty!')
+			} else if (usageText.trim()=='') {
+				return alert('Usage cannot be empty!')
+			} else if (usageTranslationText.trim()=='') {
+				return alert('Usage Translation cannot be empty!')
+			}
+			$.ajax({
+			    url: window.location.pathname.slice(0,this.length-5),
+			    type: "PATCH",
+			    data: {
+						definition: definitionText,
+						usage: usageText,
+						usage_translation: usageTranslationText,
+						tag_list: tagsText, 
+					},
+			    success: function(){alert('Definition Updated!')},
+			    error: function(xhr, status, error) {
+					  alert(error);
+					}
+			});
+		}
+	</script>
+	<div>
+		<div class="inputSection">
+			<label for="definition">Definition: </label>
+			<input type="text" id="definition" value="<%= @definition.definition %>" >
+			<label for="usage">Usage: </label>
+			<%= react_component("InputMethodEditor", {
+				idName:'usage', 
+				textArea:false, 
+				numResults:5, 
+				defaultInput: @definition.usage
+			}) %>
+			<label for="usageTranslation">Usage Translation: </label>
+			<input type="text" id="usageTranslation" value="<%= @definition.usage_translation%>">
+			<label for="tags">Tags: </label>
+			<% tag_ids = Tagging.where({definition_id: @definition.id}).pluck(:tag_id)%>
+			<input type="text" id="tags" 
+				value="<%= tag_ids.map{ |tag_id| Tag.find(tag_id).name}.join(", ") %>" 
+			>
+		</div>
+	</div>	
+	<a class="button" onclick="editDefinition( <%= params[:id] %>)">Save Edits</a>
+</body>

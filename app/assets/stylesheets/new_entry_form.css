@@ -7,9 +7,7 @@
 /* #9D8D8F - paper */
 /* #9B786F - latte */
 
-.mainPanel {
-	margin: 30px;
-}
+
 
 .newEntryPanel {
 	margin: 0px;
@@ -23,6 +21,9 @@ label {
 
 .inputField {
 	padding: 10px;
+	width: 75%;
+	font-size: 15px;
+	margin: auto;
 }
 
 .submitButton {

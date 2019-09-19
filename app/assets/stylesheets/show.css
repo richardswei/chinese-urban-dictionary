@@ -53,7 +53,7 @@
   cursor: pointer;
 } 
 .centerInnerPanel {
-	padding-left: 10%;
+	padding-left: 5%;
 	padding-bottom: 5%;
 	padding-top: 5%;
 	background-color: #3b2b46; /* purple color */
@@ -69,4 +69,7 @@
 }
 .addEditButton {
   float: right;
+}
+.defPartial{
+  color: white
 }

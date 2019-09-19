@@ -1,3 +1,33 @@
-<h1>CHANG'S SLANG</h1>
-<h2>Edit Entry</h2>
-<%= render partial: 'entry_form' %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function submitEditEntry() {
+			var phraseText = $("#phraseField").val();
+			var pinyinText = $("#pinyinField").val();
+			if (phraseText.trim()=='') {
+				return alert('Phrase field cannot be empty!');
+			} else if (pinyinText.trim()=='') {
+				return alert('Pinyin field cannot be empty!');
+			}
+			var entryId = <%= params[:id] %>;
+			$.ajax({
+				type: "PATCH",
+				url: "/entries/"+entryId,
+				data: {
+					phrase: phraseText,
+					pinyin: pinyinText
+				}
+			}).done(function () {
+			    alert('Entry Edited!');
+			});
+		}
+	</script>
+</head>
+<body>
+	<h2>Edit Entry</h2>
+	<%= render partial: 'entry_form' %>
+	<a class="button" id="submitDefButton" onclick="submitEditEntry()">Submit</a>
+</body>
+</html>

@@ -1,7 +1,9 @@
 class Definition < ApplicationRecord
   belongs_to :entry
+  belongs_to :user
   has_many :taggings
-  has_many :tags, through: :taggings
+  has_many :tags, through: :taggings, dependent: :destroy
+
 
   def tag_list
   	self.tags.collect do |x|

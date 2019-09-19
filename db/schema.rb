@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_231446) do
+ActiveRecord::Schema.define(version: 2019_09_18_004242) do
 
   create_table "definitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "definition"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 2019_09_04_231446) do
     t.bigint "entry_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["entry_id"], name: "index_definitions_on_entry_id"
+    t.index ["user_id"], name: "index_definitions_on_user_id"
   end
 
   create_table "entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -53,11 +55,17 @@ ActiveRecord::Schema.define(version: 2019_09_04_231446) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.string "username"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "definitions", "entries"
+  add_foreign_key "definitions", "users"
   add_foreign_key "taggings", "definitions"
   add_foreign_key "taggings", "tags"
 end

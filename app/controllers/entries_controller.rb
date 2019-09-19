@@ -1,6 +1,8 @@
 class EntriesController < ApplicationController
   # This will render the view location at views/entries/index
   # You can modify that to display anything you want, even corgis.
+  before_action :authenticate_user!, only: [:new, :edit]
+
   def index
     @count = Entry.count
     @corgi_url = "http://placecorgi.com/260/180"
@@ -12,6 +14,8 @@ class EntriesController < ApplicationController
     # NB: @entry might be nil if we were passed an invalid id.
   end
 
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
   def new
     @entry = Entry.new
   end
@@ -23,9 +27,9 @@ class EntriesController < ApplicationController
   def update
     @entry = Entry.find(params[:id])
     @entry.update(
-      params.require(:entry).permit(:phrase, :pinyin)
+      phrase: params[:phrase],
+      pinyin: params[:pinyin]
     )
-
     redirect_to entry_path(@entry)
   end
 
