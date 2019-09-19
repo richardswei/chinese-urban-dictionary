@@ -6,8 +6,11 @@
 		<div id="phrase" class="inputSection">
 			<label for="phrase">Phrase: </label>
 			<%= react_component("InputMethodEditor", {
-							idName:'phraseField', textArea:false, numResults:5
-						}) %>
+				idName:'phraseField', 
+				textArea:false,
+				numResults:5,
+				defaultInput: @entry.phrase
+			}) %>
 		</div>
 		<br>
 		<br>

@@ -6,7 +6,7 @@ class InputMethodEditor extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			inputText: "",
+			inputText: this.props.defaultInput ? this.props.defaultInput : "",
 			queryText: "",
 			caretPositions: [0,0],
 			results: [],

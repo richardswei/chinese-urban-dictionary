@@ -17,7 +17,7 @@
 		<% if @entry.present? %>
 			<div class="wordSection">
 				<h2><%= @entry.phrase %>
-				<span><%= link_to "Edit this word!", edit_entry_path, :class => 'button addEditButton'%></span>
+				
 				</h2>
 				<h3>Pinyin: <%=@entry.pinyin%></h3>
 			</div>
@@ -26,7 +26,6 @@
 					<% if current_user %>	
 						<a class="button" id="addDefButton">Add a Definition</a>
 					<% end %>
-
 				</span></h3>
 				<% if @entry.definitions.present?%>
 					<%= render partial: 'entries/definition', collection: @entry.definitions%>
