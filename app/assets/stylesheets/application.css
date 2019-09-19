@@ -39,6 +39,11 @@
 	  grid-template-columns: min-content auto;
 	  grid-gap:5px;
 	}
+	div.inputSection input {
+		width: 90%;
+		padding: 10px;
+		font-size: 15px;
+	}
 	div.inputSection label {
 		text-align:right;
 		white-space: nowrap;

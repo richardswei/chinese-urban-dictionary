@@ -1,5 +1,10 @@
 <div>
 	<div class="defPartial">
+		<%
+			username = definition.user_id ?
+				User.where(id: definition.user_id).first.username :
+					"[Deleted User]"
+		%>
 		<div>Definition: <%= definition.definition %></div>
 		<div>Usage: <%= definition.usage %></div>
 		<div>Usage Translation: <%= definition.usage_translation %></div>
@@ -8,6 +13,7 @@
 					<%= link_to tag.name, tag_path(tag), :class => 'button tagButton'%>
 			<% end %>	
 		</div>
+		<div>Last modified by <%=username%> on <%= definition.updated_at.strftime("%m/%d/%Y")%> </div>
 		<% if definition.user==current_user && current_user %>
 		<span>
 			<a class="button" id="delDefButton" onclick="deleteDefinition(<%= definition.id %>)">Delete this Definition</a>
@@ -30,3 +36,4 @@
 		}
 	</script>
 </div>
+

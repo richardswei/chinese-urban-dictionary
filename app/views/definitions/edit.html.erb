@@ -3,13 +3,13 @@
 	<div>
 		<div class="inputSection">
 			<label for="definition">Definition: </label>
-			<input type="text" id="definition">
+			<input type="text" id="definition" value="<%= @definition.definition %>" >
 			<label for="usage">Usage: </label>
 			<%= react_component("InputMethodEditor", {
 				idName:'usage', textArea:false, numResults:5
 			}) %>
 			<label for="usageTranslation">Usage Translation: </label>
-			<input type="text" id="usageTranslation">
+			<input type="text" id="usageTranslation" value="<%= @definition.usage_translation%>">
 			<label for="tags">Tags: </label>
 			<input type="text" id="tags">
 		</div>

@@ -2,16 +2,18 @@
 </head>
 <body>
 	<div class="newEntryPanel">
-		<label for="phrase">Phrase: </label>
 		<br>
-		<div id="phrase">
-			<input type="text" id="phraseField" class="inputField" value="<%=@entry.phrase%>">
+		<div id="phrase" class="inputSection">
+			<label for="phrase">Phrase: </label>
+			<%= react_component("InputMethodEditor", {
+							idName:'phraseField', textArea:false, numResults:5
+						}) %>
 		</div>
 		<br>
-		<label for="pinyin">Pinyin: </label>
 		<br>
-		<div id="pinyin">
-			<input type="text" id="pinyinField" class="inputField" value="<%=@entry.pinyin%>">
+		<div id="pinyin" class="inputSection">
+			<label for="pinyin">Pinyin: </label>
+			<input type="text" id="pinyinField" value="<%=@entry.pinyin%>">
 		</div>
 		<br>
 	</div>

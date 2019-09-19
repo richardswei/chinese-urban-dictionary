@@ -28,4 +28,8 @@ class DefinitionsController < ApplicationController
 		)
 		redirect_to entry_path(@definition.entry_id)
 	end
+
+	def edit
+	  @definition = Definition.find(params[:id])
+	end
 end
