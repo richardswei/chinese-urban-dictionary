@@ -8,20 +8,6 @@
 	<div class="panel">
 
 		<div class="textPanel">
-			<div class="searchBarSection">
-				<form onsubmit="getResults($.get('#searchInput').val())">
-					<div class="inputSection">
-						<label class="searchTitle">Search</label>
-					  <input type="text" id="searchInput">
-					</div>
-				</form>
-				<%= form_tag entries_path, :method => 'get', :id => "entries_search" do %>
-				  <p>
-				    <%= text_field_tag :search, params[:search] %>
-				    <%= submit_tag "Search", :name => nil %>
-				  </p>
-				<% end %>
-			</div>
 			<br>
 			<% t=Time.now %>
 			<div class="trending">
@@ -31,11 +17,13 @@
 						<% Entry.all.order(view_count: :desc).limit(5).each do |entry| %>
 					    <li>
 					    	<%= link_to "#{entry.phrase}", entry_path(entry.id) %>
+					    	<% first_definition = Definition.find_by(entry_id: entry.id) %>
+					    	<%= first_definition ? "- #{first_definition.definition}" : " - [This phrase does not have a definition! Add one!]"  %>
 					    </li>
 					  <% end %>
 					</ol>
 					<div class="newWordLink">
-						<%= link_to "Add a new word!", new_entry_path, :class => 'button' %>
+						<%= link_to "Add a new slang!", new_entry_path, :class => 'button' %>
 					</div>
 				</div>
 			</div>

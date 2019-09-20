@@ -11,31 +11,46 @@
   </head>
 
   <body>
-    <div class='background'>
       <div class='header'>
-        <div>
-          <div class="title"><a href="/">CHANG'S SLANG</a></div>
-          <div class="subtitle">The Chinese Urban Dictionary</div>
-        </div>
-        <div class='userInfo'>
-          <p class="navbar-text pull-right">
-            <% if user_signed_in? %>
-              Logged in as <strong><%= current_user.username %></strong>
-              <%= link_to 'My profile', edit_user_registration_path, :class => 'navbar-link' %> |
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-            <% else %>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-            <% end %>
-          </p>
-          <% if notice %>
-            <p class="alert alert-success"><%= notice %></p>
-          <% end %>
-          <% if alert %>
-            <p class="alert alert-danger"><%= alert %></p>
-          <% end %>
-        </div>
-      </div>
+        <ul class="navbar">
+          <li>
+            <div class="title"><a href="/">CHANG'S SLANG</a></div>
+            <div class="subtitle">The Chinese Urban Dictionary</div>
+          </li>
+          <li></li>
+          <li>
+            <div class="header-item">
+              <%= form_tag entries_path, :method => 'get', :id => "entries_search" do %>
+                <p>
+                  <%= text_field_tag :search, params[:search] %>
+                  <%= submit_tag "Search", :name => nil %>
+                </p>
+              <% end %>
+            </div>
+          </li>
+          <li>
+            <div class="header-item userInfo">
+              <p class="navbar-text pull-right">
+                <% if user_signed_in? %>
+                  Logged in as <strong><%= current_user.username %></strong>
+                  <%= link_to 'My profile', edit_user_registration_path, :class => 'navbar-link' %> |
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                <% else %>
+                  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+                  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+                <% end %>
+              </p>
+              <% if notice %>
+                <p class="alert alert-success"><%= notice %></p>
+              <% end %>
+              <% if alert %>
+                <p class="alert alert-danger"><%= alert %></p>
+              <% end %>
+            </div>
+          </li>
+        </ul>
+    </div>
+    <div class='background'>
       <div class="mainPanel">
         <%= yield %>
       </div>

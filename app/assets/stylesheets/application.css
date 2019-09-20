@@ -96,20 +96,19 @@
 
 	}
 	div {
-		border-radius: 4px; 
 		color: inherit;
 		font-family: 'Noto Sans TC', sans-serif;
 	}
 	div.header {
 	  display:grid;
-	  grid-template-columns: min-content auto;
-	  grid-gap:5px;
+	  grid-template-columns: auto auto;
+		justify-items: end;
 	}
-	div.header .userInfo {
+	div.header-item {
 		text-align: right;
 		color: white
 	}
-	div .title {
+	.title {
 		white-space: nowrap;
 		font-weight: bold;
 		font-size: 50px;
@@ -118,7 +117,7 @@
 		padding: 0px;
 		margin: 0px;
 	}
-	div .subtitle {
+	.subtitle {
 		white-space: nowrap;
 		font-weight: bold;
 		font-size: 20px;
@@ -126,4 +125,24 @@
 		color: #FAED26;
 		padding: 0px;
 		margin: 0px;
+	}
+	ul.navbar {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	  background-color: #333;
+	}
+
+	.navbar  {
+	  float: left;
+	}
+
+	.navbar li {
+		float: left;
+	  display: block;
+	  color: white;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
 	}
