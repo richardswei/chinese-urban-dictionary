@@ -18,6 +18,4 @@ class Entry < ApplicationRecord
 			Entry.all
 		end
 	end
-
-  
 end
