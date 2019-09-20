@@ -43,6 +43,4 @@ class EntriesController < ApplicationController
     @entry.save
     redirect_to entry_path(@entry)
   end
-
-
 end
