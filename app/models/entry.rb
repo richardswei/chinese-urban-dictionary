@@ -19,4 +19,5 @@ class Entry < ApplicationRecord
 		end
 	end
 
+  
 end

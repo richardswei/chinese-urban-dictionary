@@ -10,6 +10,9 @@ class EntriesController < ApplicationController
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]
   def show
     @entry = Entry.where(id: params[:id]).first
+    if (user = current_user).present?
+      @entry.increment!(:view_count)
+    end
     # NB: @entry might be nil if we were passed an invalid id.
   end
 
@@ -40,4 +43,6 @@ class EntriesController < ApplicationController
     @entry.save
     redirect_to entry_path(@entry)
   end
+
+
 end
