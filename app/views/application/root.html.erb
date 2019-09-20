@@ -9,10 +9,18 @@
 
 		<div class="textPanel">
 			<div class="searchBarSection">
-				<div class="inputSection">
-					<label class="searchTitle">Search</label>
-					<%= react_component("InputMethodEditor", {textArea:false, numResults:5}) %>
-				</div>
+				<form onsubmit="getResults($.get('#searchInput').val())">
+					<div class="inputSection">
+						<label class="searchTitle">Search</label>
+					  <input type="text" id="searchInput">
+					</div>
+				</form>
+				<%= form_tag entries_path, :method => 'get', :id => "entries_search" do %>
+				  <p>
+				    <%= text_field_tag :search, params[:search] %>
+				    <%= submit_tag "Search", :name => nil %>
+				  </p>
+				<% end %>
 			</div>
 			<br>
 			<% t=Time.now %>
@@ -34,5 +42,9 @@
 		</div>
 	</div>	
 	<script type="text/javascript">
+		function getResults(queryText){
+			const baseURL = window.location.protocol + "//" + window.location.host;
+			$.get(window.location.protocol + "//" + window.location.host+"/search/query", {query: queryText}, function(data){}, "json");
+		} 
 	</script>
 </body>

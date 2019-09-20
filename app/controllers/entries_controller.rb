@@ -4,8 +4,7 @@ class EntriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
 
   def index
-    @count = Entry.count
-    @corgi_url = "http://placecorgi.com/260/180"
+    @entries = Entry.search(params[:search])
   end
 
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]

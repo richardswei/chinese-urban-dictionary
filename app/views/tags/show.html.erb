@@ -10,7 +10,7 @@
 	  	definition.entry
 	  end.uniq
 	  for entry in tagged_entries do %>
-	  	<li><%= link_to entry.phrase, entry_path(entry) %></li>
+	  	<li><%= link_to entry.phrase, entry_path(entry), :class=> "button" %></li>
 		<% end %>
 	</ul>
 <body>
