@@ -1,20 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :users do
+	devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  scope '/api' do
+    resources :users
+    resources :entries
     resources :definitions
+    resources :tags
+    resources :taggings
   end
-    
-  # This is shorthand for doing:
-  # get "entries/", to: "entries#index"
-  # get "entries/:id", to: "entries#show"
-  resources :entries, only: [:index, :show, :edit, :new, :create, :update]
-  resources :entries do
-  	resources :definitions
-  end
-  resources :tags
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.
-  get "/", to: "application#root"
-  get "search", to: "application#search"
-  root :to => "home#index"
+  # set fallback for aanything that doesnt match client/index.html
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end

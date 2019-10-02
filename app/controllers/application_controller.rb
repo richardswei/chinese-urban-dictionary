@@ -1,15 +1,30 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :exception
+  
+  def authenticate_active_admin_user!
+    authenticate_user!
+    unless current_user.admin?
+      reset_session
+      redirect_to '/admin/login', :alert => "Unauthorized Access!"
+    end
+  end
+
+  def fallback_index_html
+    render :file => 'public/index.html'
+  end
+
+  # def after_sign_in_path_for(user)
+  #   if current_user.admin?
+  #     admin_dashboard_path
+  #   end 
+  # end`
   protected
+
   def configure_permitted_parameters
    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :password_confirmation])
    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :current_password])
   end
-      
-  def root
-  end
-
 
   # # before any action happens, it will authenticate the user
   # before_action :authenticate_user!
