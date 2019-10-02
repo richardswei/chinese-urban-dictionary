@@ -10,16 +10,14 @@ const Background = {
 
 class Home extends Component {
 	componentDidMount() {
-    window.fetch('/api/entries')
+    window.fetch('/api/entries/get_trending')
       .then(response => response.json())
       .then(json => console.log(json))
       .catch(error => console.log(error));
   }
   render() {
   	return (<div style={Background}>
-    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50vh'}}>
 		  <h2>Home</h2>
-    </div>
     </div>
   	)
   }

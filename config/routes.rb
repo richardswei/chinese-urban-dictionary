@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope '/api' do
     resources :users
-    resources :entries
+    resources :entries do
+      collection do
+        get 'get_trending'
+      end
+    end
     resources :definitions
     resources :tags
     resources :taggings

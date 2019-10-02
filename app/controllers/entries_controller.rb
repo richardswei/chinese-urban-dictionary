@@ -15,4 +15,10 @@ class EntriesController < ApplicationController
     # NB: @entry might be nil if we were passed an invalid id.
     render json: @entry.to_json
   end
+
+  def get_trending
+    @entries = Entry.order('view_count').limit(5)
+    render json: @entries.to_json
+
+  end
 end
