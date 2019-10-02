@@ -24,13 +24,13 @@ class Navigation extends Component {
 			<Navbar.Collapse id="basic-navbar-nav">
 			  <Nav className="mr-auto">
 			    <Button variant='dark' as={Link} to="/">Home</Button>
-			    <Button variant='dark' as={Link} to="About">About</Button>
+			    <Button variant='dark' as={Link} to="/About">About</Button>
 			    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-			      <NavDropdown.Item as={Link} to="action1">Action</NavDropdown.Item>
-			      <NavDropdown.Item as={Link} to="action2">Another action</NavDropdown.Item>
-			      <NavDropdown.Item as={Link} to="action3">Something</NavDropdown.Item>
+			      <NavDropdown.Item as={Link} to="/action1">Action</NavDropdown.Item>
+			      <NavDropdown.Item as={Link} to="/action2">Another action</NavDropdown.Item>
+			      <NavDropdown.Item as={Link} to="/action3">Something</NavDropdown.Item>
 			      <NavDropdown.Divider />
-			      <NavDropdown.Item as={Link} to="action4">Separated link</NavDropdown.Item>
+			      <NavDropdown.Item as={Link} to="/action4">Separated link</NavDropdown.Item>
 			    </NavDropdown>
 			  </Nav>
 			</Navbar.Collapse>
