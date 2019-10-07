@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
 	def index
-	  @tags = Tag.all
+	  @tags = Tag.where(definition_id: params[:definition_id])
 	  render json: @tags.to_json
 	end
 

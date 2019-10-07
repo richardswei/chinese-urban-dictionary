@@ -8,10 +8,12 @@ Rails.application.routes.draw do
       collection do
         get 'get_trending'
       end
+      resources :definitions do
+        member do
+          get 'get_tags'
+        end
+      end
     end
-    resources :definitions
-    resources :tags
-    resources :taggings
   end
 
   # set fallback for aanything that doesnt match client/index.html

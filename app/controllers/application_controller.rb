@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-  
+  skip_before_action :verify_authenticity_token
+  protect_from_forgery prepend: true, with: :exception
+
   def authenticate_active_admin_user!
     authenticate_user!
     unless current_user.admin?

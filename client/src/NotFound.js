@@ -5,7 +5,12 @@ import {Container, Row, Col, Button} from 'react-bootstrap'
 
 class NotFound extends Component {
   render () {
-    return  <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '50vh'}}>
+    return  <div style={{
+        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        height: '50vh',
+      }}>
       <Container>
         <Row className="justify-content-md-center">
           <Col sm="12" md="auto">

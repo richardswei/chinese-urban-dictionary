@@ -2,13 +2,6 @@ import React, {Component} from 'react';
 import {Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
-const Background = {
-  backgroundImage: 'url(taipei101.jpg)',
-  backgroundSize: 'cover', 
-  backgroundPosition: 'center center',
-  backgroundRepeat: 'no-repeat',
-  height: '100vh'
-};
 
 class Home extends Component {
   constructor() {
@@ -24,7 +17,9 @@ class Home extends Component {
   getTrending() {
     this.fetch('/api/entries/get_trending')
       .then(entries => {
-        this.setState({entries: entries.map((entry) => {return {id: entry.id, phrase: entry.phrase} })})
+        this.setState({entries: entries.map((entry) => {
+          return {id: entry.id, phrase: entry.phrase} 
+        })})
       });
   }
 
@@ -36,8 +31,8 @@ class Home extends Component {
 
   render() {
     let entries = this.state.entries;
-  	return (<div style={Background}>  
-		  <h2>Home</h2>
+  	return (<div>  
+		  <h2>Trending</h2>
       <div className='trending'>
         {entries && entries.length 
           ? <ul>

@@ -7,11 +7,22 @@ import NotFound from './NotFound'
 import Navigation from './Navigation'
 import './App.css';
 
+const Background = {
+  // backgroundImage: 'url(taipei101.jpg)',
+  backgroundColor: 'gray',
+  backgroundSize: 'cover', 
+  backgroundPosition: 'center center',
+  backgroundRepeat: 'no-repeat',
+  height: '100vh',
+
+};
 
 
 class App extends Component {
   render() {
     return (
+      <div style={Background}>
+        
       <Router>
         <div>
           <Navigation />
@@ -24,6 +35,7 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
+      </div>
     );
   }
 }
