@@ -31,4 +31,3 @@ Tagging.create!([
   {tag_id: 2, definition_id: 2},
   {tag_id: 3, definition_id: 2},
 ])
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
