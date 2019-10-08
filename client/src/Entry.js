@@ -7,14 +7,17 @@ class Entry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      definitionStateProps: []
+      definitionStateProps: [],
+      entry: []
     };
     this.getEntry = this.getEntry.bind(this);
     this.getDefinitions = this.getDefinitions.bind(this);
     this.getTags = this.getTags.bind(this);
+    this.destroyDefinition = this.destroyDefinition.bind(this);
   }
 
   componentDidMount() {
+
     this.getEntry(this.props.match.params.id);
     this.getDefinitions(this.props.match.params.id);
   }
@@ -35,6 +38,7 @@ class Entry extends Component {
           this.setState({definitionStateProps: this.state.definitionStateProps
               .concat([`definition-${definition.id}`])});
         });
+        console.log(this.state);
       });
   }
   
@@ -46,6 +50,12 @@ class Entry extends Component {
             Object.assign(this.state[`definition-${definition_id}`], {tags: tag_obj}) 
         });
       });
+  }
+
+  destroyDefinition(entry_id, definition_id) {
+    return fetch(`/api/entries/${entry_id}/definitions/${definition_id}`, {
+      method: 'DELETE'})
+    .then(response => response.json());
   }
 
   fetch(endpoint) {
@@ -77,30 +87,32 @@ class Entry extends Component {
           definitions && definitions.length ? 
             definitions.map((def, i) => {
               return (
-                <div key={i}>
-                <br/>
-                  <div>definition= {def.definition}</div>
-                  <div>usage= {def.usage}</div>
-                  <div>usage_translation= {def.usage_translation}</div>
-                  <div>
-                    {
-                    def.tags && def.tags.length ? 
-                      def.tags.map((tag_item, e) => {
-                        return (<Button size="sm" key={e}>
-                          {tag_item.name}
-                        </Button>)
-                      }) : <div></div>
-                    }
-                  </div>
-                  <DefinitionForm 
-                    buttonText="Edit Definition"
-                    defaultDefinition={def.definition}
-                    defaultUsage={def.usage}
-                    defaultUsageTranslation={def.usage_translation}
-                    entryID={def.entry_id}
-                    definitionID={def.id}
-                  ></DefinitionForm>
-                </div>
+                def.tags ? 
+                  <div key={i}>
+                  <br/>
+                    <div>definition= {def.definition}</div>
+                    <div>usage= {def.usage}</div>
+                    <div>usage_translation= {def.usage_translation}</div>
+                    <div>
+                      {
+                        def.tags.map((tag_item, e) => {
+                          return (<Button size="sm" key={tag_item.name}>
+                            {tag_item.name}
+                          </Button>)
+                        }) 
+                      }
+                    </div>
+                    <DefinitionForm 
+                      buttonText="Edit Definition"
+                      defaultDefinition={def.definition}
+                      defaultTagList={ def.tags.map((tag_item) => tag_item.name ).join(', ') }
+                      defaultUsage={def.usage}
+                      defaultUsageTranslation={def.usage_translation}
+                      entryID={def.entry_id}
+                      definitionID={def.id}
+                    ></DefinitionForm>
+                    <Button onClick={() => {this.destroyDefinition(def.entry_id, def.id)}} >Delete Definition</Button>
+                  </div> : ''
               );
             }) : <div></div>         
         }

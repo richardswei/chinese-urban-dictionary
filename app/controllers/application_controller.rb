@@ -1,14 +1,4 @@
-class ApplicationController < ActionController::Base
-  skip_before_action :verify_authenticity_token
-  protect_from_forgery prepend: true, with: :exception
-
-  def authenticate_active_admin_user!
-    authenticate_user!
-    unless current_user.admin?
-      reset_session
-      redirect_to '/admin/login', :alert => "Unauthorized Access!"
-    end
-  end
+class ApplicationController < ActionController::API
 
   def fallback_index_html
     render :file => 'public/index.html'
@@ -20,12 +10,6 @@ class ApplicationController < ActionController::Base
   #   end 
   # end`
   protected
-
-  def configure_permitted_parameters
-   devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :password_confirmation])
-   devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
-   devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :current_password])
-  end
 
   # # before any action happens, it will authenticate the user
   # before_action :authenticate_user!

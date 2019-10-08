@@ -3,35 +3,56 @@ import {Modal, Button, ButtonToolbar, Form} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
 
-class MyVerticallyCenteredModal extends Component {
+class DefinitionModal extends Component {
 	constructor(props) {
 		super(props);
-		this.definitionInput = React.createRef();
-		this.usageInput = React.createRef();
-		this.usageTranslationInput = React.createRef();
+		this.state = {};
+		this.onChange = this.onChange.bind(this);
 	}
-
 
 	componentDidMount(){
-
+		// this.setState({
+		// 	definition: this.props.default_definition,
+		// 	usage: this.props.default_usage,
+		// 	usage_translation: this.props.default_translation,
+		// 	entry_id: this.props.entry_id,
+		// 	tags: this.props.default_tags.split(',').map(item => item.trim())
+		// })
 	}
 
-	postDefinition = (event) => {
-		event.preventDefault();
+	postDefinition = () => {
+		const obj = {
+			definition: this.state.definition,
+			usage: this.state.usage,
+			usage_translation: this.state.usageTranslation,
+			entry_id: this.props.entry_id,
+			tag_list: this.state.tag_list
+		};
+		console.log(obj);
 		fetch(`${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
-					method: 'POST',
+					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {
 					  'content-type': 'application/json'
 					},
-					body: JSON.stringify({
-						definition: 'a' /*this.definitionInput.value*/,
-						usage: 'a' /*this.usageInput.value*/,
-						usage_translation: 'a' /*this.usageTranslationInput.value*/,
-					})
+					dataType: 'json',
+					body: JSON.stringify(obj)
 		})
 		.then(response => response.json())
 		.then(json => {console.log(json)});
 	}
+
+	onChange(e) {
+      console.log(e.target.value);
+	    if (e.target.id === 'definition') {
+	        this.setState({ definition: e.target.value });
+	    } else if (e.target.id === 'usage') {
+	        this.setState({ usage: e.target.value });
+	    } else if (e.target.id === 'usageTranslation') {
+	        this.setState({ usageTranslation: e.target.value});
+			} else if (e.target.id === 'tag_list') {
+	        this.setState({ tag_list: e.target.value});
+			}
+	 }
 
 	render() {
 	  return (
@@ -47,25 +68,29 @@ class MyVerticallyCenteredModal extends Component {
 	        </Modal.Title>
 	      </Modal.Header>
 	      <Modal.Body>
-	        <h4>Centered Modal</h4>
+	        <h4>Definition</h4>
 	        <Form>
-	          <Form.Group controlId="formGroupDefinition">
+	          <Form.Group>
 	            <Form.Label>Definition</Form.Label>
-	            <Form.Control defaultValue={this.props.default_definition} ref={this.definitionInput}  />
+	            <Form.Control defaultValue={this.props.default_definition} onChange={this.onChange} id='definition'  />
 	          </Form.Group>
-	          <Form.Group controlId="formGroupUsage">
+	          <Form.Group>
 	            <Form.Label>Usage</Form.Label>
-	            <Form.Control defaultValue={this.props.default_usage} ref={this.usageInput}  />
+	            <Form.Control defaultValue={this.props.default_usage} onChange={this.onChange} id='usage'  />
 	          </Form.Group>
-	          <Form.Group controlId="formGroupUsageTranslation">
+	          <Form.Group>
 	            <Form.Label>Usage Translation</Form.Label>
-	            <Form.Control defaultValue={this.props.default_translation} ref={this.usageTranslationInput}  />
+	            <Form.Control defaultValue={this.props.default_translation} onChange={this.onChange} id='usageTranslation'  />
+	          </Form.Group>
+	          <Form.Group>
+	            <Form.Label>Tags</Form.Label>
+	            <Form.Control defaultValue={this.props.default_tags} onChange={this.onChange} id='tag_list'  />
 	          </Form.Group>
 	        </Form>
 	      </Modal.Body>
 	      <Modal.Footer>
 	        <Button onClick={this.props.onHide}>Close</Button>
-	        <Button onClick={this.postDefinition}>Save</Button>
+	        <Button onClick={() => {this.postDefinition(); this.props.onHide()}} >Save</Button>
 	      </Modal.Footer>
 	    </Modal>
 	  );
@@ -74,19 +99,19 @@ class MyVerticallyCenteredModal extends Component {
 
 function DefinitionForm(props) {
   const [modalShow, setModalShow] = React.useState(false);
-	console.log(props)
   return (
     <ButtonToolbar>
       <Button size="sm" variant="primary" onClick={() => setModalShow(true)}>
         {props.buttonText}
       </Button>
 
-      <MyVerticallyCenteredModal
+      <DefinitionModal
       	entry_id={props.entryID}
       	definition_id={props.definitionID}
       	default_definition={props.defaultDefinition}
       	default_usage={props.defaultUsage}
       	default_translation={props.defaultUsageTranslation}
+      	default_tags={props.defaultTagList}
         show={modalShow}
         onHide={() => setModalShow(false)}
         // onSave={() => saveDefinition(props.entryID, props.definitionID)}
