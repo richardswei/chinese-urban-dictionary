@@ -11,24 +11,25 @@ class DefinitionModal extends Component {
 	}
 
 	componentDidMount(){
-		// this.setState({
-		// 	definition: this.props.default_definition,
-		// 	usage: this.props.default_usage,
-		// 	usage_translation: this.props.default_translation,
-		// 	entry_id: this.props.entry_id,
-		// 	tags: this.props.default_tags.split(',').map(item => item.trim())
-		// })
+		console.log(this.props)
+		this.setState({
+			definition: this.props.default_definition,
+			usage: this.props.default_usage,
+			usage_translation: this.props.default_translation,
+			entry_id: this.props.entry_id,
+			tag_list: this.props.default_tags,
+		});
 	}
 
 	postDefinition = () => {
 		const obj = {
 			definition: this.state.definition,
 			usage: this.state.usage,
-			usage_translation: this.state.usageTranslation,
+			usage_translation: this.state.usage_translation,
 			entry_id: this.props.entry_id,
 			tag_list: this.state.tag_list
 		};
-		console.log(obj);
+		
 		fetch(`${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
 					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {
@@ -42,13 +43,13 @@ class DefinitionModal extends Component {
 	}
 
 	onChange(e) {
-      console.log(e.target.value);
+      // console.log(this.state);
 	    if (e.target.id === 'definition') {
 	        this.setState({ definition: e.target.value });
 	    } else if (e.target.id === 'usage') {
 	        this.setState({ usage: e.target.value });
-	    } else if (e.target.id === 'usageTranslation') {
-	        this.setState({ usageTranslation: e.target.value});
+	    } else if (e.target.id === 'usage_translation') {
+	        this.setState({ usage_translation: e.target.value});
 			} else if (e.target.id === 'tag_list') {
 	        this.setState({ tag_list: e.target.value});
 			}
@@ -72,19 +73,31 @@ class DefinitionModal extends Component {
 	        <Form>
 	          <Form.Group>
 	            <Form.Label>Definition</Form.Label>
-	            <Form.Control defaultValue={this.props.default_definition} onChange={this.onChange} id='definition'  />
+	            <Form.Control
+	            	defaultValue={this.props.default_definition}
+	            	onChange={this.onChange}
+	            	id='definition'  />
 	          </Form.Group>
 	          <Form.Group>
 	            <Form.Label>Usage</Form.Label>
-	            <Form.Control defaultValue={this.props.default_usage} onChange={this.onChange} id='usage'  />
+	            <Form.Control
+	            	defaultValue={this.props.default_usage}
+	            	onChange={this.onChange} 
+	            	id='usage'  />
 	          </Form.Group>
 	          <Form.Group>
 	            <Form.Label>Usage Translation</Form.Label>
-	            <Form.Control defaultValue={this.props.default_translation} onChange={this.onChange} id='usageTranslation'  />
+	            <Form.Control
+	            	defaultValue={this.props.default_translation}
+	            	onChange={this.onChange} 
+	            	id='usage_translation'  />
 	          </Form.Group>
 	          <Form.Group>
 	            <Form.Label>Tags</Form.Label>
-	            <Form.Control defaultValue={this.props.default_tags} onChange={this.onChange} id='tag_list'  />
+	            <Form.Control
+	            	defaultValue={this.props.default_tags}
+	            	onChange={this.onChange} 
+	            	id='tag_list'  />
 	          </Form.Group>
 	        </Form>
 	      </Modal.Body>
