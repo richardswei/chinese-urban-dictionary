@@ -11,7 +11,6 @@ class DefinitionModal extends Component {
 	}
 
 	componentDidMount(){
-		console.log(this.props)
 		this.setState({
 			definition: this.props.default_definition,
 			usage: this.props.default_usage,

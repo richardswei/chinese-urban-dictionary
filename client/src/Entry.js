@@ -38,7 +38,6 @@ class Entry extends Component {
           this.setState({definitionStateProps: this.state.definitionStateProps
               .concat([`definition-${definition.id}`])});
         });
-        console.log(this.state);
       });
   }
   

@@ -14,13 +14,18 @@ class Navigation extends Component {
 	handleSubmit(event) {
 		event.preventDefault();
 		console.log('submitHit');
-		this.props.history.push('/about');
+		this.props.history.push({
+      pathname: "/searchresults",
+      state: {
+        query: this.state.query
+      }
+    });
 	}
 	
 	updateQuery(event) {
 		console.log(event.target.value);
 	  this.setState({
-	    searchText: event.target.value
+	    query: event.target.value
 	  });
 	};
 

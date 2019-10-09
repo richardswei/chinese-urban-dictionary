@@ -30,7 +30,7 @@ class App extends Component {
             <Route path="/about" exact component={About}/>
             <Route path="/" exact component={Home}/>
             <Route path="/entries/:id" exact component={Entry}/>
-            <Route path="/search" exact component={SearchResults}/>
+            <Route path="/searchresults" exact component={SearchResults}/>
             <Route component={NotFound} />
 
           </Switch>
