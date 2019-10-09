@@ -38,7 +38,7 @@ class Home extends Component {
           ? <ul>
              {entries.map((entry) => {
                return <li key={entry.id}>
-                <Link to={`/api/entries/${entry.id}`}>
+                <Link to={`/entries/${entry.id}`}>
                   {entry.phrase}
                 </Link>
                </li>

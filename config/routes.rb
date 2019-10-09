@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :entries do
       collection do
+        get :search
         get 'get_trending'
+        get 'get_search_results'
       end
       resources :definitions do
         member do

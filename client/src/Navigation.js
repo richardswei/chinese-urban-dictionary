@@ -1,9 +1,30 @@
 import React, {Component} from 'react'
 import {Image, Navbar, Nav, NavDropdown, FormControl, Button, Form} from 'react-bootstrap'
-import { Link } from "react-router-dom";
+import { Link, withRouter  } from "react-router-dom";
 
 class Navigation extends Component {
-	render () { 
+
+	constructor(props) {
+	  super(props);
+
+	  this.handleSubmit = this.handleSubmit.bind(this)
+	  this.updateQuery = this.updateQuery.bind(this)
+	}
+
+	handleSubmit(event) {
+		event.preventDefault();
+		console.log('submitHit');
+		this.props.history.push('/about');
+	}
+	
+	updateQuery(event) {
+		console.log(event.target.value);
+	  this.setState({
+	    searchText: event.target.value
+	  });
+	};
+
+	render() { 
 	return	<div>
 		<Navbar bg="dark" variant="dark" expand="md">			
 		  <Navbar.Brand as={Link} to="/">
@@ -11,9 +32,14 @@ class Navigation extends Component {
 		  </Navbar.Brand>
 			<Navbar.Collapse >
 				<Nav className="mr-auto"></Nav>
-		    <Form inline>
-		      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-		      <Button variant="light" as={Link} to="search">Search</Button>
+		    <Form inline onSubmit={this.handleSubmit}>
+		      <FormControl 
+		      	type="text" 
+		      	placeholder="Search" 
+		      	className="mr-sm-2" 
+		      	id="search" 
+		      	onChange={this.updateQuery} />
+		      <Button variant="light" type="submit">Search</Button>
 		    </Form>
 		    <Button variant='dark' as={Link} to="/">Sign Up</Button>
 		    <Button variant='dark' as={Link} to="About">Log In</Button>
@@ -39,4 +65,4 @@ class Navigation extends Component {
 	}
 }
 
-export default Navigation
+export default withRouter(Navigation)
