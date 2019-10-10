@@ -29,7 +29,7 @@ class DefinitionModal extends Component {
 			tag_list: this.state.tag_list
 		};
 		
-		fetch(`${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
+		return fetch(`/api/entries/${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
 					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {
 					  'content-type': 'application/json'
@@ -80,6 +80,7 @@ class DefinitionModal extends Component {
 	          <Form.Group>
 	            <Form.Label>Usage</Form.Label>
 	            <Form.Control
+	            	as="textarea" rows="3"
 	            	defaultValue={this.props.default_usage}
 	            	onChange={this.onChange} 
 	            	id='usage'  />
@@ -87,6 +88,7 @@ class DefinitionModal extends Component {
 	          <Form.Group>
 	            <Form.Label>Usage Translation</Form.Label>
 	            <Form.Control
+	            	as="textarea" rows="3"
 	            	defaultValue={this.props.default_translation}
 	            	onChange={this.onChange} 
 	            	id='usage_translation'  />

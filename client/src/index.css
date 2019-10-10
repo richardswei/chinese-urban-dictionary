@@ -18,5 +18,13 @@ code {
 h1,h2,h3,h4,h5,h6 {
   -webkit-font-smoothing: antialiased;
 	font-family: 'Oswald', sans-serif;
-	color: yellow;
 }
+
+h1.brand {
+  color: yellow
+}
+
+.jumbotron-fluid {
+  padding: 4rem 2rem;
+}
+

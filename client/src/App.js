@@ -9,8 +9,7 @@ import SearchResults from './SearchResults'
 import './App.css';
 
 const Background = {
-  // backgroundImage: 'url(taipei101.jpg)',
-  backgroundColor: 'gray',
+  backgroundImage: 'url(taipei101.jpg)',
   backgroundSize: 'cover', 
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',
@@ -21,8 +20,8 @@ const Background = {
 class App extends Component {
   render() {
     return (
+      
       <div style={Background}>
-        
       <Router>
         <div>
           <Navigation />

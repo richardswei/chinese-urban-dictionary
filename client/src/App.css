@@ -15,9 +15,19 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  background: 'url(taipei101.jpg)',
+
 }
 
 .App-link {
   color: #09d3ac;
 }
-
+/*
+.App-background {
+  background: 'url(taipei101.jpg)',
+  background-size: 'cover', 
+  background-position: 'center center',
+  background-repeat: 'no-repeat',
+  height: '100vh',
+}
+*/

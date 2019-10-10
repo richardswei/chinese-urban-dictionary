@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import {Button} from 'react-bootstrap'
+import {Jumbotron, Container, Row, Col,Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
+const headerAdStyle = {
+  opacity: 0.4,
+  color: 'white'
+};
 
 class Home extends Component {
   constructor() {
@@ -30,23 +34,41 @@ class Home extends Component {
   }
 
   render() {
+    const date = new Date().toLocaleDateString();
     let entries = this.state.entries;
-  	return (<div>  
-		  <h2>Trending</h2>
-      <div className='trending'>
-        {entries && entries.length 
-          ? <ul>
-             {entries.map((entry) => {
-               return <li key={entry.id}>
-                <Link to={`/entries/${entry.id}`}>
-                  {entry.phrase}
-                </Link>
-               </li>
-             })}
-          </ul>
-        : <ul><li></li></ul>}
+  	return (
+      <div>
+        <Jumbotron style={headerAdStyle}>
+          <h1>Whoa Taiwan, dude... Taiwan numba 1</h1>
+        </Jumbotron>
+      <Container>
+        <Row>
+          <Col xs={12} md={8}>
+              <Jumbotron fluid>
+                <h4>Trending: {date}</h4>
+                <br/>
+                <div className='trending'>
+                  {entries && entries.length 
+                    ? <ol>
+                       {entries.map((entry) => {
+                         return <li key={entry.id}>
+                          <Link to={`/entries/${entry.id}`}>
+                            {entry.phrase}
+                          </Link>
+                         </li>
+                       })}
+                    </ol>
+                  : <div></div>}
+                </div>
+              </Jumbotron>
+          </Col>
+          <Col xs={6} md={4}>
+            <Image src="logo512.png" fluid />
+          </Col>
+        </Row>
+      </Container>
       </div>
-    </div>
+
   	)
   }
 }
