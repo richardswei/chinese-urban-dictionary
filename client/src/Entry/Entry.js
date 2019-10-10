@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Button, Jumbotron, Card} from 'react-bootstrap';
-import DefinitionForm from './DefinitionForm';
+import DefinitionForm from '../Definition/DefinitionForm';
 
 class Entry extends Component {
   constructor(props) {

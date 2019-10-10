@@ -21,7 +21,7 @@ class DefinitionModal extends Component {
 	}
 
 	postDefinition = () => {
-		const obj = {
+		const defObj = {
 			definition: this.state.definition,
 			usage: this.state.usage,
 			usage_translation: this.state.usage_translation,
@@ -35,22 +35,21 @@ class DefinitionModal extends Component {
 					  'content-type': 'application/json'
 					},
 					dataType: 'json',
-					body: JSON.stringify(obj)
+					body: JSON.stringify(defObj)
 		})
 		.then(response => response.json())
 		.then(json => {console.log(json)});
 	}
 
 	onChange(e) {
-      // console.log(this.state);
 	    if (e.target.id === 'definition') {
-	        this.setState({ definition: e.target.value });
+        this.setState({ definition: e.target.value });
 	    } else if (e.target.id === 'usage') {
-	        this.setState({ usage: e.target.value });
+        this.setState({ usage: e.target.value });
 	    } else if (e.target.id === 'usage_translation') {
-	        this.setState({ usage_translation: e.target.value});
+        this.setState({ usage_translation: e.target.value});
 			} else if (e.target.id === 'tag_list') {
-	        this.setState({ tag_list: e.target.value});
+        this.setState({ tag_list: e.target.value});
 			}
 	 }
 

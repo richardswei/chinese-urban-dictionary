@@ -48,7 +48,9 @@ class Navigation extends Component {
 		      <Button variant="light" type="submit">Search</Button>
 		    </Form>
 		    <Button variant='dark' as={Link} to="/">Sign Up</Button>
-		    <Button variant='dark' as={Link} to="About">Log In</Button>
+		    <Button variant='dark' as={Link} to="/About">Log In</Button>
+		    <Button variant='dark' as={Link} to="/NewEntry">New Entry</Button>
+
 			</Navbar.Collapse>
 		</Navbar>
 	</div>

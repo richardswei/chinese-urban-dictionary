@@ -25,7 +25,6 @@ class DefinitionsController < ApplicationController
 
   def update 
     @definition = Definition.find(params[:id])
-    p params[:definition]
     @definition.update(
       definition: params[:definition],
       usage: params[:usage],

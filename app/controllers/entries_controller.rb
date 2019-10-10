@@ -4,6 +4,14 @@ class EntriesController < ApplicationController
   def index
     @entries = Entry.all
     render json: @entries.to_json
+  end 
+
+  def create 
+    @entry = Entry.new(
+      phrase: params[:phrase],
+      pinyin: params[:pinyin],
+    )
+    @entry.save
   end
 
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]
