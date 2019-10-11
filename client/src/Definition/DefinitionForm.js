@@ -62,7 +62,7 @@ class DefinitionModal extends Component {
 
 	 	this.postDefinition();
 	 	this.props.onHide();
-	 	this.props.update_parent();
+	 	// this.props.updateparent();
 	 }
 
 	render() {
@@ -139,7 +139,7 @@ function DefinitionForm(props) {
       	default_tags={props.defaultTagList}
         show={modalShow}
         onHide={() => setModalShow(false)}
-        update_parent = {() => props.updateState()}
+        // updateparent = {() => props.updateState()}
         // onSave={() => saveDefinition(props.entryID, props.definitionID)}
       />
     </ButtonToolbar>

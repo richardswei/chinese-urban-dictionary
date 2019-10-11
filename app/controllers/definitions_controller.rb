@@ -33,11 +33,13 @@ class DefinitionsController < ApplicationController
       tag_list: params[:tag_list]
     )
     # @definition.user_id = current_user.id
+    render json: @definition.to_json
   end
 
   def destroy
     @definition = Definition.find(params[:id])
     @definition.destroy
+    render json: @definition.to_json
   end
 
   def get_tags
