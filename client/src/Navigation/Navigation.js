@@ -13,7 +13,6 @@ class Navigation extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log('submitHit');
 		this.props.history.push({
       pathname: "/searchresults",
       state: {
@@ -33,7 +32,7 @@ class Navigation extends Component {
 	return	<div>
 		<Navbar bg="dark" variant="dark" expand="md">			
 		  <Navbar.Brand as={Link} to="/">
-		  	<h1 class='brand'>CHANG'S SLANG</h1>
+		  	<h1 className='brand'>CHANG'S SLANG</h1>
 		  </Navbar.Brand>
 		  <Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse >
@@ -50,7 +49,6 @@ class Navigation extends Component {
 		    <Button variant='dark' as={Link} to="/">Sign Up</Button>
 		    <Button variant='dark' as={Link} to="/About">Log In</Button>
 		    <Button variant='dark' as={Link} to="/NewEntry">New Entry</Button>
-
 			</Navbar.Collapse>
 		</Navbar>
 	</div>

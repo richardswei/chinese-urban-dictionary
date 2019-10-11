@@ -21,6 +21,7 @@ class DefinitionsController < ApplicationController
     @definition.entry_id = params[:entry_id]
     # @definition.user_id = current_user.id
     @definition.save
+    render json: @definition.to_json
   end
 
   def update 

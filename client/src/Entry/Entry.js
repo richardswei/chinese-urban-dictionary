@@ -13,6 +13,7 @@ class Entry extends Component {
     this.getDefinitions = this.getDefinitions.bind(this);
     this.getTags = this.getTags.bind(this);
     this.destroyDefinition = this.destroyDefinition.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +54,10 @@ class Entry extends Component {
     return fetch(`/api/entries/${entry_id}/definitions/${definition_id}`, {
       method: 'DELETE'})
     .then(response => response.json());
+  }
+
+  updateState() {
+    this.setState({dataStatus: 'Data updated...'})
   }
 
   fetch(endpoint) {
@@ -99,9 +104,10 @@ class Entry extends Component {
                         }
                       </div>
                       <DefinitionForm
+                        updateState={this.updateState}
                         buttonText="Edit Definition"
                         defaultDefinition={def.definition}
-                        defaultTagList={ def.tags.map((tag_item) => tag_item.name ).join(', ') }
+                        defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }
                         defaultUsage={def.usage}
                         defaultUsageTranslation={def.usage_translation}
                         entryID={def.entry_id}

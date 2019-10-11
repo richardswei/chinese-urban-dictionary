@@ -8,6 +8,9 @@ class DefinitionModal extends Component {
 		super(props);
 		this.state = {};
 		this.onChange = this.onChange.bind(this);
+		this.postDefinition = this.postDefinition.bind(this);
+		this.onSave = this.onSave.bind(this);
+		console.log(props)
 	}
 
 	componentDidMount(){
@@ -20,7 +23,7 @@ class DefinitionModal extends Component {
 		});
 	}
 
-	postDefinition = () => {
+	postDefinition() {
 		const defObj = {
 			definition: this.state.definition,
 			usage: this.state.usage,
@@ -38,7 +41,9 @@ class DefinitionModal extends Component {
 					body: JSON.stringify(defObj)
 		})
 		.then(response => response.json())
-		.then(json => {console.log(json)});
+		.then(json => {
+			console.log(json)
+		});
 	}
 
 	onChange(e) {
@@ -51,6 +56,13 @@ class DefinitionModal extends Component {
 			} else if (e.target.id === 'tag_list') {
         this.setState({ tag_list: e.target.value});
 			}
+	 }
+
+	 onSave() {
+
+	 	this.postDefinition();
+	 	this.props.onHide();
+	 	this.props.update_parent();
 	 }
 
 	render() {
@@ -103,7 +115,7 @@ class DefinitionModal extends Component {
 	      </Modal.Body>
 	      <Modal.Footer>
 	        <Button onClick={this.props.onHide}>Close</Button>
-	        <Button onClick={() => {this.postDefinition(); this.props.onHide()}} >Save</Button>
+	        <Button onClick={this.onSave} >Save</Button>
 	      </Modal.Footer>
 	    </Modal>
 	  );
@@ -127,6 +139,7 @@ function DefinitionForm(props) {
       	default_tags={props.defaultTagList}
         show={modalShow}
         onHide={() => setModalShow(false)}
+        update_parent = {() => props.updateState()}
         // onSave={() => saveDefinition(props.entryID, props.definitionID)}
       />
     </ButtonToolbar>

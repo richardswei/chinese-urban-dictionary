@@ -12,6 +12,7 @@ class EntriesController < ApplicationController
       pinyin: params[:pinyin],
     )
     @entry.save
+    render json: @entry.to_json
   end
 
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]

@@ -18,22 +18,29 @@ class NewEntry extends Component {
 		console.log(e.target.value)
 	}
 
+
 	postEntry = () => {
 		const entryObj = {
 			phrase: this.state.phrase,
 			pinyin: this.state.pinyin
 		};
-
-		return fetch(`/api/entries/`,{
+		return this.state.phrase && this.state.pinyin ? 
+			fetch(`/api/entries/`,{
 					method: 'POST',
 					headers: {
 					  'content-type': 'application/json'
 					},
 					dataType: 'json',
 					body: JSON.stringify(entryObj)
-		})
-		.then(response => response.json())
-		.then(json => {console.log(json)});	
+			})
+			.then(response => response.json())
+			.then(json => {
+				console.log(json)
+				this.props.history.push({
+		      pathname: `/entries/${json.id}`,
+		    });
+			})	
+		: alert('Fields cannot be empty!')
 	}
 
 	componentDidMount() {
@@ -51,7 +58,7 @@ class NewEntry extends Component {
   					<Form.Label>Pinyin</Form.Label>	
   					<Form.Control onChange={this.onChange} id='pinyin'></Form.Control>	
   				</Form.Group>
-  				<Button onClick={() => {this.postEntry();}} >Save</Button>
+  				<Button onClick={this.postEntry} >Save</Button>
   			</Form>
   		</Jumbotron>
   	)

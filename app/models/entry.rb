@@ -12,7 +12,7 @@ class Entry < ApplicationRecord
 				Entry.where('phrase LIKE ?', "%#{query}%")
 			entries_from_definitions2 = matching_entries.length>0 ? matching_entries.map { |entry| 
 
-					Hash["entry" => entry,  "definition_text" => entry.definitions.length>0 ? entry.definitions.first.definition : 'a']
+					Hash["entry" => entry,  "definition_text" => entry.definitions.length>0 ? entry.definitions.first.definition : 'No definition added yet']
 			} : []
 
 			results = 
