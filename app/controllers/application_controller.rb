@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
   #     admin_dashboard_path
   #   end 
   # end`
-  protected
+  # protected
 
   # # before any action happens, it will authenticate the user
   # before_action :authenticate_user!

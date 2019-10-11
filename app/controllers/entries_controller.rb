@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
+  # before_action :authenticate_user!, only: [:new, :edit]
 
   def index
     @entries = Entry.all
