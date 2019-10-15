@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {Image, Navbar, Nav, NavDropdown, FormControl, Button, Form} from 'react-bootstrap'
 import { Link, withRouter  } from "react-router-dom";
+import Login from '../Sessions/Login.js'
+import Signup from '../Sessions/Signup.js'
+
 
 class Navigation extends Component {
 
@@ -39,15 +42,15 @@ class Navigation extends Component {
 				<Nav className="mr-auto"></Nav>
 		    <Form inline onSubmit={this.handleSubmit}>
 		      <FormControl 
-		      	type="text" 
+		      	type="text"
 		      	placeholder="Search" 
 		      	className="mr-sm-2" 
 		      	id="search" 
 		      	onChange={this.updateQuery} />
 		      <Button variant="light" type="submit">Search</Button>
 		    </Form>
-		    <Button variant='dark' as={Link} to="/">Sign Up</Button>
-		    <Button variant='dark' as={Link} to="/About">Log In</Button>
+		    <Button variant='dark' as={Link} to="/Login">Log In</Button>
+		    <Button variant='dark' as={Link} to="/Signup">Sign Up</Button>
 		    <Button variant='dark' as={Link} to="/NewEntry">New Entry</Button>
 			</Navbar.Collapse>
 		</Navbar>

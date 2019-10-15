@@ -8,6 +8,8 @@ import NotFound from '../NotFound/NotFound.js'
 import Navigation from '../Navigation/Navigation.js'
 import SearchResults from '../SearchResults/SearchResults.js'
 import NewEntry from '../Entry/NewEntry.js'
+import Login from '../Sessions/Login.js'
+import Signup from '../Sessions/Signup.js'
 import '../App/App.css';
 
 const Background = {
@@ -32,6 +34,8 @@ class App extends Component {
               <Route path="/entries/:id" exact component={Entry}/>
               <Route path="/searchresults" exact component={SearchResults}/>
               <Route path="/newEntry" exact component={NewEntry}/>
+              <Route path="/login" exact component={Login}/>
+              <Route path="/signup" exact component={Signup}/>
               <Route component={NotFound} />
 
             </Switch>
