@@ -1,6 +1,4 @@
 class EntriesController < ApplicationController
-  # before_action :authenticate_user!, only: [:new, :edit]
-
   def index
     @entries = Entry.all
     render json: @entries.to_json
@@ -18,10 +16,7 @@ class EntriesController < ApplicationController
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]
   def show
     @entry = Entry.where(id: params[:id]).first
-    # if current_user.present?
-    #   @entry.increment!(:view_count)
-    # end
-    # NB: @entry might be nil if we were passed an invalid id.
+    @entry.increment!(:view_count)
     render json: @entry.to_json
   end
 

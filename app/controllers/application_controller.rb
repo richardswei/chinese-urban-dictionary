@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::API
-	
+
   # Include Knock within your application.
   include Knock::Authenticable
-  
+  # before_action :authenticate_user
+
   protected
   
   # Method for checking if current_user is admin or not.

@@ -18,15 +18,17 @@ class Login extends Component {
 	
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state);
-		return fetch('/api/login', {
+		const login = {auth: this.state	}
+		return fetch('/user_token', {
 			method: 'POST',
 			headers: {
 			  'content-type': 'application/json'
 			},
 			dataType: 'json',
-			body: JSON.stringify(this.state)
-		}).then(response => response.json())
+			body: JSON.stringify(login)
+		}).then(response => {
+			response.json()
+		})
 			.then(json => {
 				console.log(json);
 			});
@@ -41,10 +43,10 @@ class Login extends Component {
 	    				<h5>Log in</h5>
 				    	<Form onSubmit={this.handleSubmit}>
 				    		<Form.Group>
-				    			<Form.Label>Login</Form.Label>
+				    			<Form.Label>Email</Form.Label>
 				    			<Form.Control 
 				    				onChange={this.handleChange}
-				    				id='login'
+				    				id='email'
 				    			/>
 				    			<Form.Text className="text-muted">
 									</Form.Text>
