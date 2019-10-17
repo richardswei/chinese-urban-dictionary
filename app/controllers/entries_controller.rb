@@ -1,4 +1,8 @@
 class EntriesController < ApplicationController
+  before_action :authenticate_user,  only: [:create]
+  before_action :authorize_as_admin, only: [:destroy]
+
+
   def index
     @entries = Entry.all
     render json: @entries.to_json

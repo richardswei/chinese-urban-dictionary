@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import {Image, Navbar, Nav, NavDropdown, FormControl, Button, Form} from 'react-bootstrap'
 import { Link, withRouter  } from "react-router-dom";
-import Login from '../Sessions/Login.js'
-import Signup from '../Sessions/Signup.js'
 
 
 class Navigation extends Component {
@@ -49,8 +47,19 @@ class Navigation extends Component {
 		      	onChange={this.updateQuery} />
 		      <Button variant="light" type="submit">Search</Button>
 		    </Form>
-		    <Button variant='dark' as={Link} to="/Login">Log In</Button>
-		    <Button variant='dark' as={Link} to="/Signup">Sign Up</Button>
+				{!this.props.appState.jwt &&
+					<div>
+						<Button variant='dark' as={Link} to="/sign-in">Log In</Button>
+						<Button variant='dark' as={Link} to="/Signup">Sign Up</Button>
+					</div>
+				}
+
+				{this.props.appState.jwt &&
+					<div>
+						<div>Signed in as</div>
+						<Button variant='dark' as={Link} to="/sign-out">Sign Out</Button>
+					</div>
+				}
 		    <Button variant='dark' as={Link} to="/NewEntry">New Entry</Button>
 			</Navbar.Collapse>
 		</Navbar>

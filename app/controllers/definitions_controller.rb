@@ -1,4 +1,8 @@
 class DefinitionsController < ApplicationController
+  before_action :authenticate_user,  only: [:create, :update, :destroy]
+  before_action :authorize_as_admin, only: [:destroy]
+
+
 	def index
 		@definitions = Definition.where(entry_id: params[:entry_id])
 		render json: @definitions.to_json

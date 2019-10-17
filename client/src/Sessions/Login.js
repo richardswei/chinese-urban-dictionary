@@ -38,9 +38,9 @@ class Login extends Component {
     return (
     	<Jumbotron>
 	    	<Container>
+  				<h5>Log in</h5>
 	    		<Row>
 	    			<Col>
-	    				<h5>Log in</h5>
 				    	<Form onSubmit={this.handleSubmit}>
 				    		<Form.Group>
 				    			<Form.Label>Email</Form.Label>

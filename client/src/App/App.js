@@ -14,12 +14,12 @@ import SearchResults from '../SearchResults/SearchResults.js'
 import NewEntry from '../Entry/NewEntry.js'
 import Login from '../Sessions/Login.js'
 import Signup from '../Sessions/Signup.js'
-import AuthSignIn from './AuthSignIn.js'
-import AuthSignOut from './AuthSignOut.js'
+import AuthSignIn from '../Sessions/AuthSignIn.js'
+import AuthSignOut from '../Sessions/AuthSignOut.js'
 
 import '../App/App.css';
 
-const Api = require('../lib/Api.js');
+const Api = require('../Api.js');
 
 const Background = {
   backgroundSize: 'cover', 
@@ -47,12 +47,9 @@ class App extends Component {
     }
   }
 
-
   constructor(props) {
     super(props)
-
     this.state = this.defaultState()
-
     this.propagateSignIn = this.propagateSignIn.bind(this)
     this.propagateSignOut = this.propagateSignOut.bind(this)
   }
@@ -89,6 +86,7 @@ class App extends Component {
           jwt: jwt
         })
         if (history) history.push('/')
+        
       }
       else {
         // user has cookie but cannot load current user
@@ -99,6 +97,7 @@ class App extends Component {
           jwt: undefined
         })
       }
+      console.log(this.state);
     })
   }
 
@@ -107,17 +106,33 @@ class App extends Component {
       
       <div style={{backgroundColor: 'pink'}}>
         <Router>
-          <Navigation />
+          <Navigation appState={this.state}/>
           <Container style={Background}>
             <Switch>
-              <Route path="/about" exact component={About}/>
-              <Route path="/" exact component={Home}/>
-              <Route path="/entries/:id" exact component={Entry}/>
-              <Route path="/searchresults" exact component={SearchResults}/>
-              <Route path="/newEntry" exact component={NewEntry}/>
-              <Route path="/login" exact component={Login}/>
-              <Route path="/signup" exact component={Signup}/>
-              <Route component={NotFound} />
+              <Route 
+                exact path="/about" 
+                render={(routeProps) => <About {...routeProps} appState={this.state}/> } 
+              />
+              <Route 
+                exact path="/" 
+                render={(routeProps) => <Home {...routeProps} appState={this.state}/> } 
+              />
+              <Route 
+                path="/entries/:id" 
+                render={(routeProps) => <Entry {...routeProps} appState={this.state}/> } 
+              />
+              <Route 
+                path="/searchresults" 
+                render={(routeProps) => <SearchResults {...routeProps} appState={this.state}/> } 
+              />
+              <Route 
+                exact path="/signup" 
+                render={(routeProps) => <Signup {...routeProps} appState={this.state}/> } 
+              />
+              <Route 
+                exact path="/newEntry" 
+                render={(routeProps) => <NewEntry {...routeProps} appState={this.state}/> } 
+              />
               {!this.state.jwt &&
                 <Route
                   exact path="/sign-in"
@@ -135,6 +150,7 @@ class App extends Component {
                   )}
                 />
               }
+              <Route component={NotFound} />
 
             </Switch>
           </Container>
@@ -144,4 +160,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withCookies(App);
