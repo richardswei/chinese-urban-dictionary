@@ -10,7 +10,6 @@ class DefinitionModal extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.postDefinition = this.postDefinition.bind(this);
 		this.onSave = this.onSave.bind(this);
-		console.log(props)
 	}
 
 	componentDidMount(){
@@ -31,11 +30,11 @@ class DefinitionModal extends Component {
 			entry_id: this.props.entry_id,
 			tag_list: this.state.tag_list
 		};
-		
 		return fetch(`/api/entries/${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
 					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {
-					  'content-type': 'application/json'
+					  'content-type': 'application/json',
+					  'authorization': 'Bearer ' + this.props.auth
 					},
 					dataType: 'json',
 					body: JSON.stringify(defObj)
@@ -139,8 +138,7 @@ function DefinitionForm(props) {
       	default_tags={props.defaultTagList}
         show={modalShow}
         onHide={() => setModalShow(false)}
-        // updateparent = {() => props.updateState()}
-        // onSave={() => saveDefinition(props.entryID, props.definitionID)}
+        auth={props.auth}
       />
     </ButtonToolbar>
   );

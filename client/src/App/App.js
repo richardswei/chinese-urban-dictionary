@@ -4,10 +4,12 @@ import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import About from '../About/About.js';
 import Home from '../Home/Home.js';
 import Entry from '../Entry/Entry.js';
+import Tag from '../Entry/Tag.js';
 import NotFound from '../NotFound/NotFound.js'
 import Navigation from '../Navigation/Navigation.js'
 import SearchResults from '../SearchResults/SearchResults.js'
@@ -71,8 +73,6 @@ class App extends Component {
     if (history) history.push('/')
   }
 
-
-  
   getUser(history = undefined) {
     const { cookies } = this.props
     let jwt = cookies.get(this.state.cookieName)
@@ -97,54 +97,70 @@ class App extends Component {
           jwt: undefined
         })
       }
-      console.log(this.state);
     })
   }
 
   render() {
-    return (
-      
+    const notLoggedIn = !this.props.allCookies["rails-react-token-auth-jwt"]
+      return (
       <div style={{backgroundColor: 'pink'}}>
         <Router>
           <Navigation appState={this.state}/>
           <Container style={Background}>
             <Switch>
-              <Route 
-                exact path="/about" 
-                render={(routeProps) => <About {...routeProps} appState={this.state}/> } 
+              <Route exact path="/about" 
+                render={
+                  (routeProps) =>
+                    <About {...routeProps} appState={this.state}/> 
+                } 
               />
-              <Route 
-                exact path="/" 
-                render={(routeProps) => <Home {...routeProps} appState={this.state}/> } 
+              <Route exact path="/" 
+                render={
+                  (routeProps) =>
+                    <Home {...routeProps} appState={this.state}/> 
+                } 
               />
-              <Route 
-                path="/entries/:id" 
-                render={(routeProps) => <Entry {...routeProps} appState={this.state}/> } 
+              <Route path="/entries/:id" 
+                render={
+                  (routeProps) =>
+                    <Entry {...routeProps} appState={this.state}/> 
+                } 
               />
-              <Route 
-                path="/searchresults" 
-                render={(routeProps) => <SearchResults {...routeProps} appState={this.state}/> } 
+              <Route path="/tag/:id" 
+                render={
+                  (routeProps) =>
+                    <Tag {...routeProps} appState={this.state}/> 
+                } 
               />
-              <Route 
-                exact path="/signup" 
-                render={(routeProps) => <Signup {...routeProps} appState={this.state}/> } 
+              <Route path="/searchresults" 
+                render={
+                  (routeProps) =>
+                    <SearchResults {...routeProps} appState={this.state}/> 
+                } 
               />
-              <Route 
-                exact path="/newEntry" 
-                render={(routeProps) => <NewEntry {...routeProps} appState={this.state}/> } 
+              <Route exact path="/signup" 
+                render={
+                  (routeProps) => 
+                    <Signup {...routeProps} appState={this.state}/> 
+                } 
               />
-              {!this.state.jwt &&
-                <Route
-                  exact path="/sign-in"
+              <Route exact path="/newEntry" 
+                render={
+                  (routeProps) => notLoggedIn
+                    ? <Redirect to={{ pathname: "/sign-in"}} /> 
+                      : <NewEntry {...routeProps} appState={this.state}/> 
+                  }
+              />
+              {notLoggedIn &&
+                <Route exact path="/sign-in"
                   render={(routeProps) => (
                     <AuthSignIn {...routeProps} propagateSignIn={this.propagateSignIn} />
                   )}
                 />
               }
 
-              {this.state.jwt &&
-                <Route
-                  exact path="/sign-out"
+              {!notLoggedIn &&
+                <Route exact path="/sign-out"
                   render={(routeProps) => (
                     <AuthSignOut {...routeProps} propagateSignOut={this.propagateSignOut} />
                   )}

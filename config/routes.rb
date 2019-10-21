@@ -18,6 +18,11 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope '/api' do
+    resources :tags do
+      member do
+        get 'get_relevant_definitions'
+      end
+    end
     resources :entries do
       collection do
         get :search

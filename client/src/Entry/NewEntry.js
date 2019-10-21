@@ -28,7 +28,8 @@ class NewEntry extends Component {
 			fetch(`/api/entries/`,{
 					method: 'POST',
 					headers: {
-					  'content-type': 'application/json'
+					  'content-type': 'application/json',
+					  'authorization': 'Bearer ' + this.props.appState.jwt
 					},
 					dataType: 'json',
 					body: JSON.stringify(entryObj)
@@ -48,7 +49,7 @@ class NewEntry extends Component {
   render() {
   	return (
   		<Jumbotron>
-  			<h2>NewEntry</h2>
+  			<h2>New Entry</h2>
   			<Form>
   				<Form.Group>
   					<Form.Label>Phrase</Form.Label>

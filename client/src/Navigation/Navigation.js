@@ -58,9 +58,9 @@ class Navigation extends Component {
 					<div>
 						<div>Signed in as</div>
 						<Button variant='dark' as={Link} to="/sign-out">Sign Out</Button>
+		    		<Button variant='dark' as={Link} to="/NewEntry">New Entry</Button>
 					</div>
 				}
-		    <Button variant='dark' as={Link} to="/NewEntry">New Entry</Button>
 			</Navbar.Collapse>
 		</Navbar>
 	</div>

@@ -1,5 +1,7 @@
+
 class User < ApplicationRecord
   
+  has_many :definitions
   # Necessary to authenticate.
   has_secure_password
   

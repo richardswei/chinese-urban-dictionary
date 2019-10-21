@@ -1,6 +1,6 @@
 import React from 'react'
 import { Jumbotron, Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
-
+import {Link} from 'react-router-dom'
 import { authenticateUser } from '../Api.js';
 
 class AuthSignInComponent extends React.Component {
@@ -105,8 +105,8 @@ class AuthSignInComponent extends React.Component {
         <h5>Sign in</h5>
 
         <Container>
-          <Row>
-            <Col xs={12} md={12}>
+          <Row xs={12} md={12}>
+            <Col >
 
               {this.getFormErrors().length > 0 && this.state.formSubmitted &&
                 <Alert variant="danger" >
@@ -149,6 +149,10 @@ class AuthSignInComponent extends React.Component {
                 </Button>
 
               </Form>
+            </Col>
+            <Col style={{textAlign: "center"}}>
+              <h5>No account? Sign up for a new one!</h5>
+              <Button as={Link} to={'/signup'}>New Account</Button>
             </Col>
           </Row>
         </Container>
