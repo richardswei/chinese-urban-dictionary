@@ -50,13 +50,28 @@ class Home extends Component {
                 <div className='trending'>
                   {entries && entries.length 
                     ? <ol>
-                       {entries.map((entry) => {
-                         return <li key={entry.id}>
+                      <Container>
+                      <Row>
+                        <Col>
+                           {entries.map((entry, i) => {
+                             return i<5 && <li key={entry.id}>
+                              <Link to={`/entries/${entry.id}`}>
+                                {entry.phrase}
+                              </Link>
+                             </li>
+                           })}
+                        </Col>
+                        <Col>
+                       {entries.map((entry, i) => {
+                         return i>=5 && <li key={entry.id}>
                           <Link to={`/entries/${entry.id}`}>
                             {entry.phrase}
                           </Link>
                          </li>
                        })}
+                        </Col>
+                      </Row>
+                      </Container>
                     </ol>
                   : <div></div>}
                 </div>

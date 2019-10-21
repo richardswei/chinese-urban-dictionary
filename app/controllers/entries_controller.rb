@@ -23,7 +23,7 @@ class EntriesController < ApplicationController
   end
 
   def get_trending
-    @results = Entry.order('view_count DESC').limit(5)
+    @results = Entry.order('view_count DESC').limit(10)
     render json: @results.to_json
   end
 

@@ -22,12 +22,11 @@ import AuthSignOut from '../Sessions/AuthSignOut.js'
 import '../App/App.css';
 
 const Api = require('../Api.js');
-
+const imageUrl = '/taipei101.jpg';
 const Background = {
+  backgroundImage: 'url(' + imageUrl + ')', 
   backgroundSize: 'cover', 
-  backgroundPosition: 'center center',
-  backgroundRepeat: 'no-repeat',
-  height: '100vh',
+  minHeight: '100vh',
 };
 
 class App extends Component {
@@ -103,10 +102,10 @@ class App extends Component {
   render() {
     const notLoggedIn = !this.props.allCookies["rails-react-token-auth-jwt"]
       return (
-      <div style={{backgroundColor: 'pink'}}>
+      <div style={Background}>
         <Router>
           <Navigation appState={this.state}/>
-          <Container style={Background}>
+          <Container>
             <Switch>
               <Route exact path="/about" 
                 render={
