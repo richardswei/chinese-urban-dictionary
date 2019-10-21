@@ -41,47 +41,47 @@ class Home extends Component {
         <Jumbotron style={headerAdStyle}>
           <h1>Whoa Taiwan, dude... Taiwan numba 1</h1>
         </Jumbotron>
-      <Container>
-        <Row>
-          <Col xs={12} md={8}>
-              <Jumbotron fluid>
-                <h4>Trending: {date}</h4>
-                <br/>
-                <div className='trending'>
-                  {entries && entries.length 
-                    ? <ol>
-                      <Container>
-                      <Row>
-                        <Col>
+        <Container>
+          <Row>
+            <Col xs={12} md={8}>
+                <Jumbotron fluid>
+                  <h4>Trending: {date}</h4>
+                  <br/>
+                  <div className='trending'>
+                    {entries && entries.length 
+                      ? <ol>
+                        <Container>
+                          <Row>
+                            <Col>
+                               {entries.map((entry, i) => {
+                                 return i<5 && <li key={entry.id}>
+                                  <Link to={`/entries/${entry.id}`}>
+                                    {entry.phrase}
+                                  </Link>
+                                 </li>
+                               })}
+                            </Col>
+                            <Col>
                            {entries.map((entry, i) => {
-                             return i<5 && <li key={entry.id}>
+                             return i>=5 && <li key={entry.id}>
                               <Link to={`/entries/${entry.id}`}>
                                 {entry.phrase}
                               </Link>
                              </li>
                            })}
-                        </Col>
-                        <Col>
-                       {entries.map((entry, i) => {
-                         return i>=5 && <li key={entry.id}>
-                          <Link to={`/entries/${entry.id}`}>
-                            {entry.phrase}
-                          </Link>
-                         </li>
-                       })}
-                        </Col>
-                      </Row>
-                      </Container>
-                    </ol>
-                  : <div></div>}
-                </div>
-              </Jumbotron>
-          </Col>
-          <Col xs={6} md={4}>
-            <Image src="logo512.png" fluid />
-          </Col>
-        </Row>
-      </Container>
+                            </Col>
+                          </Row>
+                        </Container>
+                      </ol>
+                    : <div></div>}
+                  </div>
+                </Jumbotron>
+            </Col>
+            <Col xs={6} md={4}>
+              <Image src="logo512.png" fluid />
+            </Col>
+          </Row>
+        </Container>
       </div>
 
   	)

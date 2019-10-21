@@ -42,6 +42,7 @@ class App extends Component {
   defaultState() {
     return {
       cookieName: 'rails-react-token-auth-jwt',
+      username: undefined,
       email: undefined,
       jwt: undefined,
       user_id: undefined,
@@ -65,6 +66,7 @@ class App extends Component {
     const { cookies } = this.props
     cookies.remove(this.state.cookieName)
     this.setState({
+      username: undefined,
       email: undefined,
       user_id: undefined,
       jwt: undefined
@@ -80,6 +82,7 @@ class App extends Component {
     Api.getCurrentUser(jwt).then(response => {
       if (response !== undefined) {
         this.setState({
+          username: response.username,
           email: response.email,
           user_id: response.id,
           jwt: jwt
@@ -91,6 +94,7 @@ class App extends Component {
         // user has cookie but cannot load current user
         cookies.remove(this.state.cookieName)
         this.setState({
+          username: undefined,
           email: undefined,
           user_id: undefined,
           jwt: undefined
