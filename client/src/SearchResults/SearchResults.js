@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react'
-import { Card } from 'react-bootstrap'
+import { Card,Jumbotron } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
 class SearchResults extends Component {
@@ -38,7 +38,7 @@ class SearchResults extends Component {
 
 	render() { 
 		return	<div>
-		  <h2>Search Results</h2>
+		  <Jumbotron as="h2">Search Results</Jumbotron>
 		  {
 		  	this.state.searchResults.length > 0 ?
 		  		<div>{
@@ -60,7 +60,7 @@ class SearchResults extends Component {
 	  					)
 		  			})
 		  		}</div>
-		  			: <p>NO RESULTS FOUND</p>
+		  			: <Card><Card.Body>NO RESULTS FOUND</Card.Body></Card>
 		}
 		</div>
 	}

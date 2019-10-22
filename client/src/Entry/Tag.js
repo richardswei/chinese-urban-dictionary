@@ -48,7 +48,13 @@ class Tag extends Component {
                 key={definition.id}
                 as={Link}
                 to={`/entries/${definition.entry_id}`}>
-                <strong>{definition.entry.phrase} ({definition.entry.pinyin})</strong> {definition.definition}
+                <Card.Body>
+                  <Card.Title>{definition.entry.phrase} </Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">({definition.entry.pinyin})</Card.Subtitle>
+                  <Card.Text>Definition:  {definition.definition}</Card.Text>
+                 
+                </Card.Body>
+
               </Card>)
             })}
           </div>)
