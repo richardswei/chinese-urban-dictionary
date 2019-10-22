@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_004242) do
+ActiveRecord::Schema.define(version: 2019_10_18_232907) do
 
   create_table "definitions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "definition"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_09_18_004242) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "taggings", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "taggings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "tag_id"
     t.bigint "definition_id"
     t.datetime "created_at", null: false
@@ -41,27 +41,21 @@ ActiveRecord::Schema.define(version: 2019_09_18_004242) do
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
-  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "username", null: false
+    t.string "email", null: false
+    t.string "password_digest"
+    t.string "role", default: "user", null: false
+    t.datetime "last_login"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.index ["username"], name: "index_users_on_username", unique: true
+    t.index ["email"], name: "index_users_on_email"
   end
 
   add_foreign_key "definitions", "entries"

@@ -1,21 +1,29 @@
 class Entry < ApplicationRecord
 	has_many :definitions
 
-	def self.search(search)
-		if search
+	def self.search(query)
+		if query && query.length>0
+			matching_definitions = 
+				Definition.where('definition LIKE ?', "%#{query}%").uniq(&:entry_id)
+			entries_from_definitions1 = matching_definitions.map { |definition| 
+					Hash["entry" => Entry.find(definition.entry_id),  "definition_text" => definition.definition]
+			}
+			matching_entries = 
+				Entry.where('phrase LIKE ?', "%#{query}%")
+			entries_from_definitions2 = matching_entries.length>0 ? matching_entries.map { |entry| 
 
-			entry_ids_from_definitions = Definition.where('definition LIKE ?', "%#{search}%").pluck('entry_id').uniq
-			entry_ids_from_entries = Entry.where('phrase LIKE ?', "%#{search}%").pluck('id').uniq
-			entries_from_definitions = Entry.where({id: entry_ids_from_definitions.concat(entry_ids_from_entries)})
-			results = entries_from_definitions
+					Hash["entry" => entry,  "definition_text" => entry.definitions.length>0 ? entry.definitions.first.definition : 'No definition added yet']
+			} : []
 
+			results = 
+				entries_from_definitions1.concat(entries_from_definitions2)
 			if results
 				results
 			else
-				Entry.all
+				{}
 			end
 		else
-			Entry.all
+			{}
 		end
 	end
 

@@ -12,6 +12,7 @@ class Definition < ApplicationRecord
   end
 
 	def tag_list=(tags_to_set)
+		p tags_to_set
 		tag_names = tags_to_set.split(",").collect{
 			|text| text.strip.downcase
 		}.uniq
