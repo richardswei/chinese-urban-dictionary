@@ -59,7 +59,8 @@ class Entry extends Component {
         'authorization': 'Bearer ' + this.props.appState.jwt
       },
     })
-    .then(response => response.json());
+    .then(response => response.json())
+    .then(this.props.history.go(0));
   }
 
   updateState() {
@@ -98,7 +99,6 @@ class Entry extends Component {
         {
           definitions && definitions.length ? 
             definitions.map((def, i) => {
-                console.log(def)
               return (
                 def.tags ? 
                   <div key={i}>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button, ButtonToolbar, Form} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+
+import {Link, withRouter} from 'react-router-dom'
 
 
 class DefinitionModal extends Component {
@@ -30,6 +31,7 @@ class DefinitionModal extends Component {
 			entry_id: this.props.entry_id,
 			tag_list: this.state.tag_list
 		};
+		console.log(this.props);
 		return fetch(`/api/entries/${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
 					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {
@@ -40,9 +42,8 @@ class DefinitionModal extends Component {
 					body: JSON.stringify(defObj)
 		})
 		.then(response => response.json())
-		.then(json => {
-			console.log(json)
-		});
+		.then(json => { console.log(json) })
+		.then(() => {this.props.history.go(0) });
 	}
 
 	onChange(e) {
@@ -58,27 +59,26 @@ class DefinitionModal extends Component {
 	 }
 
 	 onSave() {
-
 	 	this.postDefinition();
 	 	this.props.onHide();
 	 	// this.props.updateparent();
 	 }
 
 	render() {
+    const { to, match, location, history, staticContext, ...rest } = this.props;
 	  return (
 	    <Modal
-	      {...this.props}
+	      {...rest}
 	      size="lg"
 	      aria-labelledby="contained-modal-title-vcenter"
 	      centered
 	    >
 	      <Modal.Header closeButton>
 	        <Modal.Title id="contained-modal-title-vcenter">
-	          Modal heading
+	      	  <h4>Definition Editor</h4>
 	        </Modal.Title>
 	      </Modal.Header>
 	      <Modal.Body>
-	        <h4>Definition</h4>
 	        <Form>
 	          <Form.Group>
 	            <Form.Label>Definition</Form.Label>
@@ -121,6 +121,7 @@ class DefinitionModal extends Component {
 	}
 }
 
+const DefinitionModalWithRouter = withRouter(DefinitionModal);
 function DefinitionForm(props) {
   const [modalShow, setModalShow] = React.useState(false);
   return (
@@ -129,7 +130,7 @@ function DefinitionForm(props) {
         {props.buttonText}
       </Button>
 
-      <DefinitionModal
+      <DefinitionModalWithRouter
       	entry_id={props.entryID}
       	definition_id={props.definitionID}
       	default_definition={props.defaultDefinition}
@@ -146,4 +147,4 @@ function DefinitionForm(props) {
 
 
 
-export default DefinitionForm;
+export default withRouter(DefinitionForm);
