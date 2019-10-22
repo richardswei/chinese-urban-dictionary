@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Button, Jumbotron, Card} from 'react-bootstrap';
+import {Button, ButtonToolbar, Jumbotron, Card} from 'react-bootstrap';
 import DefinitionForm from '../Definition/DefinitionForm';
 
 class Entry extends Component {
@@ -72,9 +72,9 @@ class Entry extends Component {
       .then(response => response.json())
       .catch(error => console.log(error))
   }
+  
 
   render() {
-    console.log(this.state)
     const entry = this.state.entry;
     const definitions = this.state.definitionStateProps
       .map((def, i) => this.state[def] );
@@ -98,44 +98,65 @@ class Entry extends Component {
         {
           definitions && definitions.length ? 
             definitions.map((def, i) => {
+                console.log(def)
               return (
                 def.tags ? 
                   <div key={i}>
-                    <Jumbotron>
-                      <div><strong>Definition:</strong> {def.definition}</div>
-                      <br/>
-                      <div>Usage: {def.usage}</div>
-                      <div>Translation: {def.usage_translation}</div>
-                      <div>Tags: 
-                        {
-                          def.tags.map((tag_item, e) => {
-                            console.log(tag_item)
+                    <Card >
+                      <Card.Header as="h5">
+                        <strong>Definition: </strong>{def.definition}
+                        
+                      </Card.Header>
+                      <Card.Body>
+                        <p><strong>Usage: </strong>{def.usage}</p>
+                        <p><strong>Translation: </strong>{def.usage_translation}</p>
+                        <div><strong>Tags: </strong>
+                        <br/>
+                          {def.tags.map((tag_item, e) => {
                             return (<Button 
                               as={Link}
                               to={`/tag/${tag_item.id}`}
-                              size="sm" 
+                              size="sm"
+                              variant='light'
                               key={tag_item.name}>
                               {tag_item.name}
                             </Button>)
-                          }) 
-                        }
-                      </div>
+                          })}
+                        </div>
+                        <div className="text-muted">Last updated by 
+                          <strong> {
+                            def.user ? def.user.username: '[deleted user]'
+                          } </strong>
+                        on {def.updated_at}</div>
+                      </Card.Body>
+
                       {def.user_id === this.props.appState.user_id ?
-                        (<div>
-                          <DefinitionForm
-                            updateState={this.updateState}
-                            buttonText="Edit Definition"
-                            defaultDefinition={def.definition}
-                            defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }
-                            defaultUsage={def.usage}
-                            defaultUsageTranslation={def.usage_translation}
-                            entryID={def.entry_id}
-                            definitionID={def.id}
-                            auth={this.props.appState.jwt}
-                          ></DefinitionForm>
-                          <Button size="sm" onClick={() => {this.destroyDefinition(def.entry_id, def.id)}} >Delete Definition</Button>
-                        </div> ) : ``}
-                    </Jumbotron>
+                        (<Card.Footer>
+                          <ButtonToolbar>
+                            <DefinitionForm
+                              updateState={this.updateState}
+                              buttonText="Edit Definition"
+                              defaultDefinition={def.definition}
+                              defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }
+                              defaultUsage={def.usage}
+                              defaultUsageTranslation={def.usage_translation}
+                              entryID={def.entry_id}
+                              definitionID={def.id}
+                              auth={this.props.appState.jwt}
+                            ></DefinitionForm>
+                            <Button
+                              variant="dark"
+                              size="sm" 
+                              onClick={() => {
+                                this.destroyDefinition(def.entry_id, def.id)
+                              }}>
+                              Delete Definition
+                            </Button>
+                          </ButtonToolbar>
+                        </Card.Footer> ) : ``}
+
+                        
+                    </Card>
                     <br/>
                   </div> : ''
               );

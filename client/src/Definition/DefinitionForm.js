@@ -125,7 +125,7 @@ function DefinitionForm(props) {
   const [modalShow, setModalShow] = React.useState(false);
   return (
     <ButtonToolbar>
-      <Button size="sm" variant="primary" onClick={() => setModalShow(true)}>
+      <Button size="sm" variant="dark" onClick={() => setModalShow(true)}>
         {props.buttonText}
       </Button>
 

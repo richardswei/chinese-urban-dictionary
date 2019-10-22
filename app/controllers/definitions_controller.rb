@@ -3,13 +3,13 @@ class DefinitionsController < ApplicationController
 
 	def index
 		definitions = Definition.where(entry_id: params[:entry_id])
-		render json: definitions.to_json
+    render json: definitions, :include => {:user => {:only => :username}}
 	end
 
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]
   def show
     definition = Definition.where(id: params[:id]).first
-    render json: definition.to_json
+    render json: definition, :include => {:user => {:only => :username}}
   end
 
 
