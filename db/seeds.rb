@@ -1,3 +1,16 @@
+User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', username: 'admin', role: 'admin')
+Entry.create!([
+  {phrase: "王八蛋", pinyin: "Wang2 Ba1 Dan4", view_count: 5},
+  {phrase: "六六六", pinyin: "liu liu liu", view_count: 1},
+  {phrase: "阿", pinyin: "ah", view_count: 5},
+  {phrase: "土", pinyin: "tu3", view_count: 3},
+  {phrase: "卖萌 ", pinyin: "mai4 meng2", view_count: 2},
+  {phrase: "哥们 ", pinyin: "ge1 men", view_count: 2},
+  {phrase: "也是醉了", pinyin: "ye3 shi4 zui4 le", view_count: 2},
+  {phrase: "你行你上 ", pinyin: "ni3 xing2 ni3 shang4", view_count: 4},
+  {phrase: "神 ", pinyin: "shen2", view_count: 7},
+  {phrase: "裸婚", pinyin: "luo3 hun1", view_count: 1}
+])
 Definition.create!([
   {definition: "asd", usage: "asd", usage_translation: "asd", entry_id: 2, user_id: 1},
   {definition: "1", usage: "阿斯顿", usage_translation: "1", entry_id: 2, user_id: 1},
@@ -13,20 +26,9 @@ Definition.create!([
   {definition: "a way to gently express your frustrations with someone or something that is completely unreasonable. (lit. \"also drunk\"))", usage: "一瓶水要一百块? 我也是醉了", usage_translation: "A bottle of water costs $100? I must also be drunk", entry_id: 7, user_id: 1},
   {definition: "'If you think you can do it, then do it.\" Widely used on Chinese internet forums in during heated arguments about basketball.", usage: "你知道Kobe有多努力吗？你行你上啊！", usage_translation: "Do you know how hard Kobe works? I'd like to see you try it!", entry_id: 8, user_id: 1},
   {definition: "commonly used to compliment someone on their godly skills (lit. \"god\")", usage: "最早成就股神称号的是Warren Buffet.", usage_translation: "The first person to achieve the level of “stock market god” is Warren Buffet.", entry_id: 9, user_id: 1},
-  {definition: "a marriage that is actually centered around love rather than materialism or financial security. (lit. \"naked marriage\")\")", usage: "不度蜜月的“裸婚”在各大中型城市开始流行", usage_translation: "The “naked marriages” that exclude honeymoons has become popular in major and medium-sized cities.\n", entry_id: 10, user_id: 1}
+  {definition: "a marriage that is actually centered around love rather than materialism or financial security. (lit. \"naked marriage\")\")", usage: "不度蜜月的“裸婚”在各大中型城市开始流行", usage_translation: "The “naked marriages” that exclude honeymoons has become popular in major and medium-sized cities.", entry_id: 10, user_id: 1}
 ])
-Entry.create!([
-  {phrase: "王八蛋", pinyin: "Wang2 Ba1 Dan4", view_count: 5},
-  {phrase: "六六六", pinyin: "liu liu liu", view_count: 1},
-  {phrase: "阿", pinyin: "ah", view_count: 5},
-  {phrase: "土", pinyin: "tu3", view_count: 3},
-  {phrase: "卖萌 ", pinyin: "mai4 meng2", view_count: 2},
-  {phrase: "哥们 ", pinyin: "ge1 men", view_count: 2},
-  {phrase: "也是醉了", pinyin: "ye3 shi4 zui4 le", view_count: 2},
-  {phrase: "你行你上 ", pinyin: "ni3 xing2 ni3 shang4", view_count: 4},
-  {phrase: "神 ", pinyin: "shen2", view_count: 7},
-  {phrase: "裸婚", pinyin: "luo3 hun1", view_count: 1}
-])
+
 Tag.create!([
   {name: "tag1"},
   {name: "tag2"},
@@ -99,5 +101,4 @@ Tagging.create!([
   {tag_id: 33, definition_id: 15},
   {tag_id: 34, definition_id: 15}
 ])
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', username: 'admin', role: 'admin')
 
