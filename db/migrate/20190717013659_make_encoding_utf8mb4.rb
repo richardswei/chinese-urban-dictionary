@@ -5,7 +5,10 @@ class MakeEncodingUtf8mb4 < ActiveRecord::Migration[5.2]
 
 	    execute "ALTER DATABASE `#{db.current_database}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 	    db.tables.each do |table|
-    		unless table=='ar_internal_metadata'
+    		if table=='ar_internal_metadata'
+    			puts 'skipped ALTER TABLE for ar_internal_metadata'
+    			next
+    		else
 		      execute "ALTER TABLE `#{table}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
 		      db.columns(table).each do |column|
@@ -23,6 +26,5 @@ class MakeEncodingUtf8mb4 < ActiveRecord::Migration[5.2]
 		      end
     		end
 	    end
-
 	end
 end
