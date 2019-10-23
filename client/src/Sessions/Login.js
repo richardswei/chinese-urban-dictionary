@@ -28,10 +28,11 @@ class Login extends Component {
 			body: JSON.stringify(login)
 		}).then(response => {
 			response.json()
-		})
-			.then(json => {
-				console.log(json);
-			});
+		}).then(json => {
+			console.log(json);
+		}).catch(error => {
+			console.log(error.json())
+		});
 	}
 
   render() {
