@@ -23,15 +23,13 @@ class Navigation extends Component {
 	}
 	
 	updateQuery(event) {
-		console.log(event.target.value);
 	  this.setState({
 	    query: event.target.value
 	  });
 	};
 
 	render() { 
-		console.log(this.props.appState)
-	return	<div>
+		return	<div>
 		<Navbar expand="lg" bg="dark" variant="dark">			
 			<Container>
 
@@ -78,7 +76,7 @@ class Navigation extends Component {
 
 			</Container>			
 		</Navbar>
-	</div>
+		</div>
 	}
 }
 

@@ -9,13 +9,11 @@ class NewEntry extends Component {
 	}
 
 	onChange(e) {
-    // console.log(this.state);
     if (e.target.id === 'phrase') {
       this.setState({ phrase: e.target.value });
     } else if (e.target.id === 'pinyin') {
       this.setState({ pinyin: e.target.value });
 		}
-		console.log(e.target.value)
 	}
 
 

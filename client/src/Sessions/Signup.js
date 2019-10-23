@@ -17,8 +17,6 @@ class Signup extends Component {
 	
 	handleSubmit(event) {
 			event.preventDefault();
-			console.log(this.state);
-
 			const login = {user: this.state} 
 			return fetch('/users/create', {
 					method: 'POST',
@@ -28,12 +26,8 @@ class Signup extends Component {
 					dataType: 'json',
 					body: JSON.stringify(login)
 			}).then(response => {
-				console.log(response);
 				response.json()
-			})
-				.then(json => {
-						console.log(json);
-				});
+			});
 	}      
 
 	render() {
