@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button, ButtonToolbar, Form} from 'react-bootstrap'
 
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 
 class DefinitionModal extends Component {
@@ -31,7 +31,6 @@ class DefinitionModal extends Component {
 			entry_id: this.props.entry_id,
 			tag_list: this.state.tag_list
 		};
-		console.log(this.props);
 		return fetch(`/api/entries/${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
 					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {

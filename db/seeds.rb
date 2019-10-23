@@ -1,4 +1,13 @@
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', username: 'admin', role: 'admin')
+User.create!([
+  {email: 'admin@example.com', password: 'password', password_confirmation: 'password', username: 'admin', role: 'admin'},
+  {email: 'diana@example.com', password: 'password', password_confirmation: 'password', username: 'wonderwoman', role: 'admin'},
+  {email: 'bruce@example.com', password: 'password', password_confirmation: 'password', username: 'batman', role: 'admin'},
+  {email: 'peter@example.com', password: 'password', password_confirmation: 'password', username: 'spiderman', role: 'admin'},
+  {email: 'tony@example.com', password: 'password', password_confirmation: 'password', username: 'ironman', role: 'admin'},
+  {email: 'ororo@example.com', password: 'password', password_confirmation: 'password', username: 'storm', role: 'admin'},
+  {email: 'bro@example.com', password: 'password', password_confirmation: 'password', username: 'broman', role: 'admin'},
+
+])
 Entry.create!([
   {phrase: "王八蛋", pinyin: "Wang2 Ba1 Dan4", view_count: 5},
   {phrase: "六六六", pinyin: "liu liu liu", view_count: 1},
@@ -12,21 +21,21 @@ Entry.create!([
   {phrase: "裸婚", pinyin: "luo3 hun1", view_count: 1}
 ])
 Definition.create!([
-  {definition: "asd", usage: "asd", usage_translation: "asd", entry_id: 2, user_id: 1},
-  {definition: "1", usage: "阿斯顿", usage_translation: "1", entry_id: 2, user_id: 1},
-  {definition: "asshole", usage: "他是个王八蛋.", usage_translation: "he IS OLE", entry_id: 1, user_id: 1},
-  {definition: "wowqow", usage: "阿达山大", usage_translation: "asd1", entry_id: 1, user_id: 1},
-  {definition: "asdasda", usage: "阿斯达阿达山大的阿斯达的", usage_translation: "asdad1", entry_id: 1, user_id: 1},
-  {definition: "an asshole", usage: "他是一个王八蛋", usage_translation: "He is a an asshole", entry_id: 3, user_id: 1},
-  {definition: "incredibly elite", usage: "他真六六六", usage_translation: "He is really elite", entry_id: 3, user_id: 1},
-  {definition: "adad", usage: "阿斯顿", usage_translation: "adad", entry_id: 3, user_id: 1},
-  {definition: "when it is used as an adjective, it means “unfashionable” or \"basic.\"", usage: "那件衬衫好土，不买它！", usage_translation: "That shirt is so basic, don’t buy it!", entry_id: 4, user_id: 1},
-  {definition: "to purposefully pretend to be cute", usage: "拍张自拍，卖萌一下!", usage_translation: "Taking a selfie to show off my cuteness!", entry_id: 5, user_id: 1},
-  {definition: "bros", usage: "Chang是我高中时候的哥们.", usage_translation: "Chang is my bro from high school", entry_id: 6, user_id: 1},
-  {definition: "a way to gently express your frustrations with someone or something that is completely unreasonable. (lit. \"also drunk\"))", usage: "一瓶水要一百块? 我也是醉了", usage_translation: "A bottle of water costs $100? I must also be drunk", entry_id: 7, user_id: 1},
-  {definition: "'If you think you can do it, then do it.\" Widely used on Chinese internet forums in during heated arguments about basketball.", usage: "你知道Kobe有多努力吗？你行你上啊！", usage_translation: "Do you know how hard Kobe works? I'd like to see you try it!", entry_id: 8, user_id: 1},
-  {definition: "commonly used to compliment someone on their godly skills (lit. \"god\")", usage: "最早成就股神称号的是Warren Buffet.", usage_translation: "The first person to achieve the level of “stock market god” is Warren Buffet.", entry_id: 9, user_id: 1},
-  {definition: "a marriage that is actually centered around love rather than materialism or financial security. (lit. \"naked marriage\")\")", usage: "不度蜜月的“裸婚”在各大中型城市开始流行", usage_translation: "The “naked marriages” that exclude honeymoons has become popular in major and medium-sized cities.", entry_id: 10, user_id: 1}
+  {definition: "asd", usage: "asd", usage_translation: "asd", entry_id: 2, user_id: 4},
+  {definition: "1", usage: "阿斯顿", usage_translation: "1", entry_id: 2, user_id: 4},
+  {definition: "asshole", usage: "他是个王八蛋.", usage_translation: "he IS OLE", entry_id: 1, user_id: 4},
+  {definition: "wowqow", usage: "阿达山大", usage_translation: "asd1", entry_id: 1, user_id: 4},
+  {definition: "asdasda", usage: "阿斯达阿达山大的阿斯达的", usage_translation: "asdad1", entry_id: 1, user_id: 4},
+  {definition: "an asshole", usage: "他是一个王八蛋", usage_translation: "He is a an asshole", entry_id: 3, user_id: 4},
+  {definition: "incredibly elite", usage: "他真六六六", usage_translation: "He is really elite", entry_id: 3, user_id: 4},
+  {definition: "adad", usage: "阿斯顿", usage_translation: "adad", entry_id: 3, user_id: 4},
+  {definition: "when it is used as an adjective, it means “unfashionable” or \"basic.\"", usage: "那件衬衫好土，不买它！", usage_translation: "That shirt is so basic, don’t buy it!", entry_id: 4, user_id: 4},
+  {definition: "to purposefully pretend to be cute", usage: "拍张自拍，卖萌一下!", usage_translation: "Taking a selfie to show off my cuteness!", entry_id: 5, user_id: 4},
+  {definition: "bros", usage: "Chang是我高中时候的哥们.", usage_translation: "Chang is my bro from high school", entry_id: 6, user_id: 4},
+  {definition: "a way to gently express your frustrations with someone or something that is completely unreasonable. (lit. \"also drunk\"))", usage: "一瓶水要一百块? 我也是醉了", usage_translation: "A bottle of water costs $100? I must also be drunk", entry_id: 7, user_id: 4},
+  {definition: "'If you think you can do it, then do it.\" Widely used on Chinese internet forums in during heated arguments about basketball.", usage: "你知道Kobe有多努力吗？你行你上啊！", usage_translation: "Do you know how hard Kobe works? I'd like to see you try it!", entry_id: 8, user_id: 4},
+  {definition: "commonly used to compliment someone on their godly skills (lit. \"god\")", usage: "最早成就股神称号的是Warren Buffet.", usage_translation: "The first person to achieve the level of “stock market god” is Warren Buffet.", entry_id: 9, user_id: 4},
+  {definition: "a marriage that is actually centered around love rather than materialism or financial security. (lit. \"naked marriage\")\")", usage: "不度蜜月的“裸婚”在各大中型城市开始流行", usage_translation: "The “naked marriages” that exclude honeymoons has become popular in major and medium-sized cities.", entry_id: 10, user_id: 4}
 ])
 
 Tag.create!([
