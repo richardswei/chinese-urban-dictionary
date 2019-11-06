@@ -13,12 +13,10 @@ export function authenticateUser(email, password) {
               "Accept": "*/*"
           },
           body: JSON.stringify(login)
-        }).then(function (response) {
-        return response.json();
-      }).then(function (json) { return json.jwt })
-      .catch(function (error) {
-        return undefined
-      })
+        })
+      .then(function (response) { return response.json(); })
+      .then(function (json) { return json.jwt })
+      .catch(function (error) { return ; })
 	}
 	
 export function getCurrentUser(jwt) {
