@@ -84,8 +84,7 @@ class Entry extends Component {
           entry ? <Jumbotron>
             <h1>{entry.phrase}</h1>
             <h3>{entry.pinyin}</h3>
-            <div>{entry.view_count}</div>
-            <div>{entry.updated_at}</div>
+            <div>{entry.view_count} Views</div>
             { this.props.appState.jwt && 
               <DefinitionForm 
                 buttonText="Add Definition"
@@ -93,75 +92,70 @@ class Entry extends Component {
                 auth={this.props.appState.jwt}
               ></DefinitionForm>
             }
+            <div className="text-muted">Created on {new Date().toDateString(entry.updated_at+'')}</div>
           </Jumbotron> : 
           <div></div>}
         <div>
-        {
-          definitions && definitions.length ? 
-            definitions.map((def, i) => {
-              return (
-                def.tags ? 
-                  <div key={i}>
-                    <Card >
-                      <Card.Header as="h5">
-                        <strong>Definition: </strong>{def.definition}
-                        
-                      </Card.Header>
-                      <Card.Body>
-                        <p><strong>Usage: </strong>{def.usage}</p>
-                        <p><strong>Translation: </strong>{def.usage_translation}</p>
-                        <div><strong>Tags: </strong>
-                        <br/>
-                          {def.tags.map((tag_item, e) => {
-                            return (<Button 
-                              as={Link}
-                              to={`/tag/${tag_item.id}`}
-                              size="sm"
-                              variant='light'
-                              key={tag_item.name}>
-                              {tag_item.name}
-                            </Button>)
-                          })}
-                        </div>
+        {definitions && definitions.length ? 
+          definitions.map((def, i) => {
+            return (
+              def.tags ? 
+                <div key={i}>
+                  <Card bg='light'>
+                    <Card.Header as="h5" >
+                      <strong>Definition: </strong>{def.definition} 
+                    </Card.Header>
+                    <Card.Body>
+                      <p><strong>Usage: </strong>{def.usage}</p>
+                      <p><strong>Translation: </strong>{def.usage_translation}</p>
+                      <div><strong>Tags: </strong>
+                      <br/>
+                        {def.tags.map((tag_item, e) => {
+                          return (<Button
+                            as={Link}
+                            to={`/tag/${tag_item.id}`}
+                            size="sm"
+                            variant='dark'
+                            key={tag_item.name}>
+                            {tag_item.name}
+                          </Button>)
+                        })}
+                      </div>
+                    </Card.Body>
+
+                    {def.user_id === this.props.appState.user_id ?
+                      (<Card.Footer >
+                        <ButtonToolbar>
+                          <DefinitionForm
+                            updateState={this.updateState}
+                            buttonText="Edit Definition"
+                            defaultDefinition={def.definition}
+                            defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }
+                            defaultUsage={def.usage}
+                            defaultUsageTranslation={def.usage_translation}
+                            entryID={def.entry_id}
+                            definitionID={def.id}
+                            auth={this.props.appState.jwt}
+                          ></DefinitionForm>
+                          <Button
+                            variant="danger"
+                            size="sm" 
+                            onClick={() => {
+                              this.destroyDefinition(def.entry_id, def.id)
+                            }}>
+                            Delete Definition
+                          </Button>
+                        </ButtonToolbar>
                         <div className="text-muted">Last updated by 
                           <strong> {
                             def.user ? def.user.username: '[deleted user]'
                           } </strong>
-                        on {def.updated_at}</div>
-                      </Card.Body>
-
-                      {def.user_id === this.props.appState.user_id ?
-                        (<Card.Footer>
-                          <ButtonToolbar>
-                            <DefinitionForm
-                              updateState={this.updateState}
-                              buttonText="Edit Definition"
-                              defaultDefinition={def.definition}
-                              defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }
-                              defaultUsage={def.usage}
-                              defaultUsageTranslation={def.usage_translation}
-                              entryID={def.entry_id}
-                              definitionID={def.id}
-                              auth={this.props.appState.jwt}
-                            ></DefinitionForm>
-                            <Button
-                              variant="dark"
-                              size="sm" 
-                              onClick={() => {
-                                this.destroyDefinition(def.entry_id, def.id)
-                              }}>
-                              Delete Definition
-                            </Button>
-                          </ButtonToolbar>
-                        </Card.Footer> ) : ``}
-
-                        
+                        on {new Date().toDateString(def.updated_at+'')}</div>
+                      </Card.Footer> ) : ``}
                     </Card>
-                    <br/>
                   </div> : ''
-              );
-            }) : <div></div>         
-        }
+                );}) : <div></div>         
+          }
         </div>
     </div>)
   }

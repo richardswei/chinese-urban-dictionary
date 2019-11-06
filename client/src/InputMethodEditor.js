@@ -1,12 +1,11 @@
-import React from 'react';
-import {Component} from 'react';
-// import './index.css';
+import React, {Component} from 'react';
+
 
 class InputMethodEditor extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			inputText: this.props.defaultInput ? this.props.defaultInput : "",
+			inputText: this.props.defaultValue ? this.props.defaultValue : "",
 			queryText: "",
 			caretPositions: [0,0],
 			results: [],
@@ -54,7 +53,7 @@ class InputMethodEditor extends Component {
 		this.getCharacters(event.target.value);
 	}
 	handleInputChange(event) {
-		this.setState({inputText: event.target.value});
+	  this.setState({inputText: event.target.value});
 	}
 	handleInputKeyDown(event) {
 		if (event.ctrlKey || event.which<65 || event.which>90){
@@ -100,6 +99,7 @@ class InputMethodEditor extends Component {
 						onKeyDown={this.handleInputKeyDown}
 						onSelect={this.handleInputSelect}
 						ref = {this.MainInputFieldRef}
+						className = {this.props.inputClass}
 					></textarea>)	: 	
 					(<input 
 						id={this.props.idName}
@@ -109,6 +109,7 @@ class InputMethodEditor extends Component {
 						onKeyDown={this.handleInputKeyDown}
 						onSelect={this.handleInputSelect}
 						ref = {this.MainInputFieldRef}
+						className = {this.props.inputClass}
 					></input>)
 				}
 				{!this.state.imeHidden && 

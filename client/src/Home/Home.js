@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Navbar, Card, CardColumns, Jumbotron, Container, Row, Col, Tooltip, OverlayTrigger} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import { Card, CardColumns, Jumbotron, Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const headerAdStyle = {
 	opacity: 0.4,
@@ -21,13 +21,12 @@ class Home extends Component {
 	getTrending() {
 		this.fetch('/api/entries/get_trending')
 			.then(entries => {
-				console.log(entries)
 				this.setState({entries: entries.map((entry) => {
 					return {
 						id: entry.id,
 						pinyin: entry.pinyin,
 						phrase: entry.phrase,
-						definition: entry.definitions[0].definition
+						definition: entry.definitions[0]? entry.definitions[0].definition : '[no definitions]'
 					}
 				})})
 			});
@@ -69,7 +68,7 @@ class Home extends Component {
 														</Card.Header>
 														<Card.Body>
 															<Card.Subtitle>
-																{entry.pinyin}
+																( {entry.pinyin} )
 															</Card.Subtitle>
 															<Card.Text>
 																{entry.definition}

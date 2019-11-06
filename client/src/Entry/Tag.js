@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Jumbotron, Card} from 'react-bootstrap';
+import {Jumbotron, Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 class Tag extends Component {
@@ -45,9 +45,14 @@ class Tag extends Component {
             </Jumbotron>
             {this.state.definitions.map((definition) => {
               return (<Card 
-                key={definition.id}
-                as={Link}
-                to={`/entries/${definition.entry_id}`}>
+                  bg='light'
+                  text='dark'
+                  className='cardLink'
+                  style={{ width: '50vw' }} 
+                  key={definition.id}
+                  as={Link}
+                  to={`/entries/${definition.entry_id}`}>
+                  
                 <Card.Body>
                   <Card.Title>{definition.entry.phrase} </Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">({definition.entry.pinyin})</Card.Subtitle>

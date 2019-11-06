@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button, ButtonToolbar, Form} from 'react-bootstrap'
-
 import {withRouter} from 'react-router-dom'
+import InputMethodEditor from '../InputMethodEditor'
 
 
 class DefinitionModal extends Component {
@@ -11,6 +11,7 @@ class DefinitionModal extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.postDefinition = this.postDefinition.bind(this);
 		this.onSave = this.onSave.bind(this);
+		this.usageInput = React.createRef();
 	}
 
 	componentDidMount(){
@@ -26,7 +27,7 @@ class DefinitionModal extends Component {
 	postDefinition() {
 		const defObj = {
 			definition: this.state.definition,
-			usage: this.state.usage,
+			usage: this.usageInput.current.state.inputText,
 			usage_translation: this.state.usage_translation,
 			entry_id: this.props.entry_id,
 			tag_list: this.state.tag_list
@@ -89,7 +90,11 @@ class DefinitionModal extends Component {
 	          <Form.Group>
 	            <Form.Label>Usage</Form.Label>
 	            <Form.Control
-	            	as="textarea" rows="3"
+	            	as={InputMethodEditor}
+	  						ref={this.usageInput}
+	  						inputClass="form-control"
+	            	textArea={true}
+	            	rows="3"
 	            	defaultValue={this.props.default_usage}
 	            	onChange={this.onChange} 
 	            	id='usage'  />
@@ -124,11 +129,10 @@ const DefinitionModalWithRouter = withRouter(DefinitionModal);
 function DefinitionForm(props) {
   const [modalShow, setModalShow] = React.useState(false);
   return (
-    <ButtonToolbar>
-      <Button size="sm" variant="dark" onClick={() => setModalShow(true)}>
+    <div>
+      <Button size="sm" variant="warning" onClick={() => setModalShow(true)}>
         {props.buttonText}
       </Button>
-
       <DefinitionModalWithRouter
       	entry_id={props.entryID}
       	definition_id={props.definitionID}
@@ -140,7 +144,7 @@ function DefinitionForm(props) {
         onHide={() => setModalShow(false)}
         auth={props.auth}
       />
-    </ButtonToolbar>
+    </div>
   );
 }
 

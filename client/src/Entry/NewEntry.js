@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {Form, Jumbotron, Button} from 'react-bootstrap';
+import InputMethodEditor from '../InputMethodEditor'
 
 class NewEntry extends Component {
 	constructor(props) {
 		super(props);
 		this.state={};
 		this.onChange = this.onChange.bind(this);
+		this.phraseInput = React.createRef();
+
 	}
 
 	onChange(e) {
@@ -18,11 +21,12 @@ class NewEntry extends Component {
 
 
 	postEntry = () => {
+		console.log(this.phraseInput);
 		const entryObj = {
-			phrase: this.state.phrase,
+			phrase: this.phraseInput.current.state.inputText,
 			pinyin: this.state.pinyin
 		};
-		return this.state.phrase && this.state.pinyin ? 
+		return entryObj.phrase && entryObj.pinyin ? 
 			fetch(`/api/entries/`,{
 					method: 'POST',
 					headers: {
@@ -42,8 +46,6 @@ class NewEntry extends Component {
 		: alert('Fields cannot be empty!')
 	}
 
-	componentDidMount() {
-  }
   render() {
   	return (
   		<Jumbotron>
@@ -51,11 +53,21 @@ class NewEntry extends Component {
   			<Form>
   				<Form.Group>
   					<Form.Label>Phrase</Form.Label>
-  					<Form.Control onChange={this.onChange} id='phrase'></Form.Control>
+  					<Form.Control
+  						as={InputMethodEditor}
+  						numResults={5}
+  						type="text"
+  						ref={this.phraseInput}
+  						id='phrase'
+  						inputClass="form-control"
+  					></Form.Control>
   				</Form.Group>
   				<Form.Group>
   					<Form.Label>Pinyin</Form.Label>	
-  					<Form.Control onChange={this.onChange} id='pinyin'></Form.Control>	
+  					<Form.Control
+  						onChange={this.onChange}
+  						id='pinyin'
+  					></Form.Control>	
   				</Form.Group>
   				<Button onClick={this.postEntry} >Save</Button>
   			</Form>

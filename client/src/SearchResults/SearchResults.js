@@ -1,6 +1,5 @@
-
 import React, {Component} from 'react'
-import { Card,Jumbotron } from 'react-bootstrap'
+import { Card, Jumbotron } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 
 class SearchResults extends Component {
@@ -48,7 +47,7 @@ class SearchResults extends Component {
 		  						text='dark'
 		  						className='cardLink'
 									key={result.entry.id} 
-									style={{ width: '18rem' }} 
+                  style={{ width: '50vw' }} 
 									as={Link} 
 									to={`/entries/${result.entry.id}`}
 								>

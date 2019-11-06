@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar,Container} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
@@ -14,7 +14,6 @@ import NotFound from '../NotFound/NotFound.js'
 import Navigation from '../Navigation/Navigation.js'
 import SearchResults from '../SearchResults/SearchResults.js'
 import NewEntry from '../Entry/NewEntry.js'
-import Login from '../Sessions/Login.js'
 import Signup from '../Sessions/Signup.js'
 import AuthSignIn from '../Sessions/AuthSignIn.js'
 import AuthSignOut from '../Sessions/AuthSignOut.js'

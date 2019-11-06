@@ -1,15 +1,14 @@
 import React, {Component} from 'react'
 import {Container, Navbar, Nav, NavDropdown, FormControl, Button, Form} from 'react-bootstrap'
 import { Link, withRouter  } from "react-router-dom";
-
+import InputMethodEditor from '../InputMethodEditor'
 
 class Navigation extends Component {
 
 	constructor(props) {
 	  super(props);
-
+    this.searchInput = React.createRef();
 	  this.handleSubmit = this.handleSubmit.bind(this)
-	  this.updateQuery = this.updateQuery.bind(this)
 	}
 
 	handleSubmit(event) {
@@ -17,16 +16,10 @@ class Navigation extends Component {
 		this.props.history.push({
       pathname: "/searchresults",
       state: {
-        query: this.state.query
+        query: this.searchInput.current.state.inputText
       }
     });
 	}
-	
-	updateQuery(event) {
-	  this.setState({
-	    query: event.target.value
-	  });
-	};
 
 	render() { 
 		return	<div>
@@ -41,22 +34,26 @@ class Navigation extends Component {
 
 					<Nav className="mr-auto">
 						<Form inline onSubmit={this.handleSubmit}>
-							<FormControl 
-							type="text"
-							placeholder="Search" 
-							className="mr-sm-2" 
-							id="search" 
-							onChange={this.updateQuery} />
+							<FormControl
+								as={InputMethodEditor}
+								numResults={5}
+								type="text"
+								placeholder="Search" 
+								className="mr-sm-2" 
+								inputClass="form-control"
+								id="search"
+								ref={this.searchInput}
+							/>
 							<Button variant="light" type="submit">Search</Button>
 						</Form>
 					</Nav>
 					<Nav>
 						<Nav.Link as={Link} to="/NewEntry">New Entry</Nav.Link>
-						<NavDropdown alignRight title="Account" id="collasible-nav-dropdown">
+						<NavDropdown alignRight title={"Account: "+this.props.appState.username || "Account"} id="collasible-nav-dropdown">
 							{!this.props.appState.jwt &&
 								<div>
-								<NavDropdown.Item as={Link} to="/sign-in">Log In</NavDropdown.Item>
-								<NavDropdown.Item as={Link} to="/Signup">Sign Up</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to="/sign-in">Log In</NavDropdown.Item>
+									<NavDropdown.Item as={Link} to="/Signup">Sign Up</NavDropdown.Item>
 								</div>
 							}
 
