@@ -10,10 +10,7 @@ export function authenticateUser(email, password) {
           method: 'POST',
           "headers": {
               "Content-Type": "application/json",
-              "Accept": "*/*",
-              "Cache-Control": "no-cache",
-              "Host": "localhost:3001",
-              "Accept-Encoding": "gzip, deflate",
+              "Accept": "*/*"
           },
           body: JSON.stringify(login)
         }).then(function (response) {
