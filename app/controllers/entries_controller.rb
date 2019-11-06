@@ -24,7 +24,7 @@ class EntriesController < ApplicationController
 
   def get_trending
     @results = Entry.order('view_count DESC').limit(10)
-    render json: @results.to_json
+    render json: @results, :include => {:definitions => {:only => :definition}}
   end
 
   def search

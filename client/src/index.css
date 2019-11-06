@@ -28,3 +28,6 @@ h1.brand {
   padding: 4rem 2rem;
 }
 
+a.cardLink {
+  text-decoration: none
+}

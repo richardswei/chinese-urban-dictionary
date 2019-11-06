@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container} from 'react-bootstrap';
+import {Navbar,Container} from 'react-bootstrap';
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
