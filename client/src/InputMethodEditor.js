@@ -56,7 +56,7 @@ class InputMethodEditor extends Component {
 	  this.setState({inputText: event.target.value});
 	}
 	handleInputKeyDown(event) {
-		if (event.ctrlKey || event.which<65 || event.which>90){
+		if (this.props.ime_off || event.ctrlKey || event.which<65 || event.which>90){
 			return;
 		}
 		this.showIME();
@@ -82,6 +82,10 @@ class InputMethodEditor extends Component {
 				.then( response => response.json() )
 				.then( json => {
 					this.setState({results: json[1][0][1]});
+				})
+				.catch( error =>  {
+					const results = ['--No Results--'] ;
+					this.setState({results: results});
 				});
 		}
 	}
@@ -152,7 +156,7 @@ class	ImeBubble extends Component {
 				style={{
 					position:'absolute',
 					zIndex: '99',
-					backgroundColor: 'gray',
+					backgroundColor: 'white',
 					textAlign: 'left',
 				}}>
 				<input 

@@ -55,6 +55,7 @@ class NewEntry extends Component {
   					<Form.Label>Phrase</Form.Label>
   					<Form.Control
   						as={InputMethodEditor}
+  						ime_off = {this.props.appState.ime_off}
   						numResults={5}
   						type="text"
   						ref={this.phraseInput}

@@ -122,12 +122,12 @@ class Entry extends Component {
                         })}
                       </div>
                     </Card.Body>
-
                     {def.user_id === this.props.appState.user_id ?
                       (<Card.Footer >
                         <ButtonToolbar>
                           <DefinitionForm
                             updateState={this.updateState}
+                            ime_off = {this.props.appState.ime_off}
                             buttonText="Edit Definition"
                             defaultDefinition={def.definition}
                             defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }

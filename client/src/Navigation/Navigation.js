@@ -28,6 +28,7 @@ class Navigation extends Component {
 
 			<Navbar.Brand as={Link} to="/">
 				<h1 className='brand'>CHANG'S SLANG</h1>
+				<div className='brand' style={{'fontSize':'1rem'}}>The Chinese Urban Dictionary</div>
 			</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Navbar.Collapse id="responsive-navbar-nav">
@@ -36,6 +37,7 @@ class Navigation extends Component {
 						<Form inline onSubmit={this.handleSubmit}>
 							<FormControl
 								as={InputMethodEditor}
+								ime_off = {this.props.appState.ime_off}
 								numResults={5}
 								type="text"
 								placeholder="Search" 
@@ -49,7 +51,7 @@ class Navigation extends Component {
 					</Nav>
 					<Nav>
 						<Nav.Link as={Link} to="/NewEntry">New Entry</Nav.Link>
-						<NavDropdown alignRight title={"Account: "+this.props.appState.username || "Account"} id="collasible-nav-dropdown">
+						<NavDropdown alignRight title={"Logged in as: "+this.props.appState.username || "Account"} id="collasible-nav-dropdown">
 							{!this.props.appState.jwt &&
 								<div>
 									<NavDropdown.Item as={Link} to="/sign-in">Log In</NavDropdown.Item>

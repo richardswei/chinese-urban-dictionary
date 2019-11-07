@@ -62,7 +62,7 @@ class SearchResults extends Component {
 	  					)
 		  			})
 		  		}</div>
-		  			: <Card><Card.Body>NO RESULTS FOUND</Card.Body></Card>
+		  			: <Card><Card.Body>NO RESULTS FOUND FOR: "{this.props.location.state.query}"</Card.Body></Card>
 		}
 		</div>
 	}

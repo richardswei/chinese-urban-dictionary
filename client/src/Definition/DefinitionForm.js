@@ -91,6 +91,7 @@ class DefinitionModal extends Component {
 	            <Form.Label>Usage</Form.Label>
 	            <Form.Control
 	            	as={InputMethodEditor}
+	            	ime_off = {this.props.ime_off}
 	  						ref={this.usageInput}
 	  						inputClass="form-control"
 	            	textArea={true}

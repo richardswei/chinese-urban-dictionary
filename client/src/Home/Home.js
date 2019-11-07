@@ -50,7 +50,7 @@ class Home extends Component {
 					<Row>
 						<Col >
 								<Jumbotron fluid>
-									<h3>TRENDERS :  {date}</h3>
+									<h3>TRENDING TODAY :  {date}</h3>
 									<br/>
 									<div className='trending'>
 										{entries && entries.length 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container} from 'react-bootstrap';
+import { Form, Container } from 'react-bootstrap';
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
@@ -27,6 +27,15 @@ const Background = {
   backgroundSize: 'cover', 
   minHeight: '100vh',
 };
+const ToggleSwitch = {
+  backgroundColor: 'white',
+  position: 'fixed',
+  bottom: '0px',
+  right: '0px',
+  padding: ".5rem",
+  color: "black",
+  borderRadius: "1rem",
+}
 
 class App extends Component {
   
@@ -45,6 +54,7 @@ class App extends Component {
       email: undefined,
       jwt: undefined,
       user_id: undefined,
+      ime_off: true
     }
   }
 
@@ -53,6 +63,14 @@ class App extends Component {
     this.state = this.defaultState()
     this.propagateSignIn = this.propagateSignIn.bind(this)
     this.propagateSignOut = this.propagateSignOut.bind(this)
+    this.handleIMEToggle = this.handleIMEToggle.bind(this)
+  }
+
+  handleIMEToggle(event) {
+    console.log(event.target.checked)
+    this.setState({
+      ime_off: !event.target.checked
+    })
   }
 
   propagateSignIn(jwt, history = undefined) {
@@ -173,6 +191,14 @@ class App extends Component {
             </Switch>
           </Container>
         </Router>
+        <Form style={ToggleSwitch}>
+          <Form.Check 
+            type="switch"
+            id="ime-switch"
+            label="Use IME"
+            onChange={this.handleIMEToggle}
+          />
+        </Form>
       </div>
     );
   }
