@@ -4,6 +4,10 @@ class ApplicationController < ActionController::API
   # before_action :authenticate_user
 
   protected
+
+  def fallback_index_html
+    render :file => 'public/index.html'
+  end
   
   # Method for checking if current_user is admin or not.
   def authorize_as_admin
