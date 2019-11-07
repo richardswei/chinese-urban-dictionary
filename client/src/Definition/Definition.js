@@ -3,9 +3,6 @@ import {Link} from 'react-router-dom';
 import {Button, Card} from 'react-bootstrap';
 
 class Definition extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const definition={
       updated_at: this.props.updated_at,
@@ -48,6 +45,7 @@ class Definition extends Component {
                   }
               </Card.Footer>
             </Card>
+            <br/>
           </div>
   }
 }

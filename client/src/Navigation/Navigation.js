@@ -51,7 +51,7 @@ class Navigation extends Component {
 					</Nav>
 					<Nav>
 						<Nav.Link as={Link} to="/NewEntry">New Entry</Nav.Link>
-						<NavDropdown alignRight title={"Logged in as: "+this.props.appState.username || "Account"} id="collasible-nav-dropdown">
+						<NavDropdown alignRight title={"Account"} id="collasible-nav-dropdown">
 							{!this.props.appState.jwt &&
 								<div>
 									<NavDropdown.Item as={Link} to="/sign-in">Log In</NavDropdown.Item>

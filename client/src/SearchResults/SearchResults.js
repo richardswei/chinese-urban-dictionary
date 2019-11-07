@@ -43,8 +43,8 @@ class SearchResults extends Component {
 		  		<div>{
 		  			this.state.searchResults.map((result) => {
 		  				return ( <Card 
-		  						bg='light'
-		  						text='dark'
+		  						bg='dark'
+		  						text='white'
 		  						className='cardLink'
 									key={result.entry.id} 
                   style={{ width: '50vw' }} 
