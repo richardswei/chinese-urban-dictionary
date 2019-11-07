@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  require 'chinese_pinyin'
   before_action :authenticate_user,  only: [:create]
 
   def index
@@ -9,7 +10,7 @@ class EntriesController < ApplicationController
   def create 
     @entry = Entry.new(
       phrase: params[:phrase],
-      pinyin: params[:pinyin],
+      pinyin: Pinyin.t(params[:phrase], tonemarks: true),
     )
     @entry.save
     render json: @entry.to_json

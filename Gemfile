@@ -49,3 +49,9 @@ gem 'jwt'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# convert simplified charaacters to traftional in the backend
+gem 'tradsim'
+# auto generate the pinyin
+gem 'chinese_pinyin'
+
