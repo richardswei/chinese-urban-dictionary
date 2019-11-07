@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Modal, Button, ButtonToolbar, Form} from 'react-bootstrap'
+import {Modal, Button, Form} from 'react-bootstrap'
 import {withRouter} from 'react-router-dom'
 import InputMethodEditor from '../InputMethodEditor'
 
@@ -32,6 +32,15 @@ class DefinitionModal extends Component {
 			entry_id: this.props.entry_id,
 			tag_list: this.state.tag_list
 		};
+		if (!defObj.definition) {
+			return alert("Definition cannot be empty!")
+		} 
+		else if (!defObj.usage) {
+			return alert("Usage cannot be empty!")
+		} 
+		else if (!defObj.usage_translation) {
+			return alert("Usage Translation cannot be empty!")
+		} 
 		return fetch(`/api/entries/${this.props.entry_id}/definitions/${this.props.definition_id ? this.props.definition_id : ''}`,{
 					method: this.props.definition_id ? 'PUT' : 'POST',
 					headers: {

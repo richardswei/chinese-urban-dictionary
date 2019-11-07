@@ -9,6 +9,7 @@ import { Redirect } from "react-router-dom";
 import About from '../About/About.js';
 import Home from '../Home/Home.js';
 import Entry from '../Entry/Entry.js';
+import EditDefinition from '../Definition/EditDefinition.js';
 import Tag from '../Entry/Tag.js';
 import NotFound from '../NotFound/NotFound.js'
 import Navigation from '../Navigation/Navigation.js'
@@ -150,6 +151,12 @@ class App extends Component {
                 render={
                   (routeProps) =>
                     <Tag {...routeProps} appState={this.state}/> 
+                } 
+              />
+              <Route exact path="/editDefinition" 
+                render={
+                  (routeProps) =>
+                    <EditDefinition {...routeProps} appState={this.state}/> 
                 } 
               />
               <Route path="/searchresults" 

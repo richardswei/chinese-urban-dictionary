@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Button, ButtonToolbar, Jumbotron, Card} from 'react-bootstrap';
-import DefinitionForm from '../Definition/DefinitionForm';
+import Definition from '../Definition/Definition';
 
 class Entry extends Component {
   constructor(props) {
@@ -23,14 +23,18 @@ class Entry extends Component {
   }
 
   getEntry(id) {
-    this.fetch(`/api/entries/${id}`)
+    return fetch(`/api/entries/${id}`)
+      .then(response => response.json())
       .then(entry => {
         this.setState({entry: entry});
-      });
+      })
+      .catch(error => console.log(error))
+;
   }
 
   getDefinitions(entry_id) {
-    this.fetch(`/api/entries/${entry_id}/definitions`)
+    return fetch(`/api/entries/${entry_id}/definitions`)
+      .then(response => response.json())
       .then(definitions => {
         definitions.forEach(definition => {
           this.setState({ [`definition-${definition.id}`]: definition});
@@ -38,17 +42,22 @@ class Entry extends Component {
           this.setState({definitionStateProps: this.state.definitionStateProps
               .concat([`definition-${definition.id}`])});
         });
-      });
+      })
+      .catch(error => console.log(error))
+;
   }
   
   getTags(entry_id, definition_id) {
-    this.fetch(`/api/entries/${entry_id}/definitions/${definition_id}/get_tags`)
+    return fetch(`/api/entries/${entry_id}/definitions/${definition_id}/get_tags`)
+      .then(response => response.json())
       .then(tag_obj => {
         this.setState({
           [`definition-${definition_id}`]: 
             Object.assign(this.state[`definition-${definition_id}`], {tags: tag_obj}) 
         });
-      });
+      })
+      .catch(error => console.log(error))
+;
   }
 
   destroyDefinition(entry_id, definition_id) {
@@ -79,84 +88,39 @@ class Entry extends Component {
     const entry = this.state.entry;
     const definitions = this.state.definitionStateProps
       .map((def, i) => this.state[def] );
+    const linkTo = { 
+      pathname: "/editDefinition", 
+      params: {
+        entry_id: entry.id,
+        entry_phrase: entry.phrase,
+        entry_pinyin: entry.pinyin,
+      }
+    };
   	return (<div>
-        {
-          entry ? <Jumbotron>
-            <h1>{entry.phrase}</h1>
-            <h3>{entry.pinyin}</h3>
-            <div>{entry.view_count} Views</div>
-            { this.props.appState.jwt && 
-              <DefinitionForm 
-                buttonText="Add Definition"
-                entryID={entry.id}
-                auth={this.props.appState.jwt}
-              ></DefinitionForm>
-            }
-            <div className="text-muted">Created on {new Date().toDateString(entry.updated_at+'')}</div>
-          </Jumbotron> : 
-          <div></div>}
-        <div>
+        { entry ? <Jumbotron>
+          <h1>{entry.phrase}</h1>
+          <h3>{entry.pinyin}</h3>
+          <div>{entry.view_count} Views</div>
+          { this.props.appState.jwt && 
+            <Button as={Link} to={linkTo} >New Definition</Button>
+          }
+          <div className="text-muted">Created on {new Date(entry.updated_at).toDateString()}</div>
+        </Jumbotron> : <div></div>}
         {definitions && definitions.length ? 
           definitions.map((def, i) => {
-            return (
-              def.tags ? 
-                <div key={i}>
-                  <Card bg='light'>
-                    <Card.Header as="h5" >
-                      <strong>Definition: </strong>{def.definition} 
-                    </Card.Header>
-                    <Card.Body>
-                      <p><strong>Usage: </strong>{def.usage}</p>
-                      <p><strong>Translation: </strong>{def.usage_translation}</p>
-                      <div><strong>Tags: </strong>
-                      <br/>
-                        {def.tags.map((tag_item, e) => {
-                          return (<Button
-                            as={Link}
-                            to={`/tag/${tag_item.id}`}
-                            size="sm"
-                            variant='dark'
-                            key={tag_item.name}>
-                            {tag_item.name}
-                          </Button>)
-                        })}
-                      </div>
-                    </Card.Body>
-                    {def.user_id === this.props.appState.user_id ?
-                      (<Card.Footer >
-                        <ButtonToolbar>
-                          <DefinitionForm
-                            updateState={this.updateState}
-                            ime_off = {this.props.appState.ime_off}
-                            buttonText="Edit Definition"
-                            defaultDefinition={def.definition}
-                            defaultTagList={def.tags.map((tag_item) => tag_item.name ).join(', ') }
-                            defaultUsage={def.usage}
-                            defaultUsageTranslation={def.usage_translation}
-                            entryID={def.entry_id}
-                            definitionID={def.id}
-                            auth={this.props.appState.jwt}
-                          ></DefinitionForm>
-                          <Button
-                            variant="danger"
-                            size="sm" 
-                            onClick={() => {
-                              this.destroyDefinition(def.entry_id, def.id)
-                            }}>
-                            Delete Definition
-                          </Button>
-                        </ButtonToolbar>
-                        <div className="text-muted">Last updated by 
-                          <strong> {
-                            def.user ? def.user.username: '[deleted user]'
-                          } </strong>
-                        on {new Date().toDateString(def.updated_at+'')}</div>
-                      </Card.Footer> ) : ``}
-                    </Card>
-                  </div> : ''
-                );}) : <div></div>         
-          }
-        </div>
+            return def.tags && <Definition key={i}
+              entry={entry}
+              updated_at = {def.updated_at}
+              id = {def.id}
+              tags = {def.tags}
+              definition = {def.definition}
+              user = {def.user.username}
+              usage = {def.usage}
+              usage_translation = {def.usage_translation}
+              appState = {this.props.appState}
+            >
+            </Definition>
+          }) : <div></div> }
     </div>)
   }
 }
