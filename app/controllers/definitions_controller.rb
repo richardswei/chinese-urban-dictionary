@@ -56,5 +56,12 @@ class DefinitionsController < ApplicationController
     render json: tag_list.to_json
   end
 
+  def get_definition
+    definition = Definition.find(params[:id])
+    render json: definition, :include => {
+      :tags => {:only => :name},
+      :entry => {:only => [:phrase, :pinyin]}
+    }
+  end
 end
 

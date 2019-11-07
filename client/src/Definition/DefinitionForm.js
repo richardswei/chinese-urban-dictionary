@@ -34,8 +34,7 @@ class DefinitionModal extends Component {
 		};
 		if (!defObj.definition) {
 			return alert("Definition cannot be empty!")
-		} 
-		else if (!defObj.usage) {
+		} else if (!defObj.usage) {
 			return alert("Usage cannot be empty!")
 		} 
 		else if (!defObj.usage_translation) {

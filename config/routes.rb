@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :definitions do
         member do
           get 'get_tags'
+          get 'get_definition'
         end
       end
     end

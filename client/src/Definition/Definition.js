@@ -43,17 +43,7 @@ class Definition extends Component {
                 </div>
                   { this.props.appState.jwt && 
                     <Button as={Link} to={{ 
-                      pathname: "/editDefinition", 
-                      params: {
-                        id: definition.id,
-                        tag_list: definition.tags ? definition.tags.map((tag) => tag.name).join(', ') : '',
-                        definition: definition.definition,
-                        usage: definition.usage,
-                        usage_translation: definition.usage_translation,
-                        entry_id: this.props.entry.id,
-                        entry_phrase: this.props.entry.phrase,
-                        entry_pinyin: this.props.entry.pinyin,
-                      }
+                      pathname: `/entries/${this.props.entry.id}/editDefinition/${definition.id}`, 
                     }} >Edit Definition</Button>
                   }
               </Card.Footer>

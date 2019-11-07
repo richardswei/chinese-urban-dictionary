@@ -28,8 +28,7 @@ class Entry extends Component {
       .then(entry => {
         this.setState({entry: entry});
       })
-      .catch(error => console.log(error))
-;
+      .catch(error => console.log(error));
   }
 
   getDefinitions(entry_id) {
@@ -43,8 +42,7 @@ class Entry extends Component {
               .concat([`definition-${definition.id}`])});
         });
       })
-      .catch(error => console.log(error))
-;
+      .catch(error => console.log(error));
   }
   
   getTags(entry_id, definition_id) {
@@ -56,8 +54,7 @@ class Entry extends Component {
             Object.assign(this.state[`definition-${definition_id}`], {tags: tag_obj}) 
         });
       })
-      .catch(error => console.log(error))
-;
+      .catch(error => console.log(error));
   }
 
   destroyDefinition(entry_id, definition_id) {
@@ -89,12 +86,7 @@ class Entry extends Component {
     const definitions = this.state.definitionStateProps
       .map((def, i) => this.state[def] );
     const linkTo = { 
-      pathname: "/editDefinition", 
-      params: {
-        entry_id: entry.id,
-        entry_phrase: entry.phrase,
-        entry_pinyin: entry.pinyin,
-      }
+      pathname: `/entries/${entry.id}/newDefinition/`, 
     };
   	return (<div>
         { entry ? <Jumbotron>

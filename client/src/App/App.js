@@ -141,6 +141,20 @@ class App extends Component {
                     <Home {...routeProps} appState={this.state}/> 
                 } 
               />
+              <Route path="/entries/:entry_id/editDefinition/:id" 
+                render={
+                  (routeProps) => notLoggedIn
+                    ? <Redirect to={{ pathname: "/sign-in"}} /> 
+                      : <EditDefinition {...routeProps} appState={this.state}/> 
+                } 
+              />
+              <Route path="/entries/:entry_id/newDefinition" 
+                render={
+                  (routeProps) => notLoggedIn
+                    ? <Redirect to={{ pathname: "/sign-in"}} /> 
+                      : <EditDefinition {...routeProps} appState={this.state}/> 
+                } 
+              />
               <Route path="/entries/:id" 
                 render={
                   (routeProps) =>
@@ -151,12 +165,6 @@ class App extends Component {
                 render={
                   (routeProps) =>
                     <Tag {...routeProps} appState={this.state}/> 
-                } 
-              />
-              <Route exact path="/editDefinition" 
-                render={
-                  (routeProps) =>
-                    <EditDefinition {...routeProps} appState={this.state}/> 
                 } 
               />
               <Route path="/searchresults" 

@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 class InputMethodEditor extends Component {
 	constructor(props) {
 		super(props);
+		console.log(this.props);
 		this.state = {
 			inputText: this.props.defaultValue ? this.props.defaultValue : "",
 			queryText: "",
