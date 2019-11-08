@@ -26,10 +26,12 @@ class Signup extends Component {
 					dataType: 'json',
 					body: JSON.stringify(login)
 			}).then(response => {
-				response.json()
+				return response.json()
 			}).then(json => {
 				console.log(json);
+				if (json.status===200) this.props.history.push('/');
 			}).catch(error => {
+				console.log('HERE')
 				console.log(error)
 			});
 	}      
