@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Jumbotron, Container, Row, Col, Form, Button} from 'react-bootstrap';
+import {Jumbotron, Container, Row, Col, Form, Button, Alert} from 'react-bootstrap';
 
 class Signup extends Component {
 	constructor(props) {
@@ -28,10 +28,14 @@ class Signup extends Component {
 			}).then(response => {
 				return response.json()
 			}).then(json => {
-				console.log(json);
-				if (json.status===200) this.props.history.push('/');
+				if (json.status===200) {
+					this.props.history.push('/');
+				} else {
+					this.setState({
+						errors: json.msg
+					})
+				}
 			}).catch(error => {
-				console.log('HERE')
 				console.log(error)
 			});
 	}      
@@ -40,6 +44,11 @@ class Signup extends Component {
 		return (
 				<Jumbotron>
 					<h5>Sign up for a free new account!</h5>
+					{this.state.errors && <Alert variant="danger">
+						<strong>Please correct the following errors:</strong>
+					  <hr />
+					  {this.state.errors.map((message, i) => <p key={`${i}error`}>- {message}</p>)}
+					</Alert>}
 	        <Container>
 	        	<Row>
 		       		<Col>
