@@ -14,9 +14,7 @@ class NewEntry extends Component {
 	onChange(e) {
     if (e.target.id === 'phrase') {
       this.setState({ phrase: e.target.value });
-    } else if (e.target.id === 'pinyin') {
-      this.setState({ pinyin: e.target.value });
-		}
+    }
 	}
 
 
@@ -24,9 +22,8 @@ class NewEntry extends Component {
 		console.log(this.phraseInput);
 		const entryObj = {
 			phrase: this.phraseInput.current.state.inputText,
-			pinyin: this.state.pinyin
 		};
-		return entryObj.phrase && entryObj.pinyin ? 
+		return entryObj.phrase ? 
 			fetch(`/api/entries/`,{
 					method: 'POST',
 					headers: {
@@ -62,13 +59,6 @@ class NewEntry extends Component {
   						id='phrase'
   						inputClass="form-control"
   					></Form.Control>
-  				</Form.Group>
-  				<Form.Group>
-  					<Form.Label>Pinyin</Form.Label>	
-  					<Form.Control
-  						onChange={this.onChange}
-  						id='pinyin'
-  					></Form.Control>	
   				</Form.Group>
   				<Button onClick={this.postEntry} >Save</Button>
   			</Form>

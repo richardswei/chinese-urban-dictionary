@@ -33,4 +33,12 @@ class EntriesController < ApplicationController
     render json: @results.to_json
   end
 
+  def get_entries_with_definitions
+    @entry = Entry.where(id: params[:id]).first
+    @entry.increment!(:view_count)
+    render json: @entry, :include => {:definitions => {
+      :include => [:tags, :user => {:only => :username}]
+    }}
+  end
+
 end

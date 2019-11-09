@@ -3,6 +3,34 @@ import {Link} from 'react-router-dom';
 import {Button, Card} from 'react-bootstrap';
 
 class Definition extends Component {
+  constructor(props) {
+    super(props);
+    this.destroyDefinition = this.destroyDefinition.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    console.log(this.props.entry.id)
+    console.log(this.props.id)
+    this.destroyDefinition(this.props.entry.id, this.props.id)
+  }
+
+  destroyDefinition(entry_id, definition_id) {
+    return fetch(`/api/entries/${entry_id}/definitions/${definition_id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': 'Bearer ' + this.props.appState.jwt
+      },
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+      this.props.propagateRefresh()
+    })
+  }
+
   render() {
     const definition={
       updated_at: this.props.updated_at,
@@ -39,9 +67,14 @@ class Definition extends Component {
                   Last updated by {definition.user} on {new Date(definition.updated_at).toDateString()}
                 </div>
                   { this.props.appState.jwt && 
-                    <Button as={Link} to={{ 
-                      pathname: `/entries/${this.props.entry.id}/editDefinition/${definition.id}`, 
-                    }} >Edit Definition</Button>
+                    <div>
+                      <Button as={Link} to={{ 
+                        pathname: `/entries/${this.props.entry.id}/editDefinition/${definition.id}`, 
+                      }} >Edit Definition</Button>
+                      <Button
+                        onClick={this.handleDelete}
+                      >Delete Definition</Button>
+                    </div>
                   }
               </Card.Footer>
             </Card>

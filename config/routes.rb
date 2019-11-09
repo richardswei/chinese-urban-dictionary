@@ -29,6 +29,9 @@ Rails.application.routes.draw do
         get 'get_trending'
         get 'get_search_results'
       end
+      member do
+        get 'get_entries_with_definitions'
+      end
       resources :definitions do
         member do
           get 'get_tags'

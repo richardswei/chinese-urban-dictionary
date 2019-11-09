@@ -44,7 +44,6 @@ class EditDefinition extends Component {
 	    .then(response => response.json())
 	    .then(definition => {
 	    	const tag_list = definition.tags.map(tag => tag.name).join(', ')
-	    	console.log(definition)
         this.setState({
         	id: definition.id,
         	entry_id: definition.entry_id,
