@@ -1,24 +1,9 @@
-# README
+# Chinese Urban Dictionary (CUD)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## General Information
+Chinese Urban Dictionary is a web app designed to help Native English speakers learn Mandarin slang. CUD is a community-centered tool that allows users to submit, define, and translate phrases.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Tech Used
+CUD is a single page application build with a Ruby on Rails backend and bootstrapped with a Create React App for the frontend.
+Ruby Version: 2.6.1
+Rails Version: 5.2.3
