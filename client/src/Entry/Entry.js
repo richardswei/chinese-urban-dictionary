@@ -26,7 +26,6 @@ class Entry extends Component {
     return fetch(`/api/entries/${id}/get_entries_with_definitions`)
       .then(response => response.json())
       .then(entry => {
-        console.log(entry)
         this.setState({entry: entry});
       })
       .catch(error => console.log(error));

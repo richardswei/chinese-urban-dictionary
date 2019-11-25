@@ -19,7 +19,6 @@ class NewEntry extends Component {
 
 
   postEntry = () => {
-    console.log(this.phraseInput);
     const entryObj = {
       phrase: this.phraseInput.current.state.inputText,
     };
@@ -35,7 +34,6 @@ class NewEntry extends Component {
       })
       .then(response => response.json())
       .then(json => {
-        console.log(json)
         this.props.history.push({
           pathname: `/entries/${json.id}`,
         });

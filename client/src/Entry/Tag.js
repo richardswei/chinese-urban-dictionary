@@ -10,8 +10,6 @@ class Tag extends Component {
     this.getTag = this.getTag.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.match.params.id)
-    // /api/tags/:id/get_relevant_definitions
     this.getDefinitions(this.props.match.params.id)
     this.getTag(this.props.match.params.id)
   }
@@ -21,7 +19,6 @@ class Tag extends Component {
       .then(response => response.json())
       .then(json => {
         this.setState({definitions: json})
-        console.log(json)
       })
       .catch(error => console.log(error))
   }
@@ -31,7 +28,6 @@ class Tag extends Component {
       .then(response => response.json())
       .then(json => {
         this.setState({tag: json.name})
-        console.log(json.name)
       })
       .catch(error => console.log(error))
   }

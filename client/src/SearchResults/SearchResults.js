@@ -17,7 +17,6 @@ class SearchResults extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps)
     const prevSearch = prevProps.location.state.query;
     const newSearch = this.props.location.state.query;
     if (prevSearch !== newSearch) {
@@ -30,7 +29,6 @@ class SearchResults extends Component {
       .then(response => response.json())
       .then(json => {
         this.setState({searchResults: json});
-        console.log(json)
       })
       .catch(error => console.log(error))
   }

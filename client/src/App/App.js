@@ -68,7 +68,6 @@ class App extends Component {
   }
 
   handleIMEToggle(event) {
-    console.log(event.target.checked)
     this.setState({
       ime_off: !event.target.checked
     })
