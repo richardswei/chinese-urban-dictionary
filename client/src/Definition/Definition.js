@@ -11,8 +11,6 @@ class Definition extends Component {
 
   handleDelete(event) {
     event.preventDefault();
-    console.log(this.props.entry.id)
-    console.log(this.props.id)
     this.destroyDefinition(this.props.entry.id, this.props.id)
   }
 

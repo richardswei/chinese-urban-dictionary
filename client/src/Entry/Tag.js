@@ -3,15 +3,15 @@ import {Jumbotron, Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 class Tag extends Component {
-	constructor(props) {
-		super(props);
-		this.state={};
+  constructor(props) {
+    super(props);
+    this.state={};
     this.getDefinitions = this.getDefinitions.bind(this);
     this.getTag = this.getTag.bind(this);
-	}
-	componentDidMount() {
-		console.log(this.props.match.params.id)
-		// /api/tags/:id/get_relevant_definitions
+  }
+  componentDidMount() {
+    console.log(this.props.match.params.id)
+    // /api/tags/:id/get_relevant_definitions
     this.getDefinitions(this.props.match.params.id)
     this.getTag(this.props.match.params.id)
   }
@@ -37,7 +37,7 @@ class Tag extends Component {
   }
 
   render() {
-  	return (
+    return (
       this.state.definitions && this.state.tag ?
         (<div>
             <Jumbotron>
@@ -64,7 +64,7 @@ class Tag extends Component {
             })}
           </div>)
         : <div>Loading</div>
-  	)
+    )
   }
 }
 

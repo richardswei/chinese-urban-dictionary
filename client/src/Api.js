@@ -1,12 +1,12 @@
 
 export function authenticateUser(email, password) {
-		let login = {
+    let login = {
       auth: {
         email: email,
         password: password
       }
     };
-		return fetch('/user_token', {
+    return fetch('/user_token', {
           method: 'POST',
           "headers": {
               "Content-Type": "application/json",
@@ -17,21 +17,21 @@ export function authenticateUser(email, password) {
       .then(function (response) { return response.json(); })
       .then(function (json) { return json.jwt })
       .catch(function (error) { return ; })
-	}
-	
+  }
+  
 export function getCurrentUser(jwt) {
-		let config = {
-			method: 'GET',
-			headers: {}
-		}
-		if (jwt) {
-			config['headers']['Authorization'] = 'Bearer ' + jwt
-		}
-		return fetch('/users/current', config)
-			.then((response) => response.json())
-			.then(json => json)
-			.catch(function (error) {
-				console.log(error);
-				return undefined
-			})
-	}
+    let config = {
+      method: 'GET',
+      headers: {}
+    }
+    if (jwt) {
+      config['headers']['Authorization'] = 'Bearer ' + jwt
+    }
+    return fetch('/users/current', config)
+      .then((response) => response.json())
+      .then(json => json)
+      .catch(function (error) {
+        console.log(error);
+        return undefined
+      })
+  }

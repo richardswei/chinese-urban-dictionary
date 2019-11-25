@@ -1,4 +1,4 @@
 class Tag < ApplicationRecord
-	has_many :taggings
-	has_many :definitions, through: :taggings
+  has_many :taggings
+  has_many :definitions, through: :taggings
 end

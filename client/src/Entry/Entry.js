@@ -43,7 +43,7 @@ class Entry extends Component {
     const linkTo = { 
       pathname: `/entries/${entry.id}/newDefinition/`, 
     };
-  	return entry ? (<div>
+    return entry ? (<div>
         { <Jumbotron>
           <h1>{entry.phrase}</h1>
           <h3>{entry.pinyin}</h3>

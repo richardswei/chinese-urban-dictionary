@@ -1,10 +1,10 @@
 class DefinitionsController < ApplicationController
   before_action :authenticate_user,  only: [:create, :update, :destroy]
 
-	def index
-		definitions = Definition.where(entry_id: params[:entry_id])
+  def index
+    definitions = Definition.where(entry_id: params[:entry_id])
     render json: definitions, :include => {:user => {:only => :username}}
-	end
+  end
 
   # Show will implicitly be passed an id in the params which can be accessed by params[:id]
   def show
@@ -45,9 +45,9 @@ class DefinitionsController < ApplicationController
   end
 
   def get_tags
-  	tag_ids = Tagging.where(definition_id: params[:id]).pluck('tag_id')
-  	tags = Tag.find(tag_ids)
-  	render json: tags.to_json
+    tag_ids = Tagging.where(definition_id: params[:id]).pluck('tag_id')
+    tags = Tag.find(tag_ids)
+    render json: tags.to_json
   end
 
   def get_tag_list
