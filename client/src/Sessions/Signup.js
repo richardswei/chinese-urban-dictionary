@@ -46,7 +46,6 @@ class Signup extends Component {
           {this.state.errors && <Alert variant="danger">
             <strong>Please correct the following errors:</strong>
             <br />
-            {console.log(this.state.errors)}
             {this.state.errors.map((message, i) => <p key={`${i}error`}>- {message}</p>)}
           </Alert>}
           <Container>
