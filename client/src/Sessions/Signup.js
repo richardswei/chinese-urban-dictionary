@@ -26,15 +26,14 @@ class Signup extends Component {
           dataType: 'json',
           body: JSON.stringify(login)
       }).then(response => {
+        if (response.status===200) {
+          this.props.history.push('/');
+        }
         return response.json()
       }).then(json => {
-        if (json.status===200) {
-          this.props.history.push('/');
-        } else {
-          this.setState({
-            errors: json.msg
-          })
-        }
+        this.setState({
+          errors: json.msg
+        })
       }).catch(error => {
         console.log(error)
       });
@@ -46,7 +45,8 @@ class Signup extends Component {
           <h5>Sign up for a free new account!</h5>
           {this.state.errors && <Alert variant="danger">
             <strong>Please correct the following errors:</strong>
-            <hr />
+            <br />
+            {console.log(this.state.errors)}
             {this.state.errors.map((message, i) => <p key={`${i}error`}>- {message}</p>)}
           </Alert>}
           <Container>

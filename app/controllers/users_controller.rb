@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   
   # Should work if the current_user is authenticated.
   def index
-    payload = { msg: 'Logged-in'}
+    payload = { msg: ['Logged-in']}
     render json: payload, status: :ok 
   end
   
@@ -22,8 +22,8 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      payload = { msg: 'User was created.'}
-      render json: payload, status: :ok 
+      payload = { msg: ['User was created.']}
+      render json: payload, :status => :ok 
     else
       payload = {msg: user.errors.full_messages}
       render :json => payload, :status => :unprocessable_entity
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if user.update(user_params)
-      payload = { msg: 'User details have been updated.' }
+      payload = { msg: ['User details have been updated.'] }
       render json: payload, status: :ok 
     end
   end
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user.destroy
-      payload = { msg: 'User has been deleted.' }
+      payload = { msg: ['User has been deleted.']}
       render json: payload, status: :ok 
     end
   end

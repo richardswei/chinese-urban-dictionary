@@ -178,7 +178,7 @@ class Result extends Component {
       <li
         onMouseDown= {this.props.onMouseDown}
       >
-      {this.props.value}
+        {this.props.value}
       </li>
     );
   }
