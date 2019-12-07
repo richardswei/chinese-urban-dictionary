@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   # before_action :authenticate_user
 
   def fallback_index_html
-    render :file => 'public/index.html'
+    render :file => 'client/public/index.html'
   end
 
   protected
