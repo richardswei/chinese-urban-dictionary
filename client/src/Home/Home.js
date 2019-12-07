@@ -3,8 +3,7 @@ import { Card, CardColumns, Jumbotron, Container, Row, Col } from 'react-bootstr
 import { Link } from 'react-router-dom'
 
 const headerAdStyle = {
-  opacity: 0.4,
-  color: 'white'
+  textAlign: 'center'
 };
 
 class Home extends Component {
@@ -44,7 +43,11 @@ class Home extends Component {
     return (
       <div>
         <Jumbotron style={headerAdStyle}>
-          <h1>"Teachers hate him!!! Learn Mandarin with 3 EASY STEPS</h1>
+          <h2>
+            "TEACHERS HATE HIM!!! LEARN MANDARIN IN 3 EASY STEPS"
+            <br/>
+            <Link>CLICK HERE!</Link>
+          </h2>
         </Jumbotron>
         <Container>
           <Row>
