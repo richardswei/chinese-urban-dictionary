@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       payload = { msg: ['User was created.']}
-      render json: payload, :status => :ok 
+      render json: payload, status: :ok 
     else
       payload = {msg: user.errors.full_messages}
       render :json => payload, :status => :unprocessable_entity
