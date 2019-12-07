@@ -44,7 +44,7 @@ class Home extends Component {
     return (
       <div>
         <Jumbotron style={headerAdStyle}>
-          <h1>Whoa Taiwan, dude... Taiwan numba 1</h1>
+          <h1>"Teachers hate him!!! Learn Mandarin with 3 EASY STEPS</h1>
         </Jumbotron>
         <Container>
           <Row>
