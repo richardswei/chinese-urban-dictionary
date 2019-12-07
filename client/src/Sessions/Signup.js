@@ -28,8 +28,10 @@ class Signup extends Component {
       }).then(response => {
         if (response.status===200) {
           this.props.history.push('/');
+          return;
+        } else {
+          return response.json();
         }
-        return response.json()
       }).then(json => {
         this.setState({
           errors: json.msg
