@@ -46,7 +46,7 @@ class Home extends Component {
           <h2>
             "TEACHERS HATE HIM!!! LEARN MANDARIN IN 3 EASY STEPS"
             <br/>
-            <Link>CLICK HERE!</Link>
+            <Link>CLICK HERE! (this goes nowhere)</Link>
           </h2>
         </Jumbotron>
         <Container>

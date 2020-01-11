@@ -3,7 +3,7 @@ import { Form, Container } from 'react-bootstrap';
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
-import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
 import About from '../About/About.js';
