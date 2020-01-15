@@ -166,7 +166,7 @@ class App extends Component {
                     <Tag {...routeProps} appState={this.state}/> 
                 } 
               />
-              <Route path="/searchresults" 
+              <Route path="/search/:id" 
                 render={
                   (routeProps) =>
                     <SearchResults {...routeProps} appState={this.state}/> 

@@ -14,7 +14,7 @@ class Navigation extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.history.push({
-      pathname: "/searchresults",
+      pathname: `/search/${this.searchInput.current.state.inputText}`,
       state: {
         query: this.searchInput.current.state.inputText
       }

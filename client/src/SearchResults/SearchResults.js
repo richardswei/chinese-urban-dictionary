@@ -17,15 +17,15 @@ class SearchResults extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const prevSearch = prevProps.location.state.query;
-    const newSearch = this.props.location.state.query;
+    const prevSearch = prevProps.location.pathname;
+    const newSearch = this.props.location.pathname;
     if (prevSearch !== newSearch) {
       this.getSearchResults();
     }
   }
 
-  getSearchResults = () => {
-    return fetch(`api/entries/search?query=${this.props.location.state.query}`)
+  getSearchResults = (r) => {
+    return fetch(`api/entries/search?query=${this.props.match.params.id}`)
       .then(response => response.json())
       .then(json => {
         this.setState({searchResults: json});
@@ -60,7 +60,7 @@ class SearchResults extends Component {
               )
             })
           }</div>
-            : <Card><Card.Body>NO RESULTS FOUND FOR: "{this.props.location.state.query}"</Card.Body></Card>
+            : <Card><Card.Body>NO RESULTS FOUND FOR: "{this.state.query}"</Card.Body></Card>
     }
     </div>
   }
