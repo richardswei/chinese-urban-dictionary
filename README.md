@@ -10,5 +10,7 @@ CUD is a single page application build with a Ruby on Rails backend and bootstra
 Ruby Version: 2.6.1  
 Rails Version: 5.2.3  
 
-### Known Bugs
-- Refreshing app can lead to page not found error (production only)
+### Potential Goals
+- automatic transliteration accounts for polyphone pronunciations
+- like/dislike functions
+- comments
